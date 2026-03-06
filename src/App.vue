@@ -7,4 +7,8 @@
         </p>
 </template>
 
-<style scoped></style>
+<style scoped>
+* {
+        color: white
+}
+</style>
