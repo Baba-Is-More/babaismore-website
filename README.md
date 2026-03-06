@@ -1,42 +1,12 @@
-# vue-project
+# Baba Is More Website
 
-This template should help get you started developing with Vue 3 in Vite.
+The official repository and source code for the Baba Is More website. Currently still in development, so check the Baba is You discord if you want to contribute!
 
-## Recommended IDE Setup
+## Credits
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+### Assets
 
-## Recommended Browser Setup
-
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
+- `image_background.png` taken from [Baba's page on Hempuli's website](https://www.hempuli.com/baba/)
+- `image_levelpacks.png` created by @shakewell42 on discord
+- `font_baba.ttf` derived from Baba's fonts used in its UIs
+- `image_logo.gif` and `image_more_text.gif` created using [Robot Is Chill](https://github.com/ROBOT-IS-CHILL/robot-is-chill)
