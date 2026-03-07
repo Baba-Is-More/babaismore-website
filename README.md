@@ -2,6 +2,18 @@
 
 The official repository and source code for the Baba Is More website. Currently still in development, so check the Baba Is You discord if you want to contribute!
 
+## Forking this repository
+
+If you wish to work on this yourself, you will first need to download [Vue.js](https://vuejs.org/guide/quick-start.html).
+
+From there, run the following in the root folder of the branch:
+
+```sh
+npm install
+```
+
+This should set up the project properly for you. From there, `npm run dev` should run the project and show what it looks like so far, and `npm run build` does a proper compile for release.
+
 ## Credits
 
 ### Assets
