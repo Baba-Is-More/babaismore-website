@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SearchResult } from '@/liar.ts'
+import type { SearchResult } from '@/liar.ts';
 
 const props = defineProps<SearchResult>()
 </script>
@@ -19,5 +19,9 @@ const props = defineProps<SearchResult>()
 	display: flexbox;
 	align-items: center;
 	margin: 5px;
+}
+
+p {
+	font-size: small;
 }
 </style>
