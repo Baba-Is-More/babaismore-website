@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import SearchPack from '@/components/SearchPack.vue'
-import lies from '@/liar.ts'
-import { ref } from 'vue'
-import { watch } from "vue"
+import lies, { type SearchResult } from '@/liar.ts'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -10,41 +9,41 @@ const route = useRoute()
 const query = route.query.q
 
 watch(
-	() => route.query.q,
-	(newQuery) => {
-		// i do not know how vue router works
-		// so im just gonna reload the page
-		// bad bad idea i know
-		window.location.reload()
-	},
+    () => route.query.q,
+    (newQuery) => {
+        // i do not know how vue router works
+        // so im just gonna reload the page
+        // bad bad idea i know
+        globalThis.location.reload()
+    },
 )
 
-// i'll hook the grid making into this laterrr
-const stuff = ref<SearchResult>(lies);
+const results = ref<SearchResult[]>(lies);
 </script>
 
 <template>
-	<h1>Search results for {{ query }}</h1>
-	<div class="grid">
-		<!-- horrific! -->
-		<SearchPack name="cool thing" author="me" desc="blahblahblahblah" />
-		<SearchPack name="cool thing" author="me" desc="blahblahblahblah" />
-		<SearchPack name="cool thing" author="me" desc="blahblahblahblah" />
+    <h1>Search results for {{ query }}</h1>
+    <div class="grid">
+        <div v-for="({ name, author, desc }, idx) in results">
+            <SearchPack :name :author :desc />
+            <!--If we render more than 3 cards in a line, go to the next one-->
+            <!--TODO: we should replace this with a dynamic check based on the card's length-->
+            <!--We also need to fix card heights so they're all consistent (ideally matching the tallest one of having a set height)-->
+            <div v-if="idx % 3 >= 2">
 
-		<SearchPack name="cool thing" author="me" desc="blahblahblahblah" />
-		<SearchPack name="cool thing" author="me" desc="blahblahblahblah" />
-		<SearchPack name="cool thing" author="me" desc="blahblahblahblah" />
-	</div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <style scoped>
 h1,
 p {
-	color: white
+    color: white
 }
 
 .grid {
-	display: grid;
-	grid-template-columns: auto auto auto;
+    display: grid;
+    grid-template-columns: auto auto auto;
 }
 </style>
