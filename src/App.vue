@@ -1,15 +1,9 @@
-<script setup lang="ts"></script>
+<script setup>
+import Navbar from '@/components/Navbar/Bar.vue'
+</script>
 
 <template>
-        <h1>Placeholder title</h1>
-        <p>
-                Placeholder paragraph
-        </p>
-</template>
+        <Navbar />
 
-<style scoped>
-h1,
-p {
-        color: white
-}
-</style>
+        <router-view />
+</template>
