@@ -1,6 +1,6 @@
 # Baba Is More Website
 
-The official repository and source code for the Baba Is More website. Currently still in development, so check the Baba is You discord if you want to contribute!
+The official repository and source code for the Baba Is More website. Currently still in development, so check the Baba Is You discord if you want to contribute!
 
 ## Credits
 
@@ -10,3 +10,4 @@ The official repository and source code for the Baba Is More website. Currently 
 - `image_levelpacks.png` created by @shakewell42 on discord
 - `font_baba.ttf` derived from Baba's fonts used in its UIs
 - `image_logo.gif` and `image_more_text.gif` created using [Robot Is Chill](https://github.com/ROBOT-IS-CHILL/robot-is-chill)
+- `image_featured.png`, `image_search.png` and `image_tag.png` are taken from an asset dump of Baba Is You
