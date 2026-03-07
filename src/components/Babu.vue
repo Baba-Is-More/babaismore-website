@@ -2,7 +2,9 @@
 </script>
 
 <template>
-	<div class="babu">Button</div>
+	<div class="babu">
+		<slot />
+	</div>
 </template>
 
 <style scoped>

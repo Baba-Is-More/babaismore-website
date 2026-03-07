@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Babu from '@/components/Babu.vue'
 </script>
 
 <template>
@@ -6,6 +7,9 @@
 	<p>
 		Placeholder paragraph
 	</p>
+	<Babu>
+		<p> Button! </p>
+	</Babu>
 </template>
 
 <style scoped>
