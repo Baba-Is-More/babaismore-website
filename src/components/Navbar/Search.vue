@@ -1,10 +1,18 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const search = ref<string>('')
 
 function submit() {
 	console.log("searched: ", search.value)
+	router.push({
+		path: "/search",
+		query: {
+			q: search.value
+		}
+	})
 }
 </script>
 

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-	<p> hi </p>
+	<p> profile </p>
 </template>
 
 <style></style>

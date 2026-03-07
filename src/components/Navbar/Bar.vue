@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import Search from '@/components/Navbar/Search.vue'
 import Profile from '@/components/Navbar/Profile.vue'
 </script>
@@ -19,17 +19,19 @@ import Profile from '@/components/Navbar/Profile.vue'
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 100%;
-	height: 10%;
+	width: 100vw;
+	/* if you change this, change App.vue as well */
+	height: 10vh;
 
 	display: flex;
 	align-items: center;
 }
 
+/* we can adjust these as we see fit */
 .search {
 	flex: 1;
-	padding-left: 20px;
-	padding-right: 60px;
+	padding-left: 2%;
+	padding-right: 4%;
 }
 
 .logo {
