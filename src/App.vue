@@ -29,7 +29,7 @@ import Navbar from '@/components/Navbar/Bar.vue'
         border-image-width: 10px 10px 10px 10px;
         border-image-outset: 0px 0px 0px 0px;
         border-image-repeat: round round;
-        border-image-source: url("../public/images/buttons/button_blue.png");
+        border-image-source: url("/public/images/buttons/button_blue.png");
         border-style: solid;
         image-rendering: crisp-edges;
         font-family: "Baba UI", sans-serif;
@@ -44,15 +44,15 @@ import Navbar from '@/components/Navbar/Bar.vue'
 }
 
 .babu_blue:hover {
-        border-image-source: url("../public/images/buttons/button_blue_hover.png");
+        border-image-source: url("/public/images/buttons/button_blue_hover.png");
 }
 
 .babu_blue:active {
-        border-image-source: url("../public/images/buttons/button_blue_press.png");
+        border-image-source: url("/public/images/buttons/button_blue_press.png");
 }
 
 .babu_blue:disabled {
-        border-image-source: url("../public/images/buttons/button_disabled.png");
+        border-image-source: url("/public/images/buttons/button_disabled.png");
 }
 
 .babu_pink {
@@ -60,7 +60,7 @@ import Navbar from '@/components/Navbar/Bar.vue'
         border-image-width: 10px 10px 10px 10px;
         border-image-outset: 0px 0px 0px 0px;
         border-image-repeat: round round;
-        border-image-source: url("../public/images/buttons/button_pink.png");
+        border-image-source: url("/public/images/buttons/button_pink.png");
         border-style: solid;
         image-rendering: crisp-edges;
         font-family: "Baba UI", sans-serif;
@@ -75,14 +75,14 @@ import Navbar from '@/components/Navbar/Bar.vue'
 }
 
 .babu_pink:hover {
-        border-image-source: url("../public/images/buttons/button_pink_hover.png");
+        border-image-source: url("/public/images/buttons/button_pink_hover.png");
 }
 
 .babu_pink:active {
-        border-image-source: url("../public/images/buttons/button_pink_press.png");
+        border-image-source: url("/public/images/buttons/button_pink_press.png");
 }
 
 .babu_pink:disabled {
-        border-image-source: url("../public/images/buttons/button_disabled.png");
+        border-image-source: url("/public/images/buttons/button_disabled.png");
 }
 </style>
