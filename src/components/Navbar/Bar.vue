@@ -5,7 +5,7 @@ import Profile from '@/components/Navbar/Profile.vue'
 
 <template>
 	<nav class="navbar">
-		<img src="@/assets/image_logo.gif" class="logo">
+		<img src="/images/image_logo.gif" class="logo">
 
 		<Search class="search" />
 
