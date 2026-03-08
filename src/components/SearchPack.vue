@@ -12,31 +12,12 @@ function truncate(desc: string): string {
 	}
 }
 
+const numFormat = Intl.NumberFormat('en-US', {
+  notation: "compact",
+});
+
 function reduce(num: number): string {
-	let display: string = num.toString();
-	let end: string = "";
-	if (num >= 1_000_000_000_000_000) {
-		display = (num / 1_000_000_000_000_000).toString();
-		end = "QD";
-	} else if (num >= 1_000_000_000_000) {
-		display = (num / 1_000_000_000_000).toString();
-		end = "T";
-	} else if (num >= 1_000_000_000) {
-		display = (num / 1_000_000_000).toString();
-		end = "B";
-	} else if (num >= 1_000_000) {
-		display = (num / 1_000_000).toString();
-		end = "M";
-	} else if (num >= 1_000) {
-		display = (num / 1_000).toString();
-		end = "K";
-	}
-	if (display.includes('.')) {
-		let decimal: number = display.indexOf('.');
-		display = display.substring(0, decimal + 2);
-	}
-	display = display.concat(end).replace(".0".concat(end), end);
-	return display;
+	return numFormat.format(num);
 }
 
 // Edited from fearofawhatplanet's code,
