@@ -25,8 +25,8 @@ const results = ref<SearchResult[]>(lies);
 <template>
         <p>Search results for {{ query }}</p>
         <div class="grid">
-                <div v-for="({ name, author, desc, downloads, posted }, idx) in results">
-                        <SearchPack :name :author :desc :downloads :posted />
+                <div v-for="({ name, author, desc, downloads, posted, tags }, idx) in results">
+                        <SearchPack :name :author :desc :downloads :posted :tags />
                 </div>
         </div>
 </template>
