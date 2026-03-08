@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SearchResult } from '@/liar.ts';
+import type { SearchResult } from '@/lies/types.ts';
 
 const props = defineProps<SearchResult>()
 
@@ -13,7 +13,7 @@ function truncate(desc: string): string {
 }
 
 const numFormat = Intl.NumberFormat('en-US', {
-  notation: "compact",
+	notation: "compact",
 });
 
 function reduce(num: number): string {
@@ -55,9 +55,12 @@ function dateToOffset(date: Date): string {
 		<div>
 			<img src="\images\image_levelpacks.png" alt="{{ name }}" id="icon">
 			<p class="name"> {{ name }} </p>
-			<p class="author"> <img src="\images\image_baba.png" alt="{{ author }}" class="inline"> {{ author }} </p>
-			<p class="info"> <img src="\images\image_downloads.png" alt="{{ downloads }} downloads" class="inline"> {{
-				reduce(downloads) }} <img src="\images\image_clock.png" alt="" class="inline"> {{ dateToOffset(posted)
+			<p class="author"> <img src="\images\image_baba.png" alt="{{ author }}" class="inline"> {{
+				author }} </p>
+			<p class="info"> <img src="\images\image_downloads.png" alt="{{ downloads }} downloads"
+					class="inline"> {{
+						reduce(downloads) }} <img src="\images\image_clock.png" alt="" class="inline"> {{
+					dateToOffset(posted)
 				}}</p>
 		</div>
 		<p class="desc"> {{ truncate(desc) }} </p>
