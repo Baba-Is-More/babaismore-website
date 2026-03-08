@@ -15,9 +15,9 @@ function truncate(desc: string): string {
 
 <template>
 	<div class="base">
-		<h2> {{ name }} </h2>
-		<h3> <img src="\images\image_baba.png" alt="{{ author }}"> {{ author }} </h3>
-		<p> {{ truncate(desc) }} </p>
+		<p class="name"> {{ name }} </p>
+		<p class="author"> <img src="\images\image_baba.png" alt="{{ author }}"> {{ author }} </p>
+		<p class="desc"> {{ truncate(desc) }} </p>
 	</div>
 </template>
 
@@ -38,21 +38,17 @@ function truncate(desc: string): string {
 	padding: 0px 0px 0px 5px;
 }
 
-h2 {
-	font-size: 20px;
-}
-
-h3 {
-	font-size: 10px;
+.author {
+	color: #83c8e5
 }
 
 img {
-	width: 25px;
-	height: 25px;
+	width: 31px;
+	height: 31px;
 	vertical-align: bottom;
 }
 
 p {
-	font-size: x-small;
+	font-size: 12px;
 }
 </style>
