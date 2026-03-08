@@ -1,12 +1,6 @@
 // this file comes up with some random stuff for search to show
 
-export type SearchResult = {
-	name: string
-	author: string
-	desc: string
-	downloads: number
-	posted: Date
-};
+import type { SearchResult } from "@/lies/types";
 
 export default [
 	{
@@ -45,7 +39,7 @@ export default [
 		posted: new Date()
 	},
 	{
-		name:"Menu+",
+		name: "Menu+",
 		author: "Extrem",
 		desc: "Upgrades the levelpack navigation menus by providing a lot of utilities, such as levelpack pinning and showing level counts.",
 		downloads: 35050,
