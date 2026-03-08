@@ -38,6 +38,35 @@ function reduce(num: number): string {
 	display = display.concat(end).replace(".0".concat(end), end);
 	return display;
 }
+
+// Edited from fearofawhatplanet's code,
+// sourced from https://stackoverflow.com/questions/6108819/javascript-timestamp-to-relative-time
+function dateToOffset(date: Date): string {
+	const msPerMinute = 60 * 1000;
+	const msPerHour = msPerMinute * 60;
+	const msPerDay = msPerHour * 24;
+	const msPerMonth = msPerDay * 30;
+	const msPerYear = msPerDay * 365;
+
+	let now: Date = new Date();
+	let elapsed: number = now.valueOf() - date.valueOf();
+	const rtf = new Intl.RelativeTimeFormat();
+
+	if (elapsed < msPerMinute) {
+		return rtf.format(-Math.floor(elapsed / 1000), "seconds");
+	} else if (elapsed < msPerHour) {
+		return rtf.format(-Math.floor(elapsed / msPerMinute), "minutes");
+	} else if (elapsed < msPerDay) {
+		return rtf.format(-Math.floor(elapsed / msPerHour), "hours");
+	} else if (elapsed < msPerMonth) {
+		return rtf.format(-Math.floor(elapsed / msPerDay), "days");
+	} else if (elapsed < msPerYear) {
+		return rtf.format(-Math.floor(elapsed / msPerMonth), "months");
+	} else {
+		return rtf.format(-Math.floor(elapsed / msPerYear), "years");
+	}
+
+}
 </script>
 
 <template>
@@ -47,7 +76,8 @@ function reduce(num: number): string {
 			<p class="name"> {{ name }} </p>
 			<p class="author"> <img src="\images\image_baba.png" alt="{{ author }}" class="inline"> {{ author }} </p>
 			<p class="info"> <img src="\images\image_downloads.png" alt="{{ downloads }} downloads" class="inline"> {{
-				reduce(downloads) }}</p>
+				reduce(downloads) }} <img src="\images\image_clock.png" alt="" class="inline"> {{ dateToOffset(posted)
+				}}</p>
 		</div>
 		<p class="desc"> {{ truncate(desc) }} </p>
 	</div>
