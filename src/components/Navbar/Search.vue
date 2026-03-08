@@ -18,7 +18,7 @@ function submit() {
 
 <template>
 	<form @submit.prevent="submit" class="search">
-		<input v-model="search" type="text" placeholder="Bababa ba...">
+		<input v-model="search" type="text" placeholder="Search...">
 	</form>
 </template>
 
@@ -34,6 +34,8 @@ function submit() {
 	background-color: #111111;
 	border-radius: 5px;
 	flex: 1;
+	font-family: "Babafont", sans-serif;
+	font-size: 12px;
 }
 
 .search input:focus {
