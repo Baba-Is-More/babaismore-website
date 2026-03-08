@@ -51,37 +51,51 @@ function dateToOffset(date: Date): string {
 </script>
 
 <template>
-	<div class="base">
+	<div class="base blue" id="box">
 		<div>
 			<img src="\images\image_levelpacks.png" alt="{{ name }}" id="icon">
 			<p class="name"> {{ name }} </p>
 			<p class="author"> <img src="\images\image_baba.png" alt="{{ author }}" class="inline"> {{
 				author }} </p>
-			<p class="info"> <img src="\images\image_downloads.png" alt="{{ downloads }} downloads"
-					class="inline"> {{
-						reduce(downloads) }} <img src="\images\image_clock.png" alt="" class="inline"> {{
+			<p class="info"> <img src="\images\image_downloads.png" alt="{{ downloads }} downloads" class="inline"> {{
+				reduce(downloads) }} <img src="\images\image_clock.png" alt="" class="inline"> {{
 					dateToOffset(posted)
 				}}</p>
 		</div>
 		<p class="desc"> {{ truncate(desc) }} </p>
+		<div>
+			<p v-for="tag in tags" id="tag" class="base pink">
+				<img src="\images\image_tag.png" alt="tag" class="inline_tag">{{ tag }}
+			</p>
+		</div>
 	</div>
 </template>
 
 <style>
 .base {
 	background-color: #00000000;
-	display: flexbox;
 	align-items: center;
 	height: 100%;
 	border-image-slice: 8 8 8 8 fill;
 	border-image-width: 10px 10px 10px 10px;
 	border-image-outset: 0px 0px 0px 0px;
 	border-image-repeat: round round;
-	border-image-source: url("/images/buttons/button_blue.png");
 	border-style: solid;
 	image-rendering: crisp-edges;
 	color: white;
-	padding: 0px 0px 0px 10px;
+}
+
+#box {
+	display: flexbox;
+	padding: 0px 10px 5px 10px;
+}
+
+.blue {
+	border-image-source: url("/images/buttons/button_blue.png");
+}
+
+.pink {
+	border-image-source: url("/images/buttons/button_pink.png");
 }
 
 .base>div {
@@ -104,6 +118,21 @@ function dateToOffset(date: Date): string {
 
 .info {
 	color: #5f9dd1;
+}
+
+#tag {
+	width: max-content;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	float: inline-start;
+	padding: 2px 7px 2px 7px;
+	font-size: 6px;
+}
+
+.inline_tag {
+	height: 15px;
+	width: 15px;
+	vertical-align: bottom;
 }
 
 p {

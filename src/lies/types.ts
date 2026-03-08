@@ -9,4 +9,5 @@ export type SearchResult = {
 	desc: string
 	downloads: number
 	posted: Date
+	tags: string[]
 };
