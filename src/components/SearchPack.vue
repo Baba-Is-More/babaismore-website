@@ -11,6 +11,33 @@ function truncate(desc: string): string {
 		return desc;
 	}
 }
+
+function reduce(num: number): string {
+	let display: string = num.toString();
+	let end: string = "";
+	if (num >= 1_000_000_000_000_000) {
+		display = (num / 1_000_000_000_000_000).toString();
+		end = "QD";
+	} else if (num >= 1_000_000_000_000) {
+		display = (num / 1_000_000_000_000).toString();
+		end = "T";
+	} else if (num >= 1_000_000_000) {
+		display = (num / 1_000_000_000).toString();
+		end = "B";
+	} else if (num >= 1_000_000) {
+		display = (num / 1_000_000).toString();
+		end = "M";
+	} else if (num >= 1_000) {
+		display = (num / 1_000).toString();
+		end = "K";
+	}
+	if (display.includes('.')) {
+		let decimal: number = display.indexOf('.');
+		display = display.substring(0, decimal + 2);
+	}
+	display = display.concat(end).replace(".0".concat(end), end);
+	return display;
+}
 </script>
 
 <template>
@@ -18,7 +45,9 @@ function truncate(desc: string): string {
 		<div>
 			<img src="\images\image_levelpacks.png" alt="{{ name }}" id="icon">
 			<p class="name"> {{ name }} </p>
-			<p class="author"> <img src="\images\image_baba.png" alt="{{ author }}"> {{ author }} </p>
+			<p class="author"> <img src="\images\image_baba.png" alt="{{ author }}" class="inline"> {{ author }} </p>
+			<p class="info"> <img src="\images\image_downloads.png" alt="{{ downloads }} downloads" class="inline"> {{
+				reduce(downloads) }}</p>
 		</div>
 		<p class="desc"> {{ truncate(desc) }} </p>
 	</div>
@@ -49,14 +78,27 @@ function truncate(desc: string): string {
 	color: #83c8e5
 }
 
-.author>img {
+.inline {
 	width: 31px;
 	height: 31px;
-	vertical-align: bottom;
+	vertical-align: top;
 }
 
 .desc {
 	display: inline-block;
+}
+
+.info {
+	color: #5f9dd1;
+}
+
+p {
+	font-size: 12px;
+	margin: 0px;
+}
+
+.name {
+	margin: 4px;
 }
 
 #icon {
@@ -65,9 +107,5 @@ function truncate(desc: string): string {
 	vertical-align: top;
 	float: left;
 	margin: 1px;
-}
-
-p {
-	font-size: 12px;
 }
 </style>
