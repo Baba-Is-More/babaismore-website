@@ -22,7 +22,7 @@ const results = ref<SearchResult[]>(lies);
 </script>
 
 <template>
-    <h1>Search results for {{ query }}</h1>
+    <p>Search results for {{ query }}</p>
     <div class="grid">
         <div v-for="({ name, author, desc }, idx) in results">
             <!--TODO: We need to fix card heights so they're all consistent (ideally matching the tallest one or having a set height)-->
