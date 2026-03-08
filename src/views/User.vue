@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import Babu from '@/components/Babu.vue'
-
-const props = defineProps<{
-	name: string
-}>()
+import type { User } from '@/lies/types.ts'
 
 </script>
 
