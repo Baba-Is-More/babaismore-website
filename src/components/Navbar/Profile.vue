@@ -3,7 +3,12 @@
 </script>
 
 <template>
-	<p> profile </p>
+	<p> Baba </p>
+	<img src="\images\image_baba.png" alt="Profile Picture">
 </template>
 
-<style></style>
+<style>
+* {
+	color: white;
+}
+</style>

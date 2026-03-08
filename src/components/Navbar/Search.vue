@@ -18,6 +18,7 @@ function submit() {
 
 <template>
 	<form @submit.prevent="submit" class="search">
+		<img src="\images\image_search.png" alt="Search">
 		<input v-model="search" type="text" placeholder="Search...">
 	</form>
 </template>
@@ -28,11 +29,21 @@ function submit() {
 	display: flex;
 }
 
+.search img {
+	background-color: #111111;
+	border-radius: 5px;
+	border-bottom-right-radius: 0px;
+	border-top-right-radius: 0px;
+	image-rendering: pixelated;
+}
+
 .search input {
 	border: 0;
 	color: white;
 	background-color: #111111;
 	border-radius: 5px;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
 	flex: 1;
 	font-family: "Babafont", sans-serif;
 	font-size: 12px;
