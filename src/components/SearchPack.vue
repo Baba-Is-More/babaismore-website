@@ -19,6 +19,7 @@ const props = defineProps<SearchResult>()
 	display: flexbox;
 	align-items: center;
 	margin: 5px;
+	height: 100%;
 }
 
 p {
