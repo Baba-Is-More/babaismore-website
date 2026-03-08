@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import SearchPack from '@/components/SearchPack.vue'
 import lies from '@/lies/packs.ts'
+import type { SearchResult } from '@/lies/types'
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
