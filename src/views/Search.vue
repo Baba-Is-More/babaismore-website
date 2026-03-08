@@ -25,8 +25,7 @@ const results = ref<SearchResult[]>(lies);
     <h1>Search results for {{ query }}</h1>
     <div class="grid">
         <div v-for="({ name, author, desc }, idx) in results">
-            <!--TODO: we should replace this with a dynamic check based on the card's length-->
-            <!--We also need to fix card heights so they're all consistent (ideally matching the tallest one of having a set height)-->
+            <!--TODO: We need to fix card heights so they're all consistent (ideally matching the tallest one or having a set height)-->
             <SearchPack :name :author :desc />
         </div>
     </div>
