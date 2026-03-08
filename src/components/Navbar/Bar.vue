@@ -5,11 +5,11 @@ import Profile from '@/components/Navbar/Profile.vue'
 
 <template>
 	<nav class="navbar">
-		<img src="/images/image_logo.gif" class="logo">
+		<img src="/images/image_logo.gif" class="logo" alt="Baba Is More">
 
 		<Search class="search" />
 
-		<Profile />
+		<Profile class="profile" />
 	</nav>
 </template>
 
@@ -32,6 +32,10 @@ import Profile from '@/components/Navbar/Profile.vue'
 	flex: 1;
 	padding-left: 2%;
 	padding-right: 4%;
+}
+
+.profile {
+	padding-right: 2%
 }
 
 .logo {
