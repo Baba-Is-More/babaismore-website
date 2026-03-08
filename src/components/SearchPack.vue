@@ -23,12 +23,23 @@ function truncate(desc: string): string {
 
 <style>
 .base {
-	background-color: #d8d8d8;
+	background-color: #00000000;
 	display: flexbox;
 	align-items: center;
-	margin: 5px;
 	height: 100%;
-	padding: 0px 2px
+	border-image-slice: 8 8 8 8 fill;
+	border-image-width: 10px 10px 10px 10px;
+	border-image-outset: 0px 0px 0px 0px;
+	border-image-repeat: round round;
+	border-image-source: url("/images/buttons/button_blue.png");
+	border-style: solid;
+	image-rendering: crisp-edges;
+	color: white;
+	padding: 0px 0px 0px 5px;
+}
+
+h2 {
+	font-size: 20px;
 }
 
 h3 {
