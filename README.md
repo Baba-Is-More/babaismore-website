@@ -12,7 +12,8 @@ From there, run the following in the root folder of the branch:
 npm install
 ```
 
-This should set up the project properly for you. From there, `npm run dev` should run the project and show what it looks like so far, and `npm run build` does a proper compile for release.
+This should set up the project properly for you. From there, `npm run dev` should run the client and show what it looks like so far, and `npm run build` does a proper compile for release.
+If you'd like to run both the server and client, run `npm run dev:full`.
 
 ## Credits
 
