@@ -4,8 +4,8 @@ import type { SearchResult } from '@/lies/types.ts';
 const props = defineProps<SearchResult>()
 
 function truncate(desc: string): string {
-	const max_length: number = 256
-	if (desc.length >= 128) {
+	const max_length: number = 128
+	if (desc.length >= max_length) {
 		return desc.substring(0, max_length - 3).concat("...");
 	} else {
 		return desc;
@@ -65,7 +65,7 @@ function dateToOffset(date: Date): string {
 		<p class="desc"> {{ truncate(desc) }} </p>
 		<div>
 			<p v-for="tag in tags" id="tag" class="base pink">
-				<img src="\images\image_tag.png" alt="tag" class="inline_tag">{{ tag }}
+				{{ tag }}
 			</p>
 		</div>
 	</div>
@@ -87,7 +87,7 @@ function dateToOffset(date: Date): string {
 
 #box {
 	display: flexbox;
-	padding: 0px 10px 5px 10px;
+	padding: 0px 10px;
 }
 
 .blue {
@@ -127,12 +127,6 @@ function dateToOffset(date: Date): string {
 	float: inline-start;
 	padding: 2px 7px 2px 7px;
 	font-size: 6px;
-}
-
-.inline_tag {
-	height: 15px;
-	width: 15px;
-	vertical-align: bottom;
 }
 
 p {
