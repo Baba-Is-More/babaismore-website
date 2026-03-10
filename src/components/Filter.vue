@@ -11,43 +11,46 @@ const isSortOpen = ref(false);
 <template>
     <div id="grid">
         <Babu id="tags" class="main" @click="isFilterOpen = !isFilterOpen; isSortOpen = false;" title="Tags">
-            <img src="\images\image_tag.png" alt="Tag" id="tag" class="image">
+            <img src="\images\image_tag.png" alt="Tag" class="image">
         </Babu>
         <Babu id="sorts" class="main" @click="isSortOpen = !isSortOpen; isFilterOpen = false;" title="Sorts">
-            <img src="\images\image_sort.png" alt="Sort" id="sort" class="image">
+            <img src="\images\image_sort.png" alt="Sort" class="image">
         </Babu>
     </div>
-    <div v-if="isFilterOpen" id="filterMenu">
+    <div v-if="isFilterOpen" class="menu">
         <div v-for="tag in tags">
             {{ tag }}
             <input type="checkbox" class="checkbox">
         </div>
     </div>
-    <div v-if="isSortOpen" id="sortMenu">
+    <div v-if="isSortOpen" class="menu">
         foo bar
     </div>
 </template>
 
-<style>
-#tags, #sorts {
-    width: min-content;
+<style scoped>
+
+.main {
     font-family: "Baba UI", sans-serif;
-    margin-bottom: 1%;
+    width:fit-content;
     margin-right: 1%;
+    margin-bottom: 1%;
 }
 
 #grid {
     display: grid;
-    grid-template-columns: min-content min-content;
+    grid-template-columns: 1fr 1fr;
     margin-bottom: 1%;
+    width:max-content;
 }
 
 .image {
-    height: 24px;
+    height: 48px;
     vertical-align: middle;
+    width: min-content;
 }
 
-#filterMenu, #sortMenu {
+.menu {
     z-index: 1;
 	color: white;
     background-color: #00000000;

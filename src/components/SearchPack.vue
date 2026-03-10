@@ -71,7 +71,7 @@ function dateToOffset(date: Date): string {
 	</div>
 </template>
 
-<style>
+<style scoped>
 .base {
 	background-color: #00000000;
 	align-items: center;
