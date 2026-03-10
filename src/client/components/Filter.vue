@@ -49,7 +49,6 @@ const isSortOpen = ref(false);
 }
 
 .menu {
-        z-index: 1;
         color: white;
         background-color: #00000000;
         align-items: center;
@@ -64,6 +63,7 @@ const isSortOpen = ref(false);
         font-size: 12px;
         position: relative;
         width: fit-content;
+        padding: 10px;
 }
 
 .checkbox {

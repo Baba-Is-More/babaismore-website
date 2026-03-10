@@ -12,6 +12,7 @@
     "paths": {
       "@/*": ["./src/client/*"],
       "@common/*": ["./src/common/*"]
-    }
+    },
+    "strict": true
   }
 }

@@ -22,7 +22,7 @@ import Profile from '@/components/Navbar/Profile.vue'
 	width: 100vw;
 	/* if you change this, change App.vue as well */
 	height: 56px;
-
+	z-index: 999;
 	display: flex;
 	align-items: center;
 }
