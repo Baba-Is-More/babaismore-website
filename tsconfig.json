@@ -10,7 +10,8 @@
   ],
   "compilerOptions": {
     "paths": {
-      "@/*": ["./src/client/*"]
+      "@/*": ["./src/client/*"],
+      "@common/*": ["./src/common/*"]
     }
   }
 }

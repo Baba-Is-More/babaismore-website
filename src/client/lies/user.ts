@@ -1,4 +1,4 @@
-import type { User } from "@/lies/types";
+import type { User } from "@common/UserType";
 
 export default {
 	name: "Baba",

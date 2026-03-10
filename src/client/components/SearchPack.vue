@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SearchResult } from '@/lies/types.ts';
+import type { SearchResult } from '@common/LevelPack';
 
 const props = defineProps<SearchResult>()
 
@@ -58,10 +58,13 @@ function dateToOffset(date: Date): string {
 			</div>
 			<div>
 				<p class="name"> {{ name }} </p>
-				<p class="author"> <img src="\images\image_baba.png" alt="{{ author }}" class="inline"> {{
-					author }} </p>
-				<p class="info"> <img src="\images\image_downloads.png" alt="{{ downloads }} downloads" class="inline"> {{
-					reduce(downloads) }} <img src="\images\image_clock.png" alt="" class="inline"> {{
+				<p class="author"> <img src="\images\image_baba.png" alt="{{ author }}" class="inline">
+					{{
+						author }} </p>
+				<p class="info"> <img src="\images\image_downloads.png" alt="{{ downloads }} downloads"
+						class="inline"> {{
+							reduce(downloads) }} <img src="\images\image_clock.png" alt="" class="inline">
+					{{
 						dateToOffset(posted)
 					}}</p>
 			</div>
@@ -90,8 +93,8 @@ function dateToOffset(date: Date): string {
 }
 
 #box {
-    box-sizing: border-box;
-    padding: 4px 10px 74px 10px;
+	box-sizing: border-box;
+	padding: 4px 10px 74px 10px;
 }
 
 .blue {
