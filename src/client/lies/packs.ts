@@ -1,6 +1,6 @@
 // this file comes up with some random stuff for search to show
 
-import type { SearchResult } from "@common/LevelPack";
+import type { SearchResult } from "@common/SearchResult";
 
 export default [
 	{

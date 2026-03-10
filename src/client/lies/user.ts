@@ -1,4 +1,4 @@
-import type { User } from "@common/UserType";
+import type { User } from "@common/User";
 
 export default {
 	name: "Baba",
