@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import SearchPack from '@/components/SearchPack.vue'
+import Filter from '@/components/Filter.vue'
 import lies from '@/lies/packs.ts'
 import type { SearchResult } from '@/lies/types'
 import { ref, watch } from 'vue'
@@ -23,7 +24,8 @@ const results = ref<SearchResult[]>(lies);
 </script>
 
 <template>
-        <p>Search results for {{ query }}</p>
+        <p>Search Filters</p>
+        <Filter />
         <div class="grid">
                 <div v-for="({ name, author, desc, downloads, posted, tags }, idx) in results">
                         <SearchPack :name :author :desc :downloads :posted :tags />

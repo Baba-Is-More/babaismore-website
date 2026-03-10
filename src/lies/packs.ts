@@ -33,7 +33,7 @@ export default [
 		desc: "A large selection of custom words, building off of the vanilla ones.",
 		downloads: 1.46e7,
 		posted: new Date("2011-10-10T14:48:00.000+09:00"),
-		tags: ["Large Scale", "variety Pack", "Feels Vanilla"],
+		tags: ["Large Scale", "Variety Pack", "Feels Vanilla"],
 	},
 	{
 		name: "Blank Mod",
