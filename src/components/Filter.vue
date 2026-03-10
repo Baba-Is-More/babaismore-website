@@ -14,7 +14,7 @@ const isSortOpen = ref(false);
             <img src="\images\image_tag.png" alt="Tag" id="tag" class="image">
         </Babu>
         <Babu id="sorts" class="main" @click="isSortOpen = !isSortOpen; isFilterOpen = false;" title="Sorts">
-            <img src="\images\image_tag.png" alt="Tag" id="sort" class="image">
+            <img src="\images\image_sort.png" alt="Sort" id="sort" class="image">
         </Babu>
     </div>
     <div v-if="isFilterOpen" id="filterMenu">
@@ -33,6 +33,7 @@ const isSortOpen = ref(false);
     width: min-content;
     font-family: "Baba UI", sans-serif;
     margin-bottom: 1%;
+    margin-right: 1%;
 }
 
 #grid {
@@ -42,7 +43,8 @@ const isSortOpen = ref(false);
 }
 
 .image {
-    height: 100%;
+    height: 24px;
+    vertical-align: middle;
 }
 
 #filterMenu, #sortMenu {
@@ -56,7 +58,7 @@ const isSortOpen = ref(false);
 	border-image-outset: 0px 0px 0px 0px;
 	border-image-repeat: round round;
 	border-style: solid;
-	image-rendering: crisp-edges;
+	image-rendering: pixelated;
     border-image-source: url("/images/buttons/button_purple.png");
     font-size: 12px;
     padding-left: 1%;
