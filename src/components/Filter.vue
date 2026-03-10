@@ -32,9 +32,8 @@ const isSortOpen = ref(false);
 
 .main {
     font-family: "Baba UI", sans-serif;
-    width:fit-content;
-    margin-right: 1%;
-    margin-bottom: 1%;
+    width: fit-content;
+    margin-right: 4px;
 }
 
 #grid {
@@ -57,16 +56,13 @@ const isSortOpen = ref(false);
 	align-items: center;
 	height: 100%;
 	border-image-slice: 8 8 8 8 fill;
-	border-image-width: 10px 10px 10px 10px;
+	border-image-width: 8px 8px 8px 8px;
 	border-image-outset: 0px 0px 0px 0px;
 	border-image-repeat: round round;
 	border-style: solid;
 	image-rendering: pixelated;
     border-image-source: url("/images/buttons/button_purple.png");
     font-size: 12px;
-    padding-left: 1%;
-    margin-bottom: 1%;
-    margin-top: 1%;
     position: relative;
     width: fit-content;
 }

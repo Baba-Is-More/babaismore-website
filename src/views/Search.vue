@@ -24,7 +24,7 @@ const results = ref<SearchResult[]>(lies);
 </script>
 
 <template>
-    <p>Search Filters</p>
+    <h3 class="head">Search Filters</h3>
     <Filter />
     <div class="grid">
         <div v-for="({ name, author, desc, downloads, posted, tags }, idx) in results">
@@ -34,14 +34,20 @@ const results = ref<SearchResult[]>(lies);
 </template>
 
 <style scoped>
-h1,
+h1, h2, h3, h4, h5, h6,
 p {
-    color: white
+    color: white;
+    font-weight: normal;
 }
 
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
+}
+
+.head {
+    position: relative;
+    top: 6px;
 }
 </style>
