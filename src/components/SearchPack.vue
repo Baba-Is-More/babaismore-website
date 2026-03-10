@@ -81,7 +81,7 @@ function dateToOffset(date: Date): string {
 	border-image-outset: 0px 0px 0px 0px;
 	border-image-repeat: round round;
 	border-style: solid;
-	image-rendering: crisp-edges;
+	image-rendering: pixelated;
 	color: white;
 }
 

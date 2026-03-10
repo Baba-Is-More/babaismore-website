@@ -15,7 +15,7 @@ p {
 }
 
 #logo {
-	image-rendering: crisp-edges;
+	image-rendering: pixelated;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;

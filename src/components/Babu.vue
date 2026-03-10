@@ -16,7 +16,7 @@
 	border-image-repeat: round round;
 	border-image-source: url("/images/buttons/button_blue.png");
 	border-style: solid;
-	image-rendering: crisp-edges;
+	image-rendering: pixelated;
 	font-family: "Baba UI", sans-serif;
 	color: white;
 	padding: 4.5px;
