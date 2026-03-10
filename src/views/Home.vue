@@ -5,6 +5,7 @@ import Babu from '@/components/Babu.vue'
 <template>
 	<div id="main">
 		<img src="\images\image_more_text.gif" alt="More" id="logo">
+		<h1 class="text-center">Welcome to "Baba Is More"!</h1><!--please add more text-->
 	</div>
 </template>
 

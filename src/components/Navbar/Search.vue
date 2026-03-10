@@ -25,7 +25,7 @@ function submit() {
 
 <style>
 .search {
-	height: 80%;
+	height: 34px;
 	display: flex;
 }
 
@@ -35,6 +35,9 @@ function submit() {
 	border-bottom-right-radius: 0px;
 	border-top-right-radius: 0px;
 	image-rendering: pixelated;
+	width: 24px;
+	height: 24px;
+	padding: 5px
 }
 
 .search input {
@@ -46,7 +49,7 @@ function submit() {
 	border-bottom-left-radius: 0px;
 	flex: 1;
 	font-family: "Babafont", sans-serif;
-	font-size: 12px;
+	font-size: 8px;
 }
 
 .search input:focus {
