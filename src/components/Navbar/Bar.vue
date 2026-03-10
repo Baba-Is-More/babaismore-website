@@ -21,7 +21,7 @@ import Profile from '@/components/Navbar/Profile.vue'
 	left: 0;
 	width: 100vw;
 	/* if you change this, change App.vue as well */
-	height: 10vh;
+	height: 56px;
 
 	display: flex;
 	align-items: center;
@@ -39,7 +39,8 @@ import Profile from '@/components/Navbar/Profile.vue'
 }
 
 .logo {
-	height: 90%;
+	height: 26px;
 	width: auto;
+	margin-left: 20px;
 }
 </style>

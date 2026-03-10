@@ -2,19 +2,18 @@
 </script>
 
 <template>
-	<div class="babu">
+	<div class="baba-button blue">
 		<slot />
 	</div>
 </template>
 
 <style scoped>
 /* Implementation done by @xnorvey on Discord*/
-.babu {
+.baba-button {
 	border-image-slice: 8 8 8 8 fill;
-	border-image-width: 10px 10px 10px 10px;
+	border-image-width: 8px 8px 8px 8px;
 	border-image-outset: 0px 0px 0px 0px;
 	border-image-repeat: round round;
-	border-image-source: url("/images/buttons/button_blue.png");
 	border-style: solid;
 	image-rendering: pixelated;
 	font-family: "Baba UI", sans-serif;
@@ -25,15 +24,19 @@
 	cursor: pointer;
 }
 
-.babu:hover {
+.baba-button.blue {
+	border-image-source: url("/images/buttons/button_blue.png");
+}
+
+.baba-button.blue:hover {
 	border-image-source: url("/images/buttons/button_blue_hover.png");
 }
 
-.babu:active {
+.baba-button.blue:active {
 	border-image-source: url("/images/buttons/button_blue_press.png");
 }
 
-.babu:disabled {
+.baba-button.blue:disabled {
 	border-image-source: url("/images/buttons/button_disabled.png");
 }
 </style>

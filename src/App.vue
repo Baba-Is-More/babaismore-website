@@ -13,6 +13,6 @@ import Navbar from '@/components/Navbar/Bar.vue'
 <style scoped>
 .main {
         /* if you change this, change components/navbar/Bar.vue as well */
-        margin-top: 10vh;
+        margin-top: 56px;
 }
 </style>
