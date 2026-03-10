@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SearchResult } from '@common/LevelPack';
+import type { SearchResult } from '@common/SearchResult';
 
 const props = defineProps<SearchResult>()
 
