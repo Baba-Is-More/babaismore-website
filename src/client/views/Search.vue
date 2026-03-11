@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import SearchPack from '@/components/SearchPack.vue'
 import Filter from '@/components/Filter.vue'
-import lies from '@/lies/packs.ts'
-import type { SearchResult } from '@/lies/types'
+import lies from '@common/packs'
+import type { SearchResult } from '@common/SearchResult'
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { trpc } from '..'
 
 const route = useRoute()
 
@@ -20,7 +21,16 @@ watch(
     },
 )
 
-const results = ref<SearchResult[]>(lies);
+const results = ref<SearchResult[]>((await trpc.project.getProjects.query()).map(v => {
+    return {
+        author: v.author,
+        desc: v.desc,
+        downloads: v.downloads,
+        name: v.name,
+        posted: new Date(),
+        tags: v.tags,
+    }
+}));
 </script>
 
 <template>

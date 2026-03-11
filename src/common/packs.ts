@@ -4,6 +4,14 @@ import type { SearchResult } from "@common/SearchResult";
 
 export default [
 	{
+		name: "WARNING: NO MONGODB CONNECTION MADE!",
+		author: "me",
+		desc: "not a mod",
+		downloads: 140,
+		posted: new Date(2024, 10, 3, 1, 30),
+		tags: ["Nothing"]
+	},
+	{
 		name: "Based Mod",
 		author: "Plasmaflare",
 		desc: "A simple mod for adding baserules to your levelpack.",

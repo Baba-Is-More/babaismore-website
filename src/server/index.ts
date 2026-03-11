@@ -4,10 +4,14 @@ import mongoose from 'mongoose';
 import 'dotenv/config'
 import process from 'process';
 
+export let has_mangodb = false
+
 if (process.env.DB_URL) {
 	await mongoose.connect(process.env.DB_URL);
+	has_mangodb = true;
 } else {
 	console.log("no db found on .env!");
+	has_mangodb = false;
 }
 
 const server = createHTTPServer({

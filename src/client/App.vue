@@ -6,7 +6,10 @@ import Navbar from '@/components/Navbar/Bar.vue'
         <Navbar />
 
         <div class="main">
-                <router-view />
+                <!-- should this be fully engulfed by suspense? -->
+                <Suspense>
+                        <router-view />
+                </Suspense>
         </div>
 </template>
 
