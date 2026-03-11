@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { User } from '@/lies/types.ts'
 import usr from '@/lies/user.ts'
 
 </script>
