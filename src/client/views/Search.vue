@@ -27,7 +27,7 @@ const results = ref<SearchResult[]>((await trpc.project.getProjects.query()).map
         desc: v.desc,
         downloads: v.downloads,
         name: v.name,
-        posted: new Date(),
+        posted: new Date(v.posted),
         tags: v.tags,
     }
 }));

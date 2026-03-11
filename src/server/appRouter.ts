@@ -24,6 +24,8 @@ export const projectRouter = router({
 				projectDesc: project.projectDesc,
 				downloads: project.downloads,
 				summary: project.summary,
+				author: project.author,
+				posted: project.posted,
 			});
 			proj.save();
 			return true;

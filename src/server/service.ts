@@ -11,11 +11,11 @@ export async function getProjects() {
                 console.log("hi")
                 return (await Project.find()).map(v => {
                         return {
-                                author: "not hooked",
+                                author: v.author,
                                 desc: v.projectDesc,
                                 downloads: v.downloads,
                                 name: v.projectName,
-                                posted: new Date(),
+                                posted: new Date(v.posted),
                                 tags: ["not hooked"],
                         } as SearchResult
                 })

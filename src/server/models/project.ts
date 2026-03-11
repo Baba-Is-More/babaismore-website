@@ -6,31 +6,23 @@ import { LevelCodeSchema } from "./levelCode";
 import * as z from 'zod'
 
 export const ProjectZod = z.object({
+        author: z.string(),
         projectName: z.string(),
         thumbnailURL: z.string(),
         projectDesc: z.string(),
         downloads: z.number(),
         summary: z.string(),
+        posted: z.coerce.date(),
 });
 
 export const ProjectSchema = new Schema({
-        // verification: {
-        //         type: Number,
-        //         enum: [-1, 0, 1],
-        //         default: -1
-        // },
+        author: {
+                type: String,
+        },
         projectName: {
                 type: String,
                 required: true
         },
-        // projectSuffix: {
-        //         type: String,
-        //         required: true
-        // },
-        // projectType: {
-        //         type: Number,
-        //         required: true
-        // },
         thumbnailURL: {
                 type: String,
                 default: null
@@ -48,6 +40,10 @@ export const ProjectSchema = new Schema({
                 type: String,
                 default: null
         },
+        posted: {
+                type: Date,
+                required: true,
+        }
         // distribution: {
         //         type: String,
         //         required: true
