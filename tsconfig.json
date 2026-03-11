@@ -11,7 +11,8 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/client/*"],
-      "@common/*": ["./src/common/*"]
+      "@common/*": ["./src/common/*"],
+      "@server/*": ["./src/server/*"]
     },
     "strict": true
   }
