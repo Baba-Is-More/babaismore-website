@@ -3,9 +3,11 @@ import { Project } from "./models";
 import { getProjects, getTags, getUsers } from "./service";
 import { router, publicProcedure } from "./trpc";
 import * as z from "zod";
+import { UserZod } from "@common/User";
+import { has_mongodb } from ".";
 
 export const userRouter = router({
-    getUsers: publicProcedure.query(async () => {
+    getUsers: publicProcedure.output(z.array(UserZod)).query(async () => {
         return getUsers();
     }),
 });

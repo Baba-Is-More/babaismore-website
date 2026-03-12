@@ -9,7 +9,9 @@ import Profile from "@/components/Navbar/Profile.vue";
 
         <Search class="search" />
 
-        <Profile class="profile" />
+        <Suspense>
+            <Profile class="profile" />
+        </Suspense>
     </nav>
 </template>
 

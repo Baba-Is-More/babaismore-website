@@ -1,3 +1,4 @@
+import { octetInputParser } from "@trpc/server/unstable-core-do-not-import";
 import mongoose, { Schema } from "mongoose";
 
 export const UserSchema = new mongoose.Schema({
@@ -12,13 +13,13 @@ export const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    pronouns: {
+    profilePicture: {
         type: String,
         required: true,
     },
-    profilePicture: {
+/*     pronouns: {
         type: String,
-        default: null,
+        required: true,
     },
     links: {
         type: [String],
@@ -28,5 +29,5 @@ export const UserSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: false,
-    },
+    }, */
 });

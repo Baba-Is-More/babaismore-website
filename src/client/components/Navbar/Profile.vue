@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import usr from "@/lies/user.ts";
-const avatar = "/uploads/avatars/" + usr.avatar;
+import { trpc } from "@/index";
+import { ref } from "vue";
+
+const usr = (await trpc.user.getUsers.query())[0]!;
+
+const avatar = "/uploads/avatars/" + usr.avatar + ".png";
 </script>
 
 <template>
