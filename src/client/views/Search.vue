@@ -55,7 +55,6 @@ h5,
 h6,
 p {
     color: white;
-    font-weight: normal;
 }
 
 .grid {
