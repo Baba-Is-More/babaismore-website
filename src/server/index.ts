@@ -5,7 +5,7 @@ import "dotenv/config";
 import process from "node:process";
 import * as trpcExpress from '@trpc/server/adapters/express';
 import express from 'express';
-import path from "path";
+import path from "node:path";
 
 let temp_has_mongodb = false;
 

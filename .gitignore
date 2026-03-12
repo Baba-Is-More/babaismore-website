@@ -38,5 +38,10 @@ __screenshots__/
 # Vite
 *.timestamp-*-*.mjs
 
+# Disable uploads folder content from being pushed
+uploads\*
+# use ! followed by relative path to include from previously excluded paths
+!uploads\README.md
+
 # other important stuff
 .env
