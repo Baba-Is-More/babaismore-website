@@ -3,13 +3,13 @@ import { reactive, ref, unref } from "vue";
 import { trpc } from "..";
 import { Project } from "@server/models";
 
-var author = ref("");
-var projectName = ref("");
-var thumbnailURL = ref("");
-var projectDesc = ref("");
-var downloads = ref(3);
-var summary = ref("");
-var posted = ref(new Date());
+let author = ref("");
+let projectName = ref("");
+let thumbnailURL = ref("");
+let projectDesc = ref("");
+let downloads = ref(3);
+let summary = ref("");
+let posted = ref(new Date());
 
 function create() {
     trpc.project.newProject.mutate({
