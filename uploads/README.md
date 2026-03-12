@@ -1,0 +1,1 @@
+In this folder, the server puts all the uploaded files to here! try not to send anything to the repo from here while you're testing (or not, we don't mind)
