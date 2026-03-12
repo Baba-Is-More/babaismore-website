@@ -14,6 +14,7 @@
       "@common/*": ["./src/common/*"],
       "@server/*": ["./src/server/*"]
     },
-    "strict": true
+    "strict": true,
+    "types": ["node"],
   }
 }
