@@ -9,26 +9,16 @@ const isSortOpen = ref(false);
 
 <template>
     <div id="grid">
-        <Babu
-            id="tags"
-            class="main"
-            @click="
-                isFilterOpen = !isFilterOpen;
-                isSortOpen = false;
-            "
-            title="Tags"
-        >
+        <Babu id="tags" class="main" @click="
+            isFilterOpen = !isFilterOpen;
+        isSortOpen = false;
+        " title="Tags">
             <img src="\images\image_tag.png" alt="Tag" class="image" />
         </Babu>
-        <Babu
-            id="sorts"
-            class="main"
-            @click="
-                isSortOpen = !isSortOpen;
-                isFilterOpen = false;
-            "
-            title="Sorts"
-        >
+        <Babu id="sorts" class="main" @click="
+            isSortOpen = !isSortOpen;
+        isFilterOpen = false;
+        " title="Sorts">
             <img src="\images\image_sort.png" alt="Sort" class="image" />
         </Babu>
     </div>
