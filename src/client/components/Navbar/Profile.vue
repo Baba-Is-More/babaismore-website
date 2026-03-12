@@ -3,33 +3,33 @@ import usr from "@/lies/user.ts";
 </script>
 
 <template>
-  <div style="display: flex; flex-direction: column">
-    <p class="name">{{ usr.name }}</p>
-    <p class="id">{{ usr.id }}</p>
-  </div>
-  <img class="profile" src="\images\image_baba.png" alt="Profile" />
+    <div style="display: flex; flex-direction: column">
+        <p class="name">{{ usr.name }}</p>
+        <p class="id">{{ usr.id }}</p>
+    </div>
+    <img class="profile" src="\images\image_baba.png" alt="Profile" />
 </template>
 
 <style>
 .name {
-  color: white;
-  font-size: 8px;
-  margin: 0px;
-  text-align: right;
+    color: white;
+    font-size: 8px;
+    margin: 0px;
+    text-align: right;
 }
 .id {
-  color: #737373;
-  font-size: 8px;
-  padding-left: 4px;
-  margin: 0px;
-  text-align: right;
+    color: #737373;
+    font-size: 8px;
+    padding-left: 4px;
+    margin: 0px;
+    text-align: right;
 }
 p {
-  align-self: left;
+    align-self: left;
 }
 
 .profile {
-  width: 48px;
-  margin-left: 10px;
+    width: 48px;
+    margin-left: 10px;
 }
 </style>

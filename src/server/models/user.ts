@@ -1,32 +1,32 @@
 import mongoose, { Schema } from "mongoose";
 
 export const UserSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    minLength: 3,
-    match: /[a-zA-Z0-9._-]/,
-  },
-  displayName: {
-    type: String,
-    required: true,
-  },
-  pronouns: {
-    type: String,
-    required: true,
-  },
-  profilePicture: {
-    type: String,
-    default: null,
-  },
-  links: {
-    type: [String],
-    default: [],
-  },
-  isServerSide: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+        minLength: 3,
+        match: /[a-zA-Z0-9._-]/,
+    },
+    displayName: {
+        type: String,
+        required: true,
+    },
+    pronouns: {
+        type: String,
+        required: true,
+    },
+    profilePicture: {
+        type: String,
+        default: null,
+    },
+    links: {
+        type: [String],
+        default: [],
+    },
+    isServerSide: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
 });

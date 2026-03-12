@@ -1,20 +1,20 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
+    "files": [],
+    "references": [
+        {
+            "path": "./tsconfig.node.json"
+        },
+        {
+            "path": "./tsconfig.app.json"
+        }
+    ],
+    "compilerOptions": {
+        "paths": {
+            "@/*": ["./src/client/*"],
+            "@common/*": ["./src/common/*"],
+            "@server/*": ["./src/server/*"]
+        },
+        "strict": true,
+        "types": ["node"]
     }
-  ],
-  "compilerOptions": {
-    "paths": {
-      "@/*": ["./src/client/*"],
-      "@common/*": ["./src/common/*"],
-      "@server/*": ["./src/server/*"]
-    },
-    "strict": true,
-    "types": ["node"],
-  }
 }

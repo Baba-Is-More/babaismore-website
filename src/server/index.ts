@@ -4,21 +4,21 @@ import mongoose from "mongoose";
 import "dotenv/config";
 import process from "node:process";
 
-let temp_has_mongodb = false
+let temp_has_mongodb = false;
 
 if (process.env.DB_URL) {
-	await mongoose.connect(process.env.DB_URL);
-	temp_has_mongodb = true;
+    await mongoose.connect(process.env.DB_URL);
+    temp_has_mongodb = true;
 } else {
-	console.log("no db found on .env!");
-	// implied temp_has_mongodb = false;
+    console.log("no db found on .env!");
+    // implied temp_has_mongodb = false;
 }
 
 export const has_mongodb = temp_has_mongodb;
 
 const server = createHTTPServer({
-  router: appRouter,
-  basePath: "/trpc/",
+    router: appRouter,
+    basePath: "/trpc/",
 });
 
 console.log("listening on http://localhost:3000...");
