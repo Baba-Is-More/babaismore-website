@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { reactive, ref, unref } from "vue";
+import { ref, unref } from "vue";
 import { trpc } from "..";
-import { Project } from "@server/models";
 
 let author = ref("");
 let projectName = ref("");

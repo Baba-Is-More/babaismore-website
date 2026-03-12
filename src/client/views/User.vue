@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Babu from "@/components/Babu.vue";
-import type { User } from "@common/User";
 </script>
 
 <template>

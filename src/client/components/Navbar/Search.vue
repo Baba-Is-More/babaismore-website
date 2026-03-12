@@ -23,7 +23,7 @@ function submit() {
     </form>
 </template>
 
-<style>
+<style scoped>
 .search {
     height: 34px;
     display: flex;

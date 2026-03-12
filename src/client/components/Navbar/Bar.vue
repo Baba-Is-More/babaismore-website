@@ -15,7 +15,7 @@ import Profile from "@/components/Navbar/Profile.vue";
     </nav>
 </template>
 
-<style>
+<style scoped>
 .navbar {
     background-color: #1c1e24;
     position: fixed;

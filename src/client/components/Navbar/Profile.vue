@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { trpc } from "@/index";
-import { ref } from "vue";
 
 const usr = (await trpc.user.getUsers.query())[0]!;
 
@@ -15,13 +14,14 @@ const avatar = "/uploads/avatars/" + usr.avatar + ".png";
     <img class="profile" :src="avatar" alt="Profile" />
 </template>
 
-<style>
+<style scoped>
 .name {
     color: white;
     font-size: 8px;
     margin: 0px;
     text-align: right;
 }
+
 .id {
     color: #737373;
     font-size: 8px;
@@ -29,6 +29,7 @@ const avatar = "/uploads/avatars/" + usr.avatar + ".png";
     margin: 0px;
     text-align: right;
 }
+
 p {
     align-self: left;
 }

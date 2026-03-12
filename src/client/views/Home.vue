@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import Babu from "@/components/Babu.vue";
 </script>
 
 <template>
     <div id="main">
         <img src="\images\image_more_text.gif" alt="More" id="logo" />
-        <h1 class="text-center">Welcome to "Baba Is More"!</h1>
-        <!--please add more text-->
+        <p class="text-center" id="blurb">This website is used for cataloguing Baba Is You mods, levelpacks, and level codes. Whether you're here as a long-time creator, or just a player, we have you covered!</p>
+        <div id="grid">
+            <div class="panel">
+
+            </div>
+        </div>
     </div>
 </template>
 
@@ -30,5 +33,23 @@ p {
     height: 1000px;
     background-color: #293141;
     margin-left: 10%;
+}
+
+#blurb {
+    padding: 0% 15% 0% 15%;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.panel {
+    
 }
 </style>
