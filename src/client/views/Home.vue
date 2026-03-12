@@ -1,33 +1,34 @@
 <script setup lang="ts">
-import Babu from '@/components/Babu.vue'
+import Babu from "@/components/Babu.vue";
 </script>
 
 <template>
-	<div id="main">
-		<img src="\images\image_more_text.gif" alt="More" id="logo">
-		<h1 class="text-center">Welcome to "Baba Is More"!</h1><!--please add more text-->
-	</div>
+  <div id="main">
+    <img src="\images\image_more_text.gif" alt="More" id="logo" />
+    <h1 class="text-center">Welcome to "Baba Is More"!</h1>
+    <!--please add more text-->
+  </div>
 </template>
 
 <style scoped>
 h1,
 p {
-	color: white
+  color: white;
 }
 
 #logo {
-	image-rendering: pixelated;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 5%;
-	width: 15%;
+  image-rendering: pixelated;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  width: 15%;
 }
 
 #main {
-	width: 80%;
-	height: 1000px;
-	background-color: #293141;
-	margin-left: 10%;
+  width: 80%;
+  height: 1000px;
+  background-color: #293141;
+  margin-left: 10%;
 }
 </style>

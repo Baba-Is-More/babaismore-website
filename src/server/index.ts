@@ -1,8 +1,8 @@
-import { createHTTPServer } from '@trpc/server/adapters/standalone';
-import { appRouter } from './appRouter';
-import mongoose from 'mongoose';
-import 'dotenv/config'
-import process from 'process';
+import { createHTTPServer } from "@trpc/server/adapters/standalone";
+import { appRouter } from "./appRouter";
+import mongoose from "mongoose";
+import "dotenv/config";
+import process from "node:process";
 
 let temp_has_mongodb = false
 
@@ -17,8 +17,8 @@ if (process.env.DB_URL) {
 export const has_mongodb = temp_has_mongodb;
 
 const server = createHTTPServer({
-	router: appRouter,
-	basePath: '/trpc/'
+  router: appRouter,
+  basePath: "/trpc/",
 });
 
 console.log("listening on http://localhost:3000...");
