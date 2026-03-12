@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import usr from "@/lies/user.ts";
+const avatar = "/uploads/avatars/" + usr.avatar;
 </script>
 
 <template>
@@ -7,7 +8,7 @@ import usr from "@/lies/user.ts";
         <p class="name">{{ usr.name }}</p>
         <p class="id">{{ usr.id }}</p>
     </div>
-    <img class="profile" src="\images\image_baba.png" alt="Profile" />
+    <img class="profile" :src="avatar" alt="Profile" />
 </template>
 
 <style>
