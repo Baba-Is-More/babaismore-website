@@ -10,10 +10,15 @@ import Panel from '@/components/Panel.vue';
             codes. Whether you're here as a long-time creator, or just a player, we have you covered!</p>
         <div id="grid">
             <Panel class="panel">
-                <p>packs panel</p>
+                <h2>Mods</h2>
+                <!-- TODO: replace this with a more fitting image -->
+                <img src="\images\image_levelpacks.png" alt="Levelpacks" class="image"/>
+                <p>Custom sprites, music, code, and more things made by the community.</p>
             </Panel>
             <Panel class="panel">
-                <p>packs panel</p>
+                <h2>Levels</h2>
+                <img src="\images\image_levelpacks.png" alt="Levelpacks" class="image"/>
+                <p>Downloadable Levelpacks and individual Level Codes.</p>
             </Panel>
         </div>
     </div>
@@ -49,6 +54,7 @@ p {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
+    margin: 1%
 }
 
 .text-center {
@@ -57,5 +63,12 @@ p {
 
 .panel {
     font-family: "BabaFont", sans-serif;
+    text-align: center;
+}
+
+.image {
+    image-rendering: pixelated;
+    display: block;
+    margin: auto;
 }
 </style>
