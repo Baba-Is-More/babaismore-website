@@ -33,7 +33,7 @@ const isSortOpen = ref(false);
 
 <style scoped>
 .main {
-    font-family: "Baba UI", sans-serif;
+    font-family: "BabaFont", sans-serif;
     width: fit-content;
     margin-right: 4px;
 }

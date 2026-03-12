@@ -1,14 +1,20 @@
 <script setup lang="ts">
+import Panel from '@/components/Panel.vue';
+
 </script>
 
 <template>
     <div id="main">
         <img src="\images\image_more_text.gif" alt="More" id="logo" />
-        <p class="text-center" id="blurb">This website is used for cataloguing Baba Is You mods, levelpacks, and level codes. Whether you're here as a long-time creator, or just a player, we have you covered!</p>
+        <p class="text-center" id="blurb">This website is used for cataloguing Baba Is You mods, levelpacks, and level
+            codes. Whether you're here as a long-time creator, or just a player, we have you covered!</p>
         <div id="grid">
-            <div class="panel">
-
-            </div>
+            <Panel class="panel">
+                <p>packs panel</p>
+            </Panel>
+            <Panel class="panel">
+                <p>packs panel</p>
+            </Panel>
         </div>
     </div>
 </template>
@@ -50,6 +56,6 @@ p {
 }
 
 .panel {
-    
+    font-family: "BabaFont", sans-serif;
 }
 </style>
