@@ -3,6 +3,8 @@ import { appRouter } from "./appRouter";
 import mongoose from "mongoose";
 import "dotenv/config";
 import process from "node:process";
+import * as trpcExpress from '@trpc/server/adapters/express';
+import express from 'express';
 
 let temp_has_mongodb = false;
 
@@ -16,10 +18,14 @@ if (process.env.DB_URL) {
 
 export const has_mongodb = temp_has_mongodb;
 
-const server = createHTTPServer({
-    router: appRouter,
-    basePath: "/trpc/",
-});
+const app = express();
 
+app.use(
+  '/trpc',
+  trpcExpress.createExpressMiddleware({
+    router: appRouter,
+  }),
+);
+ 
 console.log("listening on http://localhost:3000...");
-server.listen(3000);
+app.listen(3000);
