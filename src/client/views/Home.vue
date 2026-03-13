@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Panel from '@/components/Panel.vue';
+import Bapi from '@/components/Bapi.vue';
 
 </script>
 
@@ -14,11 +15,31 @@ import Panel from '@/components/Panel.vue';
                 <!-- TODO: replace this with a more fitting image -->
                 <img src="\images\image_levelpacks.png" alt="Levelpacks" class="image"/>
                 <p>Custom sprites, music, code, and more things made by the community.</p>
+                <Bapi id="mods">
+                    <h3>Browse Mods</h3>
+                </Bapi>
+                <div id="col3">
+                    <Bapi class="col">
+                        <p>Palettes</p>
+                    </Bapi>
+                    <Bapi class="col">
+                        <p>Sprites</p>
+                    </Bapi>
+                    <Bapi class="col">
+                        <p>Music</p>
+                    </Bapi>
+                </div>
             </Panel>
             <Panel class="panel">
                 <h2>Levels</h2>
                 <img src="\images\image_levelpacks.png" alt="Levelpacks" class="image"/>
                 <p>Downloadable Levelpacks and individual Level Codes.</p>
+                <Bapi id="levelpacks">
+                    Browse Levelpacks
+                </Bapi>
+                <Bapi>
+                    <p>Browse Level Codes</p>
+                </Bapi>
             </Panel>
         </div>
     </div>
@@ -55,6 +76,23 @@ p {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
     margin: 1%
+}
+
+#col3 {
+    grid-template-columns: 30% 30% 30%;
+    gap: 1rem;
+    margin: 1%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+#levelpacks {
+    margin-bottom: 1%;
+}
+
+.col {
+    margin:auto;
 }
 
 .text-center {
