@@ -18,8 +18,8 @@
     font-family: "BabaFont", sans-serif;
     color: white;
     padding: 4.5px;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
     cursor: pointer;
 }
 
