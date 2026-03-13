@@ -43,7 +43,9 @@ import Bapi from '@/components/Bapi.vue';
             </Panel>
         </div>
         <p id="disclaimer">
-            Baba Is More is a site independent from Baba Is You, Arvi "Hempuli" Teikari, or any other official party associated with the Baba Is You IP. This legal disclaimer is not legally binding in any way, mostly because we haven't finished it yet!
+            Baba Is More is a site independent from Baba Is You, Arvi "Hempuli" Teikari, or any other official party
+            associated with the Baba Is You IP. This legal disclaimer is not legally binding in any way, mostly because
+            we haven't finished it yet!
         </p>
     </div>
 </template>
