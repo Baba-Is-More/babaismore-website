@@ -22,10 +22,11 @@ export const has_mongodb = temp_has_mongodb;
 const app = express();
 
 app.use(
-  '/trpc',
+  "/trpc",
   trpcExpress.createExpressMiddleware({
     router: appRouter,
-  }),
+    createContext: () => ({}),
+  })
 );
 
 app.use(

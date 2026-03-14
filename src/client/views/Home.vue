@@ -16,7 +16,7 @@ import Bapi from '@/components/Bapi.vue';
                 <img src="\images\image_levelpacks.png" alt="Levelpacks" class="image" />
                 <p>Custom sprites, music, code, and more things made by the community.</p>
                 <Bapi id="mods">
-                    <h3>Browse Mods</h3>
+                    <p>Browse Mods</p>
                 </Bapi>
                 <div id="col3">
                     <Bapi class="col">
@@ -35,7 +35,7 @@ import Bapi from '@/components/Bapi.vue';
                 <img src="\images\image_levelpacks.png" alt="Levelpacks" class="image" />
                 <p>Downloadable Levelpacks and individual Level Codes.</p>
                 <Bapi id="levelpacks">
-                    Browse Levelpacks
+                    <p>Browse Levelpacks</p>
                 </Bapi>
                 <Bapi>
                     <p>Browse Level Codes</p>
