@@ -7,4 +7,4 @@ export const UserZod = z.object({
     avatar: z.uuidv4(),
 });
 
-export type User = z.infer<typeof UserZod>
+export type User = z.infer<typeof UserZod>;

@@ -1,20 +1,29 @@
 <script setup lang="ts">
-import Panel from '@/components/Panel.vue';
-import Bapi from '@/components/Bapi.vue';
-
+import Panel from "@/components/Panel.vue";
+import Bapi from "@/components/Bapi.vue";
 </script>
 
 <template>
     <div id="main">
         <img src="\images\image_more_text.gif" alt="More" id="logo" />
-        <p class="text-center" id="blurb">This website is used for cataloguing Baba Is You mods, levelpacks, and level
-            codes. Whether you're here as a long-time creator, or just a player, we have you covered!</p>
+        <p class="text-center" id="blurb">
+            This website is used for cataloguing Baba Is You mods, levelpacks,
+            and level codes. Whether you're here as a long-time creator, or just
+            a player, we have you covered!
+        </p>
         <div id="grid">
             <Panel class="panel">
                 <h2>Mods</h2>
                 <!-- TODO: replace this with a more fitting image -->
-                <img src="\images\image_levelpacks.png" alt="Levelpacks" class="image" />
-                <p>Custom sprites, music, code, and more things made by the community.</p>
+                <img
+                    src="\images\image_levelpacks.png"
+                    alt="Levelpacks"
+                    class="image"
+                />
+                <p>
+                    Custom sprites, music, code, and more things made by the
+                    community.
+                </p>
                 <Bapi id="mods">
                     <p>Browse Mods</p>
                 </Bapi>
@@ -32,7 +41,11 @@ import Bapi from '@/components/Bapi.vue';
             </Panel>
             <Panel class="panel" id="levels">
                 <h2>Levels</h2>
-                <img src="\images\image_levelpacks.png" alt="Levelpacks" class="image" />
+                <img
+                    src="\images\image_levelpacks.png"
+                    alt="Levelpacks"
+                    class="image"
+                />
                 <p>Downloadable Levelpacks and individual Level Codes.</p>
                 <Bapi id="levelpacks">
                     <p>Browse Levelpacks</p>
@@ -43,9 +56,10 @@ import Bapi from '@/components/Bapi.vue';
             </Panel>
         </div>
         <p id="disclaimer">
-            Baba Is More is a site independent from Baba Is You, Arvi "Hempuli" Teikari, or any other official party
-            associated with the Baba Is You IP. This legal disclaimer is not legally binding in any way, mostly because
-            we haven't finished it yet!
+            Baba Is More is a site independent from Baba Is You, Arvi "Hempuli"
+            Teikari, or any other official party associated with the Baba Is You
+            IP. This legal disclaimer is not legally binding in any way, mostly
+            because we haven't finished it yet!
         </p>
     </div>
 </template>
