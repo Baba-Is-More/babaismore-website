@@ -9,24 +9,34 @@ const isSortOpen = ref(false);
 
 <template>
     <div id="grid">
-        <Babu id="tags" class="main" @click="
-            isFilterOpen = !isFilterOpen;
-        isSortOpen = false;
-        " title="Tags">
+        <Babu
+            id="tags"
+            class="main"
+            @click="
+                isFilterOpen = !isFilterOpen;
+                isSortOpen = false;
+            "
+            title="Tags"
+        >
             <img src="\images\image_tag.png" alt="Tag" class="image" />
         </Babu>
-        <Babu id="sorts" class="main" @click="
-            isSortOpen = !isSortOpen;
-        isFilterOpen = false;
-        " title="Sorts">
+        <Babu
+            id="sorts"
+            class="main"
+            @click="
+                isSortOpen = !isSortOpen;
+                isFilterOpen = false;
+            "
+            title="Sorts"
+        >
             <img src="\images\image_sort.png" alt="Sort" class="image" />
         </Babu>
     </div>
     <div v-if="isFilterOpen" class="menu">
-        <div v-for="tag in tags">
-            {{ tag }}
+        <label class="text-label" v-for="tag in tags" :key="tag">
             <input type="checkbox" class="checkbox" />
-        </div>
+            <span class="check"></span><span>{{ tag }}</span>
+        </label>
     </div>
     <div v-if="isSortOpen" class="menu">foo bar</div>
 </template>
@@ -74,5 +84,59 @@ const isSortOpen = ref(false);
     vertical-align: middle;
     width: 15px;
     height: 100%;
+}
+
+.text-label {
+    position: relative;
+    font-size: 8px;
+    padding: 4px 4px;
+    padding-left: 30px;
+    width: 180px;
+    border-image-slice: 8 8 8 8 fill;
+    border-image-width: 8px 8px 8px 8px;
+    border-image-outset: 0px 0px 0px 0px;
+    border-image-repeat: round round;
+    border-style: solid;
+    image-rendering: pixelated;
+    border-image-source: url("/images/buttons/button_purple.png");
+}
+
+.text-label:hover {
+    border-image-source: url("/images/buttons/button_purple_hover.png");
+}
+
+.text-label:active {
+    border-image-source: url("/images/buttons/button_purple_press.png");
+}
+
+input {
+    display: none;
+}
+
+input:checked + .check {
+    background-image: url("/images/image_checkmark.png");
+}
+
+.text-label:has(input:checked) {
+    border-image-source: url("/images/buttons/button_pink.png");
+}
+
+.text-label:hover:has(input:checked) {
+    border-image-source: url("/images/buttons/button_pink_hover.png");
+}
+
+.text-label:active:has(input:checked) {
+    border-image-source: url("/images/buttons/button_pink_press.png");
+}
+
+.check {
+    position: absolute;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    left: 4px;
+    background-size: 12px 12px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 </style>
