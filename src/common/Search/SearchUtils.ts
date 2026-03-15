@@ -81,6 +81,7 @@ export function parseUrlToQuery(url: URLSearchParams): SearchQuery {
     const query_tags = raw_keywords
         .filter((v) => isTagFilter(v)) // filter only for `tag:`
         .map((v) => v.slice(4)) // remove four characters to remove the `tag:`
+        .map((v) => v.toLowerCase()) // turn all tags into lowercase
         .map(toTagQuery); // turn it into TagQuery[]
 
     const url_tags: TagQuery[] = url.getAll("t").map(toTagQuery);

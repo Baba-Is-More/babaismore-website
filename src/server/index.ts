@@ -10,16 +10,15 @@ import path from "node:path";
 let temp_has_mongodb = false;
 
 if (process.env.DB_URL) {
-    // note: you should comment out your personal db url if testing
+    // note: you need to add your own `.env` file to the root of the project with DB_URL
     await mongoose.connect(process.env.DB_URL);
     temp_has_mongodb = true;
 } else {
-    console.log("no db found on .env!");
+    throw "no db found on .env! please create a key 'DB_URL' with 'mongodb+srv://' url";
     // implied temp_has_mongodb = false;
 }
 
 export const has_mongodb = temp_has_mongodb;
-// export const has_mongodb = false;
 
 const app = express();
 

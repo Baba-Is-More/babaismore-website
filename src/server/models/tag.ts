@@ -6,7 +6,12 @@ export const TagZod = z.object({
     tagIcon: z.string().optional(),
 });
 
-export const TagSchema = new Schema({
+export interface ITag {
+    tagName: string;
+    tagIcon: string;
+}
+
+export const TagSchema = new Schema<ITag>({
     tagName: {
         type: String,
         required: true,

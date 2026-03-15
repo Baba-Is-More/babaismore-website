@@ -4,86 +4,31 @@ import lies from "../common/packs";
 import userlies from "../common/users";
 import type { SearchResult } from "@common/SearchResult";
 import type { User } from "@common/User";
-import type { SearchQuery, TagQuery } from "@common/Search/SearchQuery";
-import type { ObjectId, QueryFilter } from "mongoose";
+
+import { buildProjectsFilter, projectToSearchResult } from "./searching/utils";
+import type { SearchQuery } from "@common/Search/SearchQuery";
+import type { IProject, ProjectSchema } from "./models/project";
+import type { Document, HydratedDocument } from "mongoose";
+import type { ITag } from "./models/tag";
 
 export async function getUsers(): Promise<User[]> {
-    if (has_mongodb) {
-        return (await UserModel.find()).map((v) => {
-            return {
-                avatar: v.profilePicture,
-                id: v.username,
-                name: v.displayName,
-            } as User;
-        });
-    } else {
-        return userlies;
-    }
-}
-
-async function tagObjectIds(tags: TagQuery[]): Promise<ObjectId[]> {
-    return await Tag.find({
-        tagName: { $in: tags.map((v) => v.tag) },
+    return (await UserModel.find()).map((v) => {
+        return {
+            avatar: v.profilePicture,
+            id: v.username,
+            name: v.displayName,
+        } as User;
     });
 }
 
-async function buildProjectsFilter(
-    query: SearchQuery,
-): Promise<QueryFilter<typeof Project>> {
-    const and = [];
-    if (query.keywords.length) {
-        for (const kw of query.keywords) {
-            and.push({
-                projectName: { $regex: kw, $options: "i" },
-            });
-        }
-    }
-    if (query.tags.length) {
-        const includes = query.tags.filter((t) => !t.is_negated);
-        const excludes = query.tags.filter((t) => t.is_negated);
-        const includes_ids = await tagObjectIds(includes);
-        const excludes_ids = await tagObjectIds(excludes);
-        for (const id of includes_ids) {
-            and.push({
-                tags: id,
-            });
-        }
-        for (const id of excludes_ids) {
-            and.push({
-                $not: {
-                    tags: id,
-                },
-            });
-        }
-    }
-
-    console.log(and);
-
-    return { $and: and };
-}
-
 export async function getProjects(query: SearchQuery) {
-    if (has_mongodb) {
-        const projects = await Project.find(await buildProjectsFilter(query));
+    const filter = await buildProjectsFilter(query);
+    const projects = await Project.find(filter) // filter each project
+        .populate<{ tags: ITag[] }>("tags"); //populate each tags with their respective objects
 
-        const results = await Promise.all(
-            projects.map(async (v) => {
-                const tags = await Tag.find({ _id: { $in: v.tags } });
-                return {
-                    author: v.author,
-                    desc: v.projectDesc,
-                    downloads: v.downloads,
-                    name: v.projectName,
-                    posted: new Date(v.posted),
-                    tags: tags.map((t) => t.tagName),
-                } as SearchResult;
-            }),
-        );
+    const results = await Promise.all(projects.map(projectToSearchResult));
 
-        return results;
-    } else {
-        return lies;
-    }
+    return results;
 }
 
 export async function getTags() {

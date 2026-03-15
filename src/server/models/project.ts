@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 import { GalleryImageSchema } from "./galleryImage";
 import { ReviewSchema } from "./review";
 import { ProjectFileSchema } from "./projectFile";
@@ -17,7 +17,18 @@ export const ProjectZod = z.object({
     tags: z.array(TagZod),
 });
 
-export const ProjectSchema = new Schema({
+export interface IProject {
+    author: string;
+    projectName: string;
+    thumbnailURL: string;
+    projectDesc: string;
+    downloads: number;
+    summary: string;
+    posted: string;
+    tags: Types.ObjectId[];
+}
+
+export const ProjectSchema = new Schema<IProject>({
     author: {
         type: String,
     },
@@ -43,7 +54,7 @@ export const ProjectSchema = new Schema({
         default: null,
     },
     posted: {
-        type: Date,
+        type: String,
         required: true,
     },
     tags: [

@@ -9,7 +9,7 @@ export enum SortType {
 
 export const TagQuery = z.object({
     is_negated: z.boolean().default(false),
-    tag: z.string(),
+    tag: z.string().lowercase(),
 });
 
 export type TagQuery = z.infer<typeof TagQuery>;

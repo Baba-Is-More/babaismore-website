@@ -1,29 +1,62 @@
+import type { tags } from "@/lies/tags";
+import type { TagQuery } from "@common/Search/SearchQuery";
 import { SortType, type SearchQuery } from "@common/Search/SearchQuery";
-import type { Project } from "@server/models";
-import type { SortOrder } from "mongoose";
-import type { Query, QueryFilter } from "mongoose";
+import type { SearchResult } from "@common/SearchResult";
+import { Tag, type Project } from "@server/models";
+import type { IProject } from "@server/models/project";
+import type { ITag } from "@server/models/tag";
+import type { HydratedDocument, ObjectId, QueryFilter } from "mongoose";
 
-export function queryToFilter(query: SearchQuery): QueryFilter<typeof Project> {
-    return {};
+async function tagObjectIds(tags: TagQuery[]): Promise<ObjectId[]> {
+    return await Tag.find({
+        tagName: { $in: tags.map((v) => v.tag) },
+    });
 }
 
-// i genuinely do not know what the type of this is
-export function queryToSort(query: SearchQuery) {
-    switch (query.sort) {
-        case SortType.LeastDownloaded: {
-            return {};
-        }
-        case SortType.MostDownloaded: {
-            return {};
-        }
-        case SortType.Newest: {
-            return {};
-        }
-        case SortType.Oldest: {
-            return {};
-        }
-        case SortType.None: {
-            return {};
+export async function buildProjectsFilter(
+    query: SearchQuery,
+): Promise<QueryFilter<IProject>> {
+    const and = [];
+    if (query.keywords.length) {
+        for (const kw of query.keywords) {
+            and.push({
+                projectName: { $regex: kw, $options: "i" },
+            });
         }
     }
+    if (query.tags.length) {
+        const includes = query.tags.filter((t) => !t.is_negated);
+        const excludes = query.tags.filter((t) => t.is_negated);
+        const includes_ids = await tagObjectIds(includes);
+        const excludes_ids = await tagObjectIds(excludes);
+        for (const id of includes_ids) {
+            and.push({
+                tags: id,
+            });
+        }
+        for (const id of excludes_ids) {
+            and.push({
+                $not: {
+                    tags: id,
+                },
+            });
+        }
+    }
+
+    return { $and: and };
+}
+
+export function projectToSearchResult(
+    // the moment any typescript developer just throws their hands up and decides to make it any...
+    // is a sad one...
+    project: any, // really its type HydratedDocument<IProject>
+): SearchResult {
+    return {
+        author: project.author,
+        desc: project.projectDesc,
+        downloads: project.downloads,
+        name: project.projectName,
+        posted: new Date(project.posted),
+        tags: project.tags.map((t: any) => t.tagName),
+    };
 }
