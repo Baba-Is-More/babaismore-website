@@ -1,4 +1,10 @@
 import mongoose, { Schema } from "mongoose";
+import * as z from "zod";
+
+export const TagZod = z.object({
+    tagName: z.string(),
+    tagIcon: z.string().optional(),
+});
 
 export const TagSchema = new Schema({
     tagName: {
@@ -7,6 +13,6 @@ export const TagSchema = new Schema({
     },
     tagIcon: {
         type: String,
-        required: true,
+        required: false,
     },
 });

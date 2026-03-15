@@ -4,6 +4,7 @@ import { ReviewSchema } from "./review";
 import { ProjectFileSchema } from "./projectFile";
 import { LevelCodeSchema } from "./levelCode";
 import * as z from "zod";
+import { TagZod } from "./tag";
 
 export const ProjectZod = z.object({
     author: z.string(),
@@ -13,6 +14,7 @@ export const ProjectZod = z.object({
     downloads: z.number(),
     summary: z.string(),
     posted: z.coerce.date(),
+    tags: z.array(TagZod),
 });
 
 export const ProjectSchema = new Schema({
@@ -44,6 +46,12 @@ export const ProjectSchema = new Schema({
         type: Date,
         required: true,
     },
+    tags: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Tag",
+        },
+    ],
     // distribution: {
     //     type: String,
     //     required: true
@@ -52,10 +60,7 @@ export const ProjectSchema = new Schema({
     //     type: [String],
     //     default: []
     // },
-    // tags: [{
-    //     type: Schema.Types.ObjectId,
-    //     ref: "Tag"
-    // }],
+
     // contributors: {
     //     type: [String],
     //     default: []
