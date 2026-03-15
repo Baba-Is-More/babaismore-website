@@ -5,7 +5,13 @@ import Profile from "@/components/Navbar/Profile.vue";
 
 <template>
     <nav class="navbar">
-        <img src="/images/image_logo.gif" class="logo" alt="Baba Is More" />
+        <a href="/" class="logo outer">
+            <img
+                src="/images/image_logo.gif"
+                class="logo inner"
+                alt="Baba Is More"
+            />
+        </a>
 
         <Search class="search" />
 
@@ -40,9 +46,13 @@ import Profile from "@/components/Navbar/Profile.vue";
     padding-right: 2%;
 }
 
-.logo {
+.logo.outer {
     height: 26px;
     width: auto;
     margin-left: 20px;
+}
+.logo.inner {
+    height: 26px;
+    width: auto;
 }
 </style>
