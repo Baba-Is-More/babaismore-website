@@ -19,6 +19,7 @@ if (process.env.DB_URL) {
 }
 
 export const has_mongodb = temp_has_mongodb;
+// export const has_mongodb = false;
 
 const app = express();
 

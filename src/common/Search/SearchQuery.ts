@@ -1,17 +1,23 @@
 import * as z from "zod";
 
 export enum SortType {
-    None,
     MostDownloaded,
     LeastDownloaded,
     Newest,
     Oldest,
 }
 
+export const TagQuery = z.object({
+    is_negated: z.boolean().default(false),
+    tag: z.string(),
+});
+
+export type TagQuery = z.infer<typeof TagQuery>;
+
 export const SearchQuery = z.object({
-    keywords: z.string(),
-    tags: z.array(z.string()),
-    sort: z.enum(SortType).default(SortType.None),
+    keywords: z.array(z.string()),
+    tags: z.array(TagQuery),
+    sort: z.enum(SortType),
 });
 
 export type SearchQuery = z.infer<typeof SearchQuery>;

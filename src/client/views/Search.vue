@@ -3,25 +3,33 @@ import SearchPack from "@/components/SearchPack.vue";
 import Filter from "@/components/Filter.vue";
 import type { SearchResult } from "@common/SearchResult";
 import { ref, watch } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { trpc } from "..";
+import {
+    parseUrlToQuery,
+    queryIntoURLSuffix,
+} from "@common/Search/SearchUtils";
 
+const router = useRouter();
 const route = useRoute();
 
-const query = route.query.q;
+const url = new URLSearchParams(route.query as Record<string, string>);
+const query = parseUrlToQuery(url);
+
+router.replace(queryIntoURLSuffix(query));
 
 watch(
-    () => route.query.q,
+    () => route.query,
     (newQuery) => {
         // i do not know how vue router works
         // so im just gonna reload the page
         // bad bad idea i know
-        globalThis.location.reload();
+        // globalThis.location.reload();
     },
 );
 
 const results = ref<SearchResult[]>(
-    (await trpc.project.getProjects.query()).map((v) => {
+    (await trpc.project.getProjects.query(query)).map((v) => {
         return {
             author: v.author,
             desc: v.desc,

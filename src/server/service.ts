@@ -4,6 +4,8 @@ import lies from "../common/packs";
 import userlies from "../common/users";
 import type { SearchResult } from "@common/SearchResult";
 import type { User } from "@common/User";
+import type { SearchQuery } from "@common/Search/SearchQuery";
+import type { QueryFilter } from "mongoose";
 
 export async function getUsers(): Promise<User[]> {
     if (has_mongodb) {
@@ -19,9 +21,22 @@ export async function getUsers(): Promise<User[]> {
     }
 }
 
-export async function getProjects() {
+function buildProjectsFilter(query: SearchQuery): QueryFilter<typeof Project> {
+    const and = [];
+    if (query.keywords.length) {
+        for (const kw of query.keywords) {
+            and.push({
+                projectName: { $regex: kw, $options: "i" },
+            });
+        }
+    }
+
+    return { $and: and };
+}
+
+export async function getProjects(query: SearchQuery) {
     if (has_mongodb) {
-        return (await Project.find()).map((v) => {
+        return (await Project.find(buildProjectsFilter(query))).map((v) => {
             return {
                 author: v.author,
                 desc: v.projectDesc,

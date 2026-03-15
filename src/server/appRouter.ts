@@ -4,7 +4,7 @@ import { getProjects, getTags, getUsers } from "./service";
 import { router, publicProcedure } from "./trpc";
 import * as z from "zod";
 import { UserZod } from "@common/User";
-import { has_mongodb } from ".";
+import { SearchQuery } from "@common/Search/SearchQuery";
 
 export const userRouter = router({
     getUsers: publicProcedure.output(z.array(UserZod)).query(async () => {
@@ -13,8 +13,8 @@ export const userRouter = router({
 });
 
 export const projectRouter = router({
-    getProjects: publicProcedure.query(async () => {
-        return getProjects();
+    getProjects: publicProcedure.input(SearchQuery).query(async (ctx) => {
+        return getProjects(ctx.input);
     }),
     newProject: publicProcedure.input(ProjectZod).mutation(async (ctx) => {
         const project = ctx.input;
