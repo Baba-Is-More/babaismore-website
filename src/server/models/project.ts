@@ -45,17 +45,21 @@ export const ProjectSchema = new Schema({
         required: true,
     },
     // distribution: {
-    //         type: String,
-    //         required: true
+    //     type: String,
+    //     required: true
     // },
     // links: {
-    //         type: [String],
-    //         default: []
+    //     type: [String],
+    //     default: []
     // },
     // tags: [{
-    //         type: Schema.Types.ObjectId,
-    //         ref: "Tag"
+    //     type: Schema.Types.ObjectId,
+    //     ref: "Tag"
     // }],
+    // contributors: {
+    //     type: [String],
+    //     default: []
+    // }
 
     // reviews: [ReviewSchema],
     // files: [ProjectFileSchema],

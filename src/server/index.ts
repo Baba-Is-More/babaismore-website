@@ -10,6 +10,7 @@ import path from "node:path";
 let temp_has_mongodb = false;
 
 if (process.env.DB_URL) {
+    // note: you should comment out your personal db url if testing
     await mongoose.connect(process.env.DB_URL);
     temp_has_mongodb = true;
 } else {

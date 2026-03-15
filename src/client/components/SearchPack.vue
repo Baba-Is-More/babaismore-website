@@ -53,28 +53,16 @@ function dateToOffset(date: Date): string {
     <div class="base blue" id="box">
         <div class="horizontal-align">
             <div>
-                <img
-                    src="\images\image_levelpacks.png"
-                    alt="{{ name }}"
-                    id="icon"
-                />
+                <img src="\images\image_levelpacks.png" alt="{{ name }}" id="icon" />
             </div>
             <div>
                 <p class="name">{{ name }}</p>
                 <p class="author">
-                    <img
-                        src="\images\image_baba.png"
-                        alt="{{ author }}"
-                        class="inline"
-                    />
+                    <img src="\images\image_baba.png" alt="{{ author }}" class="inline" />
                     {{ author }}
                 </p>
                 <p class="info">
-                    <img
-                        src="\images\image_downloads.png"
-                        alt="{{ downloads }} downloads"
-                        class="inline"
-                    />
+                    <img src="\images\image_downloads.png" alt="{{ downloads }} downloads" class="inline" />
                     {{ reduce(downloads) }}
                     <img src="\images\image_clock.png" alt="" class="inline" />
                     {{ dateToOffset(posted) }}
@@ -117,7 +105,7 @@ function dateToOffset(date: Date): string {
     border-image-source: url("/images/buttons/button_pink.png");
 }
 
-.base > div {
+.base>div {
     height: fit-content;
 }
 

@@ -1,4 +1,3 @@
-import type { ZodUUID } from "zod";
 import * as z from "zod";
 
 export const UserZod = z.object({
