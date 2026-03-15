@@ -1,10 +1,11 @@
 import { ProjectSchema, ProjectZod } from "./models/project";
 import { Project } from "./models";
-import { getProjects, getTags, getUsers } from "./service";
+import { searchProjects, getTags, getUsers } from "./service";
 import { router, publicProcedure } from "./trpc";
 import * as z from "zod";
 import { UserZod } from "@common/User";
 import { SearchQuery } from "@common/Search/SearchQuery";
+import { SearchResult } from "@common/Search/SearchResult";
 
 export const userRouter = router({
     getUsers: publicProcedure.output(z.array(UserZod)).query(async () => {
@@ -13,9 +14,12 @@ export const userRouter = router({
 });
 
 export const projectRouter = router({
-    getProjects: publicProcedure.input(SearchQuery).query(async (ctx) => {
-        return getProjects(ctx.input);
-    }),
+    searchProjects: publicProcedure
+        .input(SearchQuery)
+        .output(z.array(SearchResult))
+        .query(async (ctx) => {
+            return searchProjects(ctx.input);
+        }),
     newProject: publicProcedure.input(ProjectZod).mutation(async (ctx) => {
         const project = ctx.input;
         const proj = new Project({

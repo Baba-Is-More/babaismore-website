@@ -21,7 +21,7 @@ export async function getUsers(): Promise<User[]> {
     });
 }
 
-export async function getProjects(query: SearchQuery) {
+export async function searchProjects(query: SearchQuery) {
     const filter = await buildProjectsFilter(query);
     const projects = await Project.find(filter) // filter each project
         .populate<{ tags: ITag[] }>("tags"); //populate each tags with their respective objects

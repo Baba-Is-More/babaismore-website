@@ -1,7 +1,7 @@
 export type SearchResult = {
     name: string;
     author: string;
-    desc: string;
+    summary: string;
     downloads: number;
     posted: Date;
     tags: string[];

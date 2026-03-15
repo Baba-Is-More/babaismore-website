@@ -53,7 +53,7 @@ export function projectToSearchResult(
 ): SearchResult {
     return {
         author: project.author,
-        desc: project.projectDesc,
+        summary: project.summary,
         downloads: project.downloads,
         name: project.projectName,
         posted: new Date(project.posted),

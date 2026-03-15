@@ -29,10 +29,10 @@ watch(
 );
 
 const results = ref<SearchResult[]>(
-    (await trpc.project.getProjects.query(query)).map((v) => {
+    (await trpc.project.searchProjects.query(query)).map((v) => {
         return {
             author: v.author,
-            desc: v.desc,
+            summary: v.summary,
             downloads: v.downloads,
             name: v.name,
             posted: new Date(v.posted),
@@ -48,10 +48,10 @@ const results = ref<SearchResult[]>(
     <div class="grid">
         <div
             v-for="(
-                { name, author, desc, downloads, posted, tags }, idx
+                { name, author, summary, downloads, posted, tags }, idx
             ) in results"
         >
-            <SearchPack :name :author :desc :downloads :posted :tags />
+            <SearchPack :name :author :summary :downloads :posted :tags />
         </div>
     </div>
 </template>
