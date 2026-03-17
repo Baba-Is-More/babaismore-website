@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import Babu from "./Babu.vue";
-import { tags } from "@/lies/tags";
+
+const tags = ["something", "something"];
 
 const isFilterOpen = ref(false);
 const isSortOpen = ref(false);

@@ -1,15 +1,14 @@
 import mongoose, { Schema, Types } from "mongoose";
-import { GalleryImageSchema } from "./galleryImage";
 import { ReviewSchema } from "./review";
 import { ProjectFileSchema } from "./projectFile";
 import { LevelCodeSchema } from "./levelCode";
 import * as z from "zod";
 import { TagZod } from "./tag";
+import { GalleryImageSchema, type IGalleryImage } from "./galleryImage";
 
 export const ProjectZod = z.object({
     author: z.string(),
     projectName: z.string(),
-    thumbnailURL: z.string(),
     projectDesc: z.string(),
     downloads: z.number(),
     summary: z.string(),
@@ -20,12 +19,12 @@ export const ProjectZod = z.object({
 export interface IProject {
     author: string;
     projectName: string;
-    thumbnailURL: string;
     projectDesc: string;
     downloads: number;
     summary: string;
     posted: string;
     tags: Types.ObjectId[];
+    galleryImages: IGalleryImage[];
 }
 
 export const ProjectSchema = new Schema<IProject>({
@@ -35,10 +34,6 @@ export const ProjectSchema = new Schema<IProject>({
     projectName: {
         type: String,
         required: true,
-    },
-    thumbnailURL: {
-        type: String,
-        default: null,
     },
     projectDesc: {
         type: String,
@@ -63,6 +58,9 @@ export const ProjectSchema = new Schema<IProject>({
             ref: "Tag",
         },
     ],
+    galleryImages: {
+        type: [GalleryImageSchema],
+    },
     // distribution: {
     //     type: String,
     //     required: true

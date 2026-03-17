@@ -1,4 +1,3 @@
-import type { tags } from "@/lies/tags";
 import type { TagQuery } from "@common/Search/SearchQuery";
 import { SortType, type SearchQuery } from "@common/Search/SearchQuery";
 import type { SearchResult } from "@common/SearchResult";

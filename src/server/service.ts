@@ -5,11 +5,18 @@ import userlies from "../common/users";
 import type { SearchResult } from "@common/SearchResult";
 import type { User } from "@common/User";
 
-import { buildProjectsFilter, projectToSearchResult } from "./searching/utils";
+import {
+    buildProjectsFilter,
+    projectToSearchResult,
+} from "./searching/searching";
+import { buildFetchFilter } from "./searching/fetching";
 import type { SearchQuery } from "@common/Search/SearchQuery";
 import type { IProject, ProjectSchema } from "./models/project";
 import type { Document, HydratedDocument } from "mongoose";
 import type { ITag } from "./models/tag";
+import type { FetchQuery } from "@common/fetch/fetchQuery";
+import type { FetchResult } from "@common/fetch/FetchResult";
+import { TRPCError } from "@trpc/server";
 
 export async function getUsers(): Promise<User[]> {
     return (await UserModel.find()).map((v) => {
@@ -19,6 +26,24 @@ export async function getUsers(): Promise<User[]> {
             name: v.displayName,
         } as User;
     });
+}
+
+export async function fetchProject(query: FetchQuery): Promise<FetchResult> {
+    const filter = await buildFetchFilter(query);
+    const project = await Project.findOne(filter);
+
+    if (!project) {
+        throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "project not found",
+        });
+    }
+
+    return {
+        author: project.projectName,
+        description: project.projectDesc,
+        thumbnail: "",
+    };
 }
 
 export async function searchProjects(query: SearchQuery) {

@@ -4,6 +4,7 @@ import Home from "@/views/Home.vue";
 import Search from "@/views/Search.vue";
 import User from "@/views/User.vue";
 import Test from "@/views/Test.vue";
+import ProjectView from "@/views/ProjectView.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -12,6 +13,11 @@ const router = createRouter({
         { path: "/search", component: Search },
         { path: "/user", component: User },
         { path: "/newthing", component: Test },
+        {
+            path: "/project/:author/:project",
+            name: "project",
+            component: ProjectView,
+        },
     ],
 });
 
