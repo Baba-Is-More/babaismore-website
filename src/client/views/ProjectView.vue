@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import TopImages from "@/components/ProjectView/TopImages.vue";
+import Information from "@/components/ProjectView/Information.vue";
 import { useRoute } from "vue-router";
 import { trpc } from "..";
 
@@ -16,8 +17,8 @@ const fetchResult = await trpc.project.fetch.query({
 
 <template>
     <div id="main">
-        <TopImages />
-        <p>{{ fetchResult.description }}</p>
+        <TopImages :image="fetchResult.thumbnail" />
+        <Information :data="fetchResult" />
     </div>
 </template>
 
@@ -29,7 +30,7 @@ p {
 
 #main {
     width: 80%;
-    height: 1000px;
+    height: auto;
     background-color: #293141;
     margin-left: 10%;
 }

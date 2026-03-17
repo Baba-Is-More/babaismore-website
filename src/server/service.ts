@@ -30,7 +30,9 @@ export async function getUsers(): Promise<User[]> {
 
 export async function fetchProject(query: FetchQuery): Promise<FetchResult> {
     const filter = await buildFetchFilter(query);
-    const project = await Project.findOne(filter);
+    const project = await Project.findOne(filter).populate<{ tags: ITag[] }>(
+        "tags",
+    );
 
     if (!project) {
         throw new TRPCError({
@@ -40,9 +42,13 @@ export async function fetchProject(query: FetchQuery): Promise<FetchResult> {
     }
 
     return {
-        author: project.projectName,
+        author: project.author,
+        title: project.projectName,
         description: project.projectDesc,
-        thumbnail: "",
+        thumbnail: project.galleryImages[0]!!.imageName,
+        tags: project.tags.map((v) => {
+            return v.tagName;
+        }),
     };
 }
 

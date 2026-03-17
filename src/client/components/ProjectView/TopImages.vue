@@ -1,7 +1,16 @@
 <script setup lang="ts">
-const props = defineProps<{}>();
+const props = defineProps<{
+    image: string;
+}>();
 </script>
 
 <template>
-    <img src="/images/image_levelpacks.png" />
+    <img :src="`/uploads/gallery/${image}.png`" />
 </template>
+
+<style scoped>
+img {
+    max-width: 100%;
+    height: auto;
+}
+</style>
