@@ -36,14 +36,10 @@ export function stringToSortType(str: string | null): SortType | null {
     return null;
 }
 
-// untested!
 export function queryIntoURLSuffix(query: SearchQuery): string {
     let ret = "/search?";
     if (query.keywords.length != 0) {
-        ret = ret.concat("q=");
-        for (let keyword of query.keywords) {
-            ret = ret.concat(keyword, "+");
-        }
+        ret = ret.concat("q=", query.keywords.join("+"));
     }
     if (query.tags.length != 0) {
         for (let tag of query.tags) {

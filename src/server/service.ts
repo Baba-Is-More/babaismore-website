@@ -11,12 +11,17 @@ import {
 } from "./searching/searching";
 import { buildFetchFilter } from "./searching/fetching";
 import type { SearchQuery } from "@common/Search/SearchQuery";
-import type { IProject, ProjectSchema } from "./models/project";
+import type {
+    IProject,
+    PopulatedProject,
+    ProjectSchema,
+} from "./models/project";
 import type { Document, HydratedDocument } from "mongoose";
 import type { ITag } from "./models/tag";
 import type { FetchQuery } from "@common/fetch/fetchQuery";
 import type { FetchResult } from "@common/fetch/FetchResult";
 import { TRPCError } from "@trpc/server";
+import type { IUser } from "./models/user";
 
 export async function getUsers(): Promise<User[]> {
     return (await UserModel.find()).map((v) => {
@@ -30,9 +35,9 @@ export async function getUsers(): Promise<User[]> {
 
 export async function fetchProject(query: FetchQuery): Promise<FetchResult> {
     const filter = await buildFetchFilter(query);
-    const project = await Project.findOne(filter).populate<{ tags: ITag[] }>(
-        "tags",
-    );
+    const project: PopulatedProject | null = await Project.findOne(filter)
+        .populate("tags")
+        .populate("author");
 
     if (!project) {
         throw new TRPCError({
@@ -42,7 +47,7 @@ export async function fetchProject(query: FetchQuery): Promise<FetchResult> {
     }
 
     return {
-        author: project.author,
+        author: project.author.username,
         title: project.projectName,
         description: project.projectDesc,
         thumbnail: project.galleryImages[0]!!.imageName,
@@ -54,8 +59,9 @@ export async function fetchProject(query: FetchQuery): Promise<FetchResult> {
 
 export async function searchProjects(query: SearchQuery) {
     const filter = await buildProjectsFilter(query);
-    const projects = await Project.find(filter) // filter each project
-        .populate<{ tags: ITag[] }>("tags"); //populate each tags with their respective objects
+    const projects: PopulatedProject[] = await Project.find(filter) // filter each project
+        .populate("tags") //populate each tags with their respective objects
+        .populate("author"); // populate each author
 
     const results = await Promise.all(projects.map(projectToSearchResult));
 

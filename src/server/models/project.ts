@@ -1,15 +1,14 @@
-import mongoose, { Schema, Types } from "mongoose";
+import mongoose, { Schema, Types, type HydratedDocument } from "mongoose";
 import { ReviewSchema } from "./review";
 import { ProjectFileSchema } from "./projectFile";
 import * as z from "zod";
-import { TagZod } from "./tag";
+import { TagZod, type ITag } from "./tag";
 import { GalleryImageSchema, type IGalleryImage } from "./galleryImage";
 import type { IUser } from "./user";
 import { UserZod } from "./user";
 
 export const ProjectZod = z.object({
-    author: z.string(),
-    authorId: UserZod,
+    author: UserZod,
     projectName: z.string(),
     projectDesc: z.string(),
     downloads: z.number(),
@@ -18,23 +17,26 @@ export const ProjectZod = z.object({
     tags: z.array(TagZod),
 });
 
+export type PopulatedProject = HydratedDocument<
+    Omit<IProject, "tags" | "author"> & {
+        tags: ITag[];
+        author: IUser;
+    }
+>;
+
 export interface IProject {
-    author: string;
-    authorId: IUser;
+    author: IUser;
     projectName: string;
     projectDesc: string;
     downloads: number;
     summary: string;
     posted: string;
-    tags: Types.ObjectId[];
+    tags: ITag[];
     galleryImages: IGalleryImage[];
 }
 
 export const ProjectSchema = new Schema<IProject>({
     author: {
-        type: String,
-    },
-    authorId: {
         type: Schema.Types.ObjectId,
         ref: "User",
     },
