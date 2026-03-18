@@ -1,5 +1,4 @@
 import mongoose, { Schema, Types, type HydratedDocument } from "mongoose";
-import { ReviewSchema } from "./review";
 import { ProjectFileSchema } from "./projectFile";
 import * as z from "zod";
 import { TagZod, type ITag } from "./tag";
@@ -13,6 +12,8 @@ export const ProjectZod = z.object({
     projectDesc: z.string(),
     downloads: z.number(),
     summary: z.string(),
+    StarRatingAverage: z.number().min(0).max(5),
+    StarRatingCount: z.number(),
     posted: z.coerce.date(),
     tags: z.array(TagZod),
 });
@@ -31,6 +32,8 @@ export interface IProject {
     downloads: number;
     summary: string;
     posted: string;
+    StarRatingAverage: number;
+    StarRatingCount: number;
     tags: ITag[];
     galleryImages: IGalleryImage[];
 }
@@ -67,6 +70,12 @@ export const ProjectSchema = new Schema<IProject>({
             ref: "Tag",
         },
     ],
+    StarRatingAverage: {
+        type: Number,
+    },
+    StarRatingCount: {
+        type: Number,
+    },
     galleryImages: {
         type: [GalleryImageSchema],
     },
@@ -86,6 +95,5 @@ export const ProjectSchema = new Schema<IProject>({
 
     // reviews: [ReviewSchema],
     // files: [ProjectFileSchema],
-    // gallery: [GalleryImageSchema],
     // levelCodes: [LevelCodeSchema]
 });

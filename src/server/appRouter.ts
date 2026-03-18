@@ -29,19 +29,6 @@ export const projectRouter = router({
         .query(async (ctx) => {
             return fetchProject(ctx.input);
         }),
-    newProject: publicProcedure.input(ProjectZod).mutation(async (ctx) => {
-        const project = ctx.input;
-        const proj = new Project({
-            projectName: project.projectName,
-            projectDesc: project.projectDesc,
-            downloads: project.downloads,
-            summary: project.summary,
-            author: project.author,
-            posted: project.posted,
-        });
-        proj.save();
-        return true;
-    }),
 });
 
 export const tagRouter = router({

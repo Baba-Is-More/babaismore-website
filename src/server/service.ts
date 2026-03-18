@@ -1,27 +1,17 @@
-import { has_mongodb } from ".";
-import { Project, Tag, User as UserModel } from "./models";
-import lies from "../common/packs";
-import userlies from "../common/users";
-import type { SearchResult } from "@common/SearchResult";
 import type { User } from "@common/User";
+import { Project, Tag, User as UserModel } from "./models";
 
+import type { FetchQuery } from "@common/fetch/fetchQuery";
+import type { FetchResult } from "@common/fetch/FetchResult";
+import type { SearchQuery } from "@common/Search/SearchQuery";
+import { TRPCError } from "@trpc/server";
+import { buildFetchFilter } from "./helpers/fetching";
 import {
     buildProjectsFilter,
     projectToSearchResult,
-} from "./searching/searching";
-import { buildFetchFilter } from "./searching/fetching";
-import type { SearchQuery } from "@common/Search/SearchQuery";
-import type {
-    IProject,
-    PopulatedProject,
-    ProjectSchema,
-} from "./models/project";
-import type { Document, HydratedDocument } from "mongoose";
-import type { ITag } from "./models/tag";
-import type { FetchQuery } from "@common/fetch/fetchQuery";
-import type { FetchResult } from "@common/fetch/FetchResult";
-import { TRPCError } from "@trpc/server";
-import type { IUser } from "./models/user";
+} from "./helpers/searching";
+import type { PopulatedProject } from "./models/project";
+import {} from "./helpers/stars";
 
 export async function getUsers(): Promise<User[]> {
     return (await UserModel.find()).map((v) => {
