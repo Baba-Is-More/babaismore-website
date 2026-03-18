@@ -11,6 +11,7 @@ body {
     font-family: "BabaFont", sans-serif;
     font-size: 12px;
     image-rendering: pixelated;
+    margin: 0px;
 }
 
 h1 {
