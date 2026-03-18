@@ -1,13 +1,15 @@
 import mongoose, { Schema, Types } from "mongoose";
 import { ReviewSchema } from "./review";
 import { ProjectFileSchema } from "./projectFile";
-import { LevelCodeSchema } from "./levelCode";
 import * as z from "zod";
 import { TagZod } from "./tag";
 import { GalleryImageSchema, type IGalleryImage } from "./galleryImage";
+import type { IUser } from "./user";
+import { UserZod } from "./user";
 
 export const ProjectZod = z.object({
     author: z.string(),
+    authorId: UserZod,
     projectName: z.string(),
     projectDesc: z.string(),
     downloads: z.number(),
@@ -18,6 +20,7 @@ export const ProjectZod = z.object({
 
 export interface IProject {
     author: string;
+    authorId: IUser;
     projectName: string;
     projectDesc: string;
     downloads: number;
@@ -30,6 +33,10 @@ export interface IProject {
 export const ProjectSchema = new Schema<IProject>({
     author: {
         type: String,
+    },
+    authorId: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
     },
     projectName: {
         type: String,

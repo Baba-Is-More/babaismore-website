@@ -1,7 +1,20 @@
 import { octetInputParser } from "@trpc/server/unstable-core-do-not-import";
 import mongoose, { Schema } from "mongoose";
+import * as z from "zod";
 
-export const UserSchema = new mongoose.Schema({
+export const UserZod = z.object({
+    username: z.string(),
+    displayName: z.string(),
+    profilePicture: z.string(),
+});
+
+export interface IUser {
+    username: string;
+    displayName: string;
+    profilePicture: string;
+}
+
+export const UserSchema = new mongoose.Schema<IUser>({
     username: {
         type: String,
         required: true,
