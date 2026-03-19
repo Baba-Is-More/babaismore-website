@@ -1,9 +1,10 @@
 import type { User } from "@common/User";
-import { Project, Tag, User as UserModel } from "./models";
+import { Project, StarRating, Tag, User as UserModel } from "./models";
 
+import { projectToObjectId } from "./indexing/project";
 import type { FetchQuery } from "@common/fetch/fetchQuery";
 import type { FetchResult } from "@common/fetch/FetchResult";
-import type { SearchQuery } from "@common/Search/SearchQuery";
+import type { SearchQuery } from "@common/search/SearchQuery";
 import { TRPCError } from "@trpc/server";
 import { buildFetchFilter } from "./helpers/fetching";
 import {
@@ -11,7 +12,12 @@ import {
     projectToSearchResult,
 } from "./helpers/searching";
 import type { PopulatedProject } from "./models/project";
-import {} from "./helpers/stars";
+import { createOrUpdateUserRating, updateStarRating } from "./helpers/stars";
+import type { StarRateQuery } from "@common/rate/StarRateQuery";
+import type { QueryFilter } from "mongoose";
+import type { IStarRating } from "./models/starRating";
+import { userToObjectId } from "./indexing/users";
+import type { L } from "vue-router/dist/index-DFCq6eJK.js";
 
 export async function getUsers(): Promise<User[]> {
     return (await UserModel.find()).map((v) => {
@@ -57,6 +63,17 @@ export async function searchProjects(query: SearchQuery) {
     const results = await Promise.all(projects.map(projectToSearchResult));
 
     return results;
+}
+
+export async function starRate(query: StarRateQuery) {
+    const author = await userToObjectId(query.author);
+    if (!author) return;
+    const project = await projectToObjectId(author, query.project);
+    if (!project) return;
+    const user = await userToObjectId(query.user);
+    if (!user) return;
+    await createOrUpdateUserRating(user, project, query.count);
+    await updateStarRating(project);
 }
 
 export async function getTags() {

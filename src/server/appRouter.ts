@@ -1,14 +1,21 @@
 import { ProjectSchema, ProjectZod } from "./models/project";
 import { Project } from "./models";
-import { searchProjects, getTags, getUsers, fetchProject } from "./service";
+import {
+    searchProjects,
+    getTags,
+    getUsers,
+    fetchProject,
+    starRate,
+} from "./service";
 import { router, publicProcedure } from "./trpc";
 import * as z from "zod";
 import { UserZod } from "@common/User";
-import { SearchQuery } from "@common/Search/SearchQuery";
-import { SearchResult } from "@common/Search/SearchResult";
+import { SearchQuery } from "@common/search/SearchQuery";
+import { SearchResult } from "@common/search/SearchResult";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { FetchQuery } from "@common/fetch/fetchQuery";
 import { FetchResult } from "@common/fetch/FetchResult";
+import { StarRateQuery } from "@common/rate/StarRateQuery";
 
 export const userRouter = router({
     getUsers: publicProcedure.output(z.array(UserZod)).query(async () => {
@@ -29,6 +36,9 @@ export const projectRouter = router({
         .query(async (ctx) => {
             return fetchProject(ctx.input);
         }),
+    starRate: publicProcedure.input(StarRateQuery).mutation(async (ctx) => {
+        starRate(ctx.input);
+    }),
 });
 
 export const tagRouter = router({

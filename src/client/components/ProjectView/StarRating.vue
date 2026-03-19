@@ -25,10 +25,10 @@ function alt_from_count(count: number): string {
 }
 
 const img_src: ComputedRef<string> = computed(() =>
-    src_from_count(count.value),
+    src_from_count(Math.round(count.value)),
 );
 const img_alt: ComputedRef<string> = computed(() =>
-    alt_from_count(count.value),
+    alt_from_count(Math.round(count.value)),
 );
 </script>
 

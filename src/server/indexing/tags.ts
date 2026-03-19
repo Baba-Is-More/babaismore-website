@@ -1,4 +1,4 @@
-import type { TagQuery } from "@common/Search/SearchQuery";
+import type { TagQuery } from "@common/search/SearchQuery";
 import { Tag } from "@server/models";
 import type { ITag } from "@server/models/tag";
 

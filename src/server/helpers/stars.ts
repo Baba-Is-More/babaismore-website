@@ -8,21 +8,17 @@ export async function updateStarRating(project: HydratedDocument<IProject>) {
         { $match: { project: project._id } },
         {
             $group: {
+                _id: null, // this tells mongoose to just look at the full document, not a spesific field of the document
                 avg: { $avg: "$score" },
                 count: { $sum: 1 },
             },
         },
     ]);
 
-    await Project.updateOne(
-        { _id: project._id },
-        {
-            $set: {
-                StarRatingAverage: result[0]?.avg || 0,
-                StarRatingCount: result[0]?.count || 0,
-            },
-        },
-    );
+    project.StarRatingAverage = result[0]?.avg || 0;
+    project.StarRatingCount = result[0]?.count || 0;
+
+    await project.save();
 }
 
 export async function createOrUpdateUserRating(

@@ -1,5 +1,5 @@
-import type { TagQuery } from "@common/Search/SearchQuery";
-import { SortType, type SearchQuery } from "@common/Search/SearchQuery";
+import type { TagQuery } from "@common/search/SearchQuery";
+import { SortType, type SearchQuery } from "@common/search/SearchQuery";
 import type { SearchResult } from "@common/SearchResult";
 import { Tag, type Project } from "@server/models";
 import type { IProject, PopulatedProject } from "@server/models/project";

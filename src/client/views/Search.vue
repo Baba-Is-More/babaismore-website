@@ -8,7 +8,7 @@ import { trpc } from "..";
 import {
     parseUrlToQuery,
     queryIntoURLSuffix,
-} from "@common/Search/SearchUtils";
+} from "@common/search/SearchUtils";
 
 const router = useRouter();
 const route = useRoute();
