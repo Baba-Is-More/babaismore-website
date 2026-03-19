@@ -44,6 +44,7 @@ export async function fetchProject(query: FetchQuery): Promise<FetchResult> {
         tags: project.tags.map((v) => {
             return v.tagName;
         }),
+        starCount: project.StarRatingAverage,
     };
 }
 

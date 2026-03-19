@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import StarRating from "./StarRating.vue";
 import type { FetchResult } from "@common/fetch/FetchResult";
 
 const props = defineProps<{
@@ -13,6 +14,7 @@ const props = defineProps<{
         <div class="tags">
             <p v-for="tag in data.tags">{{ tag }}</p>
         </div>
+        <StarRating :count="data.starCount" />
     </div>
 </template>
 
