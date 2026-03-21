@@ -1,9 +1,8 @@
-import type { TagQuery } from "@common/Search/SearchQuery";
-import { Tag } from "@server/models";
-import type { ITag } from "@server/models/tag";
+import { db } from "@server/database";
+import type { ITag } from "@server/database/models/tag";
 
 export async function tagsToObjectId(tags: string[]): Promise<ITag[]> {
-    return await Tag.find({
+    return await db.tags.find({
         tagName: { $in: tags },
     });
 }

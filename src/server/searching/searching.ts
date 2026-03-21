@@ -1,10 +1,10 @@
-import type { TagQuery } from "@common/Search/SearchQuery";
-import { SortType, type SearchQuery } from "@common/Search/SearchQuery";
+import { type SearchQuery } from "@common/Search/SearchQuery";
 import type { SearchResult } from "@common/SearchResult";
-import { Tag, type Project } from "@server/models";
-import type { IProject, PopulatedProject } from "@server/models/project";
-import type { ITag } from "@server/models/tag";
-import type { HydratedDocument, ObjectId, QueryFilter } from "mongoose";
+import type {
+    IProject,
+    PopulatedProject,
+} from "@server/database/models/project";
+import type { QueryFilter } from "mongoose";
 import { tagsToObjectId } from "../indexing/tags";
 
 export async function buildProjectsFilter(

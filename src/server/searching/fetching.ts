@@ -1,5 +1,5 @@
 import type { FetchQuery } from "@common/fetch/fetchQuery";
-import type { IProject } from "@server/models/project";
+import type { IProject } from "@server/database/models/project";
 import type { QueryFilter } from "mongoose";
 import { userToObjectId } from "../indexing/users";
 

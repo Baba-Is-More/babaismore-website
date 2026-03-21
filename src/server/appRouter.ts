@@ -1,20 +1,16 @@
-import { ProjectSchema, ProjectZod } from "./models/project";
-import { Project } from "./models";
-import { searchProjects, getTags, getUsers, fetchProject } from "./service";
-import { router, publicProcedure } from "./trpc";
-import * as z from "zod";
-import { UserZod } from "@common/User";
-import { SearchQuery } from "@common/Search/SearchQuery";
-import { SearchResult } from "@common/Search/SearchResult";
-import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { FetchQuery } from "@common/fetch/fetchQuery";
 import { FetchResult } from "@common/fetch/FetchResult";
+import { SearchQuery } from "@common/Search/SearchQuery";
+import { SearchResult } from "@common/Search/SearchResult";
+import * as z from "zod";
+import { fetchProject, searchProjects } from "./service";
+import { publicProcedure, router } from "./trpc";
 
-export const userRouter = router({
+/* export const userRouter = router({
     getUsers: publicProcedure.output(z.array(UserZod)).query(async () => {
         return getUsers();
     }),
-});
+}) */
 
 export const projectRouter = router({
     searchProjects: publicProcedure
@@ -29,31 +25,18 @@ export const projectRouter = router({
         .query(async (ctx) => {
             return fetchProject(ctx.input);
         }),
-    newProject: publicProcedure.input(ProjectZod).mutation(async (ctx) => {
-        const project = ctx.input;
-        const proj = new Project({
-            projectName: project.projectName,
-            projectDesc: project.projectDesc,
-            downloads: project.downloads,
-            summary: project.summary,
-            author: project.author,
-            posted: project.posted,
-        });
-        proj.save();
-        return true;
-    }),
 });
 
-export const tagRouter = router({
+/* export const tagRouter = router({
     getTags: publicProcedure.query(async () => {
         return getTags();
     }),
-});
+}); */
 
 export const appRouter = router({
-    user: userRouter,
+    // user: userRouter,
     project: projectRouter,
-    tag: tagRouter,
+    // tag: tagRouter,
 });
 
 export type AppRouter = typeof appRouter;
