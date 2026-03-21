@@ -6,12 +6,14 @@ export const UserZod = z.object({
     username: z.string(),
     displayName: z.string(),
     profilePicture: z.string(),
+    password: z.string(),
 });
 
 export interface IUser {
     username: string;
     displayName: string;
     profilePicture: string;
+    password: string;
 }
 
 export const UserSchema = new mongoose.Schema<IUser>({
@@ -27,6 +29,10 @@ export const UserSchema = new mongoose.Schema<IUser>({
         required: true,
     },
     profilePicture: {
+        type: String,
+        required: true,
+    },
+    password: {
         type: String,
         required: true,
     },

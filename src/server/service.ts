@@ -9,6 +9,11 @@ import type { FetchQuery } from "@common/fetch/fetchQuery";
 import type { FetchResult } from "@common/fetch/FetchResult";
 import { TRPCError } from "@trpc/server";
 import { db, type Database } from "./database";
+import type { LoginQuery } from "@common/login/loginQuery";
+import { userToObjectId } from "./indexing/users";
+import { comparePassword } from "./auth/compare";
+import jwt from "jsonwebtoken";
+import type mongoose from "mongoose";
 
 export async function fetchProject(query: FetchQuery): Promise<FetchResult> {
     const filter = await buildFetchFilter(query);
@@ -45,4 +50,52 @@ export async function searchProjects(query: SearchQuery) {
     const results = await Promise.all(projects.map(projectToSearchResult));
 
     return results;
+}
+
+export async function login(query: LoginQuery, res: any) {
+    const user = await userToObjectId(query.username);
+
+    if (!user) {
+        throw new TRPCError({
+            code: "BAD_REQUEST",
+        });
+    }
+
+    const isValid = await comparePassword(user, query.plainPassword);
+
+    if (!isValid) {
+        throw new TRPCError({
+            code: "BAD_REQUEST",
+        });
+    }
+
+    const jwt_secret = process.env.JWT_SECRET!!;
+
+    const token = jwt.sign(
+        {
+            userId: user._id,
+        },
+        jwt_secret,
+        {
+            expiresIn: "1d",
+        },
+    );
+
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax",
+    });
+}
+
+export async function userMe(sessionToken: any) {
+    const id = sessionToken.userId as mongoose.Types.ObjectId;
+    const user = await db.users.findById(id);
+
+    if (!user)
+        throw new TRPCError({
+            code: "FORBIDDEN",
+        });
+
+    return user.profilePicture;
 }

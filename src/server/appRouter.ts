@@ -3,14 +3,15 @@ import { FetchResult } from "@common/fetch/FetchResult";
 import { SearchQuery } from "@common/Search/SearchQuery";
 import { SearchResult } from "@common/Search/SearchResult";
 import * as z from "zod";
-import { fetchProject, searchProjects } from "./service";
+import { fetchProject, login, searchProjects, userMe } from "./service";
 import { publicProcedure, router } from "./trpc";
+import { LoginQuery } from "@common/login/loginQuery";
 
-/* export const userRouter = router({
-    getUsers: publicProcedure.output(z.array(UserZod)).query(async () => {
-        return getUsers();
+export const userRouter = router({
+    me: publicProcedure.query(async (ctx) => {
+        return userMe(ctx.ctx.session_token as any);
     }),
-}) */
+});
 
 export const projectRouter = router({
     searchProjects: publicProcedure
@@ -27,6 +28,12 @@ export const projectRouter = router({
         }),
 });
 
+export const authRouter = router({
+    login: publicProcedure.input(LoginQuery).mutation(async (ctx) => {
+        return login(ctx.input, ctx.ctx.res as any);
+    }),
+});
+
 /* export const tagRouter = router({
     getTags: publicProcedure.query(async () => {
         return getTags();
@@ -34,9 +41,10 @@ export const projectRouter = router({
 }); */
 
 export const appRouter = router({
-    // user: userRouter,
+    user: userRouter,
     project: projectRouter,
     // tag: tagRouter,
+    auth: authRouter,
 });
 
 export type AppRouter = typeof appRouter;

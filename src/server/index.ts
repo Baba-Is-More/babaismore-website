@@ -6,6 +6,9 @@ import process from "node:process";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import express from "express";
 import path from "node:path";
+import { createContext } from "./context";
+import bcrypt from "bcrypt";
+import cookieParser from "cookie-parser";
 
 let temp_has_mongodb = false;
 
@@ -19,14 +22,16 @@ if (process.env.DB_URL) {
 }
 
 export const has_mongodb = temp_has_mongodb;
+export const is_dev = true;
 
 const app = express();
+app.use(cookieParser());
 
 app.use(
     "/trpc",
     trpcExpress.createExpressMiddleware({
         router: appRouter,
-        createContext: () => ({}),
+        createContext: createContext,
     }),
 );
 
