@@ -90,17 +90,19 @@ export async function login(query: LoginQuery, res: any) {
 }
 
 export async function userMe(sessionToken: any): Promise<MeResult> {
+    if (sessionToken == null) return { is_logged_in: false };
+
     const id = sessionToken.userId as mongoose.Types.ObjectId;
     const user = await db.users.findById(id);
 
-    if (!user)
-        throw new TRPCError({
-            code: "FORBIDDEN",
-        });
+    if (!user) return { is_logged_in: false };
 
     return {
-        displayName: user.displayName,
-        profilePicture: user.profilePicture,
-        username: user.username,
+        is_logged_in: true,
+        data: {
+            displayName: user.displayName,
+            profilePicture: user.profilePicture,
+            username: user.username,
+        },
     };
 }
