@@ -8,6 +8,9 @@ import express from "express";
 import path from "node:path";
 import { createContext } from "./context";
 import cookieParser from "cookie-parser";
+import { ExpressAuth } from "@auth/express";
+import { DBAdapter } from "./auth/database_adaptor";
+import Credentials from "@auth/core/providers/credentials";
 
 if (process.env.DB_URL) {
     await mongoose.connect(process.env.DB_URL);
@@ -19,6 +22,18 @@ export const is_dev = true;
 
 const app = express();
 app.use(cookieParser());
+app.set("trust proxy", true); // needed because we are serving with a proxy
+app.use(
+    "/auth",
+    ExpressAuth({
+        adapter: DBAdapter(),
+        session: {
+            strategy: "database",
+        },
+        providers: [],
+        secret: process.env.AUTH_SECRET!!,
+    }),
+);
 
 app.use(
     "/trpc",
