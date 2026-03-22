@@ -14,6 +14,7 @@ import { userToObjectId } from "./indexing/users";
 import { comparePassword } from "./auth/compare";
 import jwt from "jsonwebtoken";
 import type mongoose from "mongoose";
+import type { MeResult } from "@common/users/MeResult";
 
 export async function fetchProject(query: FetchQuery): Promise<FetchResult> {
     const filter = await buildFetchFilter(query);
@@ -88,7 +89,7 @@ export async function login(query: LoginQuery, res: any) {
     });
 }
 
-export async function userMe(sessionToken: any) {
+export async function userMe(sessionToken: any): Promise<MeResult> {
     const id = sessionToken.userId as mongoose.Types.ObjectId;
     const user = await db.users.findById(id);
 
@@ -97,5 +98,9 @@ export async function userMe(sessionToken: any) {
             code: "FORBIDDEN",
         });
 
-    return user.profilePicture;
+    return {
+        displayName: user.displayName,
+        profilePicture: user.profilePicture,
+        username: user.username,
+    };
 }

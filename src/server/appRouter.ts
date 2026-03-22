@@ -6,9 +6,10 @@ import * as z from "zod";
 import { fetchProject, login, searchProjects, userMe } from "./service";
 import { publicProcedure, router } from "./trpc";
 import { LoginQuery } from "@common/login/loginQuery";
+import { MeResult } from "@common/users/MeResult";
 
 export const userRouter = router({
-    me: publicProcedure.query(async (ctx) => {
+    me: publicProcedure.output(MeResult).query(async (ctx) => {
         return userMe(ctx.ctx.session_token as any);
     }),
 });
