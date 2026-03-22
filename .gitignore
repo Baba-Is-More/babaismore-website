@@ -39,9 +39,9 @@ __screenshots__/
 *.timestamp-*-*.mjs
 
 # Disable uploads folder content from being pushed
-uploads/*
-# use ! followed by relative path to include from previously excluded paths
-!uploads/README.md
+app/uploads/*
+!app/uploads/README.md
+app/mongodb_data/*
 
 # other important stuff
 .env
