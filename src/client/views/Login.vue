@@ -2,7 +2,25 @@
 
 <template>
     <div class="log-sign-in">
-        <h1>hi</h1>
+        <div class="info">
+            <h3>login to baba is more!</h3>
+            <img src="/images/image_baba.png" />
+            <a href="/signup"> <p>meant to sign up?</p></a>
+        </div>
+        <div class="separator"></div>
+        <div class="login">
+            <form method="POST" action="/auth/login">
+                <input name="email" type="email" placeholder="email" required />
+                <input
+                    name="password"
+                    type="password"
+                    placeholder="password"
+                    required
+                />
+                <div style="flex: 1"></div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
     </div>
 </template>
 
@@ -11,10 +29,47 @@
     color: white;
 }
 
+img {
+    height: auto;
+    width: 80%;
+}
+
 .log-sign-in {
     background-color: #293141;
     display: flex;
     margin: 100px;
     border-radius: 5px;
+}
+
+.separator {
+    border-left: 3px solid black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+.info {
+    flex: 1;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.login {
+    flex: 1;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.login form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.login form * {
+    background-color: #293141;
 }
 </style>
