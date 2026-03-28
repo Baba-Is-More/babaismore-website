@@ -12,7 +12,6 @@ import { db, type Database } from "./database";
 import type { LoginQuery } from "@common/login/loginQuery";
 import { userToObjectId } from "./indexing/users";
 import { comparePassword } from "./auth/compare";
-import jwt from "jsonwebtoken";
 import type mongoose from "mongoose";
 import type { MeResult } from "@common/users/MeResult";
 
@@ -53,45 +52,9 @@ export async function searchProjects(query: SearchQuery) {
     return results;
 }
 
-export async function login(query: LoginQuery, res: any) {
-    const user = await userToObjectId(query.username);
-
-    if (!user) {
-        throw new TRPCError({
-            code: "BAD_REQUEST",
-        });
-    }
-
-    const isValid = await comparePassword(user, query.plainPassword);
-
-    if (!isValid) {
-        throw new TRPCError({
-            code: "BAD_REQUEST",
-        });
-    }
-
-    const jwt_secret = process.env.JWT_SECRET!!;
-
-    const token = jwt.sign(
-        {
-            userId: user._id,
-        },
-        jwt_secret,
-        {
-            expiresIn: "1d",
-        },
-    );
-
-    res.cookie("token", token, {
-        httpOnly: true,
-        secure: false,
-        sameSite: "lax",
-    });
-}
+export async function login(query: LoginQuery, res: any) {}
 
 export async function userMe(ctx: any): Promise<MeResult> {
-    console.log(ctx);
-
     if (ctx.user == null) return { is_logged_in: false };
 
     const id = ctx.user.id as mongoose.Types.ObjectId;
