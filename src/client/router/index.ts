@@ -5,6 +5,7 @@ import Search from "@/views/Search.vue";
 import User from "@/views/User.vue";
 import Test from "@/views/Test.vue";
 import ProjectView from "@/views/ProjectView.vue";
+import Login from "@/views/Login.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -18,6 +19,7 @@ const router = createRouter({
             name: "project",
             component: ProjectView,
         },
+        { path: "/login", component: Login },
     ],
 });
 

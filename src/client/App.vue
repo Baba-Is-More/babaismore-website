@@ -20,5 +20,6 @@ import Footer from "@/components/Footer/Footer.vue";
 .main {
     /* if you change this, change components/navbar/Bar.vue as well */
     margin-top: 56px;
+    min-height: 100vh;
 }
 </style>
