@@ -12,12 +12,12 @@ export function DBAdapter(): Adapter {
             throw "todo";
         },
         getUser: async function (id: string): Promise<AdapterUser | null> {
-            return null;
+            throw "todo";
         },
         getUserByEmail: async function (
             email: string,
         ): Promise<AdapterUser | null> {
-            return null;
+            throw "todo";
         },
         getUserByAccount: async function (
             providerAccountId: Pick<
@@ -25,7 +25,7 @@ export function DBAdapter(): Adapter {
                 "provider" | "providerAccountId"
             >,
         ): Promise<AdapterUser | null> {
-            return null;
+            throw "todo";
         },
         updateUser: async function (
             user: Partial<AdapterUser> & Pick<AdapterUser, "id">,
@@ -35,7 +35,7 @@ export function DBAdapter(): Adapter {
         linkAccount: async function (
             account: AdapterAccount,
         ): Promise<AdapterAccount | null> {
-            return null;
+            throw "todo";
         },
         createSession: async function (session: {
             sessionToken: string;
@@ -48,13 +48,13 @@ export function DBAdapter(): Adapter {
             session: AdapterSession;
             user: AdapterUser;
         } | null> {
-            return null;
+            throw "todo";
         },
         updateSession: async function (
             session: Partial<AdapterSession> &
                 Pick<AdapterSession, "sessionToken">,
         ): Promise<AdapterSession | null> {
-            return null;
+            throw "todo";
         },
         deleteSession: async function (sessionToken: string) {},
     };

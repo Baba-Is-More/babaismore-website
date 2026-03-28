@@ -10,7 +10,7 @@ import { createContext } from "./context";
 import cookieParser from "cookie-parser";
 import { ExpressAuth } from "@auth/express";
 import { DBAdapter } from "./auth/database_adaptor";
-import Credentials from "@auth/core/providers/credentials";
+import Credentials from "./auth/providers/credentials";
 
 if (process.env.DB_URL) {
     await mongoose.connect(process.env.DB_URL);
@@ -30,7 +30,7 @@ app.use(
         session: {
             strategy: "database",
         },
-        providers: [],
+        providers: [Credentials],
         secret: process.env.AUTH_SECRET!!,
     }),
 );
