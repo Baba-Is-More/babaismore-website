@@ -1,13 +1,12 @@
 import type { CreateExpressContextOptions } from "@trpc/server/adapters/express";
+import session from "express-session";
 
 export function createContext({ req, res }: CreateExpressContextOptions) {
     return {
         req,
         res,
-        //@ts-ignore
-        session: req.session,
-        //@ts-ignore
-        user: req.user,
+        session: req.session as session.SessionData,
+        user: req.user as Express.User,
     };
 }
 

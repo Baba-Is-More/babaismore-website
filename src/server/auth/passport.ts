@@ -18,20 +18,27 @@ passport.use(
             const valid = await comparePassword(user, password);
             if (!valid) return done(null, false);
 
-            return done(null, {
+            const express_user: Express.User = {
                 id: user._id.toString(),
-            });
+            };
+
+            return done(null, express_user);
         },
     ),
 );
 
+// this function just returns the user id from the user session...
 passport.serializeUser((user: Express.User, done) => {
     done(null, user.id);
 });
 
-passport.deserializeUser(async (id: mongoose.Types.ObjectId, done) => {
-    const user = await db.users.findById(id);
+// ... which is then send to this function here to be turned back into the object id
+passport.deserializeUser(async (id: string, done) => {
+    const mongoid = id as unknown as mongoose.Types.ObjectId;
+    const user = await db.users.findById(mongoid);
 
+    // i am unsure if database lookup here is actually needed,
+    // but a little extra safety cant hurt
     if (!user) return done(null, false);
 
     done(null, {
