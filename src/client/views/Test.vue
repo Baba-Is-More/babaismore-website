@@ -1,21 +1,16 @@
-<script setup lang="ts">
-import { ref, unref } from "vue";
-import { trpc } from "..";
-const user = ref("");
-const pass = ref("");
-
-function go() {
-    trpc.auth.login.mutate({
-        username: user.value,
-        plainPassword: pass.value,
-    });
-}
-</script>
+<script setup lang="ts"></script>
 
 <template>
-    <input v-model="user" placeholder="username" />
-    <input v-model="pass" placeholder="password" />
-    <button @click="go">go!</button>
+    <form method="POST" action="/auth/login">
+        <input name="email" type="email" placeholder="email" required />
+        <input
+            name="password"
+            type="password"
+            placeholder="password"
+            required
+        />
+        <button type="submit">Login</button>
+    </form>
 </template>
 
 <style scoped>

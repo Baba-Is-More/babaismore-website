@@ -10,7 +10,7 @@ import { MeResult } from "@common/users/MeResult";
 
 export const userRouter = router({
     me: publicProcedure.output(MeResult).query(async (ctx) => {
-        return userMe(ctx.ctx.session_token as any);
+        return userMe(ctx.ctx as any);
     }),
 });
 

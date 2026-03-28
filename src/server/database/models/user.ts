@@ -7,6 +7,7 @@ export const UserZod = z.object({
     displayName: z.string(),
     profilePicture: z.string(),
     password: z.string(),
+    email: z.email(),
 });
 
 export interface IUser {
@@ -14,6 +15,7 @@ export interface IUser {
     displayName: string;
     profilePicture: string;
     password: string;
+    email: string;
 }
 
 export const UserSchema = new mongoose.Schema<IUser>({
@@ -33,6 +35,10 @@ export const UserSchema = new mongoose.Schema<IUser>({
         required: true,
     },
     password: {
+        type: String,
+        required: true,
+    },
+    email: {
         type: String,
         required: true,
     },

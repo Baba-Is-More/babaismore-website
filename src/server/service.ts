@@ -89,10 +89,12 @@ export async function login(query: LoginQuery, res: any) {
     });
 }
 
-export async function userMe(sessionToken: any): Promise<MeResult> {
-    if (sessionToken == null) return { is_logged_in: false };
+export async function userMe(ctx: any): Promise<MeResult> {
+    console.log(ctx);
 
-    const id = sessionToken.userId as mongoose.Types.ObjectId;
+    if (ctx.user == null) return { is_logged_in: false };
+
+    const id = ctx.user.id as mongoose.Types.ObjectId;
     const user = await db.users.findById(id);
 
     if (!user) return { is_logged_in: false };

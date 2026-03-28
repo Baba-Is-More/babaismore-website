@@ -8,6 +8,9 @@ import express from "express";
 import path from "node:path";
 import { createContext } from "./context";
 import cookieParser from "cookie-parser";
+import session from "express-session";
+import passport from "passport";
+import "./auth/passport";
 
 if (process.env.DB_URL) {
     await mongoose.connect(process.env.DB_URL);
@@ -19,6 +22,26 @@ export const is_dev = true;
 
 const app = express();
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(
+    session({
+        secret: process.env.SECRET!!,
+        resave: false,
+        saveUninitialized: false,
+    }),
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.post(
+    "/auth/login",
+    passport.authenticate("local", {
+        successRedirect: "/dashboard",
+        failureRedirect: "/auth/login",
+    }),
+);
 
 app.use(
     "/trpc",
