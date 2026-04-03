@@ -23,7 +23,6 @@ export const is_dev = true;
 
 const app = express();
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
 
 // express-session initialization
 app.use(
@@ -45,15 +44,6 @@ app.use(
 // passport middleware initialization
 app.use(passport.initialize());
 app.use(passport.session());
-
-// POST request used by passport to authenticate
-app.post(
-    "/auth/login",
-    passport.authenticate("local", {
-        successRedirect: "/", // if we logged in fine, go to the root (might wanna change this)
-        failureRedirect: "/login", // else we go back to the login page
-    }),
-);
 
 // TRPC endpoint
 app.use(

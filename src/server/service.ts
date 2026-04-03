@@ -52,8 +52,6 @@ export async function searchProjects(query: SearchQuery) {
     return results;
 }
 
-export async function login(query: LoginQuery, res: any) {}
-
 export async function userMe(ctx: any): Promise<MeResult> {
     if (ctx.user == null) return { is_logged_in: false };
 

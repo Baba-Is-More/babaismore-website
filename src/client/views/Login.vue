@@ -1,4 +1,20 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { LoginQuery } from "@common/login/loginQuery";
+import { ref } from "vue";
+import { trpc } from "..";
+
+const email = ref("");
+const password = ref("");
+
+async function start_login() {
+    const query: LoginQuery = {
+        username: email.value,
+        plainPassword: password.value,
+    };
+
+    await trpc.auth.login.mutate(query);
+}
+</script>
 
 <template>
     <div class="log-sign-in">
@@ -9,17 +25,22 @@
         </div>
         <div class="separator"></div>
         <div class="login">
-            <form method="POST" action="/auth/login">
-                <input name="email" type="email" placeholder="email" required />
-                <input
-                    name="password"
-                    type="password"
-                    placeholder="password"
-                    required
-                />
-                <div style="flex: 1"></div>
-                <button type="submit">Login</button>
-            </form>
+            <input
+                name="email"
+                type="email"
+                placeholder="email"
+                required
+                v-model="email"
+            />
+            <input
+                name="password"
+                type="password"
+                placeholder="password"
+                required
+                v-model="password"
+            />
+            <div style="flex: 1"></div>
+            <button @click="start_login">Login</button>
         </div>
     </div>
 </template>
@@ -63,13 +84,7 @@ img {
     flex-direction: column;
 }
 
-.login form {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-}
-
-.login form * {
+.login * {
     background-color: #293141;
 }
 </style>
