@@ -8,6 +8,7 @@ import { publicProcedure, router } from "./trpc";
 import { LoginQuery } from "@common/login/loginQuery";
 import { MeResult } from "@common/users/MeResult";
 import { login } from "./auth/login";
+import { logout } from "./auth/logout";
 
 export const userRouter = router({
     me: publicProcedure.output(MeResult).query(async (ctx) => {
@@ -33,6 +34,9 @@ export const projectRouter = router({
 export const authRouter = router({
     login: publicProcedure.input(LoginQuery).mutation(async (ctx) => {
         return login(ctx.input, ctx.ctx);
+    }),
+    logout: publicProcedure.mutation(async (ctx) => {
+        return logout(ctx.ctx);
     }),
 });
 
