@@ -6,6 +6,7 @@ import User from "@/views/User.vue";
 import Test from "@/views/Test.vue";
 import ProjectView from "@/views/ProjectView.vue";
 import Login from "@/views/Login.vue";
+import Logout from "@/views/Logout.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -20,6 +21,7 @@ const router = createRouter({
             component: ProjectView,
         },
         { path: "/login", component: Login },
+        { path: "/logout", component: Logout },
     ],
 });
 
