@@ -9,6 +9,8 @@ import { LoginQuery } from "@common/login/loginQuery";
 import { MeResult } from "@common/users/MeResult";
 import { login } from "./auth/login";
 import { logout } from "./auth/logout";
+import { SignupQuery } from "@common/signup/SignupQuery";
+import { signup } from "./auth/signup";
 
 export const userRouter = router({
     me: publicProcedure.output(MeResult).query(async (ctx) => {
@@ -37,6 +39,9 @@ export const authRouter = router({
     }),
     logout: publicProcedure.mutation(async (ctx) => {
         return logout(ctx.ctx);
+    }),
+    signup: publicProcedure.input(SignupQuery).mutation(async (ctx) => {
+        return signup(ctx.input);
     }),
 });
 

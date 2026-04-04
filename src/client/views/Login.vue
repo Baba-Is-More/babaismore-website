@@ -17,7 +17,7 @@ async function start_login() {
 </script>
 
 <template>
-    <div class="log-sign-in">
+    <div class="board">
         <div class="info">
             <h3>login to baba is more!</h3>
             <img src="/images/image_baba.png" />
@@ -55,7 +55,7 @@ img {
     width: 80%;
 }
 
-.log-sign-in {
+.board {
     background-color: #293141;
     display: flex;
     margin: 100px;

@@ -50,7 +50,7 @@ async function check_email(email: string): Promise<boolean> {
         email: email,
     });
 
-    if (user != null) {
+    if (user == null) {
         return false;
     } else {
         return true;
@@ -63,7 +63,7 @@ async function check_username(username: string): Promise<boolean> {
         username: username,
     });
 
-    if (user != null) {
+    if (user == null) {
         return false;
     } else {
         return true;
