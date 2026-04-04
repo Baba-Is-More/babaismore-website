@@ -24,17 +24,6 @@ export const is_dev = true;
 const app = express();
 app.use(cookieParser());
 app.set("trust proxy", true); // needed because we are serving with a proxy
-app.use(
-    "/auth",
-    ExpressAuth({
-        adapter: DBAdapter(),
-        session: {
-            strategy: "database",
-        },
-        providers: [Credentials],
-        secret: process.env.AUTH_SECRET!!,
-    }),
-);
 
 // express-session initialization
 app.use(
