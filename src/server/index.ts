@@ -8,9 +8,10 @@ import express from "express";
 import path from "node:path";
 import { createContext } from "./context";
 import cookieParser from "cookie-parser";
-import { ExpressAuth } from "@auth/express";
-import { DBAdapter } from "./auth/database_adaptor";
-import Credentials from "./auth/providers/credentials";
+import session from "express-session";
+import passport from "passport";
+import "./auth/passport";
+import MongoStore from "connect-mongo";
 
 if (process.env.DB_URL) {
     await mongoose.connect(process.env.DB_URL);
@@ -35,6 +36,28 @@ app.use(
     }),
 );
 
+// express-session initialization
+app.use(
+    session({
+        secret: process.env.SECRET!!,
+        resave: false,
+        saveUninitialized: false,
+        // lets mongodb store the sessions (by default its in-memory)
+        store: MongoStore.create({
+            mongoUrl: process.env.DB_URL,
+            collectionName: "sessions",
+        }),
+        // cookie: {
+        // maxAge: 1000 * 60 * 60 * 24, // one day
+        // },
+    }),
+);
+
+// passport middleware initialization
+app.use(passport.initialize());
+app.use(passport.session());
+
+// TRPC endpoint
 app.use(
     "/trpc",
     trpcExpress.createExpressMiddleware({

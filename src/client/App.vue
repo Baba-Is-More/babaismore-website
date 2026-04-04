@@ -11,14 +11,22 @@ import Footer from "@/components/Footer/Footer.vue";
         <Suspense>
             <router-view />
         </Suspense>
-    </div>
 
-    <Footer />
+        <Footer />
+    </div>
 </template>
 
 <style scoped>
 .main {
     /* if you change this, change components/navbar/Bar.vue as well */
     margin-top: 56px;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main :first-child {
+    flex: 1;
 }
 </style>
