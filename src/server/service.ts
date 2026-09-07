@@ -18,6 +18,8 @@ import type mongoose from "mongoose";
 import type { MeResult } from "@common/users/MeResult";
 import type { QueryFilter } from "mongoose";
 import type { ITag } from "./database/models/tag";
+import type { UserFetchQuery } from "@common/fetch/UserFetchQuery";
+import type { UserFetchResult } from "@common/fetch/UserFetchResult";
 
 export async function fetchProject(
     query: project.fetch.Query,
@@ -69,6 +71,27 @@ export async function searchProjects(query: project.search.Query) {
     const results = await Promise.all(projects.map(projectToSearchResult));
 
     return results;
+}
+
+export async function fetchUser(
+    query: UserFetchQuery,
+    caller: Express.User | null,
+): Promise<UserFetchResult> {
+    const user = await userToObjectId(query.username);
+
+    if (!user) {
+        throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "user not found",
+        });
+    }
+
+    return {
+        username: user.username,
+        displayName: user.displayName,
+        profilePicture: user.profilePicture,
+        userIsYou: (caller && caller.id == user._id.toString()) ?? false
+    };
 }
 
 export async function userMe(ctx: any): Promise<MeResult> {

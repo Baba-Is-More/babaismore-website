@@ -1,6 +1,6 @@
 import * as project from "@common/project";
 import * as z from "zod";
-import { fetchProject, searchProjects, userMe } from "./service";
+import { fetchProject, fetchUser, searchProjects, userMe } from "./service";
 import { publicProcedure, router } from "./trpc";
 import { LoginQuery } from "@common/login/loginQuery";
 import { MeResult } from "@common/users/MeResult";
@@ -8,11 +8,19 @@ import { login } from "./auth/login";
 import { logout } from "./auth/logout";
 import { SignupQuery } from "@common/signup/SignupQuery";
 import { signup } from "./auth/signup";
+import { UserFetchQuery } from "@common/fetch/UserFetchQuery";
+import { UserFetchResult } from "@common/fetch/UserFetchResult";
 
 export const userRouter = router({
     me: publicProcedure.output(MeResult).query(async (ctx) => {
         return userMe(ctx.ctx as any);
     }),
+    fetch: publicProcedure
+        .input(UserFetchQuery)
+        .output(UserFetchResult)
+        .query(async (ctx) => {
+            return fetchUser(ctx.input, ctx.ctx.user)
+        })
 });
 
 export const projectRouter = router({
