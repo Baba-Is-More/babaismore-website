@@ -57,21 +57,34 @@ function dateToOffset(date: Date): string {
 }
 </script>
 
-<template><a :href="`/project/${author}/${name}`">
+<template>
+    <a :href="`/project/${author}/${name}`">
         <div class="base blue" id="box">
             <div class="meta">
                 <img src="\images\image_levelpacks.png" :alt="name" id="icon" />
                 <p class="name">{{ name }}</p>
                 <p class="author">
-                    <img src="\images\image_baba.png" :alt="author" class="inline" />
+                    <img
+                        src="\images\image_baba.png"
+                        :alt="author"
+                        class="inline"
+                    />
                     {{ author }}
                 </p>
                 <p class="info">
-                    <img src="\images\image_downloads.png" :alt="`${downloads} downloads`" class="inline" />
+                    <img
+                        src="\images\image_downloads.png"
+                        :alt="`${downloads} downloads`"
+                        class="inline"
+                    />
                     {{ reduce(downloads) }}
                 </p>
                 <p class="info">
-                    <img src="\images\image_clock.png" alt="todo" class="inline" />
+                    <img
+                        src="\images\image_clock.png"
+                        alt="todo"
+                        class="inline"
+                    />
                     {{ dateToOffset(posted) }}
                 </p>
             </div>
@@ -82,7 +95,8 @@ function dateToOffset(date: Date): string {
                 </p>
             </div>
         </div>
-    </a></template>
+    </a>
+</template>
 
 <style scoped>
 a {
@@ -116,7 +130,7 @@ a {
     border-image-source: url("/images/buttons/button_pink.png");
 }
 
-.base>div {
+.base > div {
     height: fit-content;
 }
 
@@ -131,7 +145,7 @@ a {
     padding: 4px 0;
 }
 
-.meta>p {
+.meta > p {
     margin: 0;
     display: flex;
     align-items: center;

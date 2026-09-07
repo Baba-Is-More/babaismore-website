@@ -44,10 +44,11 @@ const results = ref<SearchResult[]>(
         <h3 class="head">Search Filters</h3>
         <Filter />
         <div class="grid">
-            <div v-for="(
-{ name, author, summary, downloads, posted, tags },
-    idx
-                ) in results">
+            <div
+                v-for="(
+                    { name, author, summary, downloads, posted, tags }, idx
+                ) in results"
+            >
                 <SearchPack :name :author :summary :downloads :posted :tags />
             </div>
         </div>
