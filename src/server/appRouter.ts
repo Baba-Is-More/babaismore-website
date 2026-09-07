@@ -1,7 +1,4 @@
-import { FetchQuery } from "@common/fetch/fetchQuery";
-import { FetchResult } from "@common/fetch/FetchResult";
-import { SearchQuery } from "@common/Search/SearchQuery";
-import { SearchResult } from "@common/Search/SearchResult";
+import * as project from "@common/project";
 import * as z from "zod";
 import { fetchProject, searchProjects, userMe } from "./service";
 import { publicProcedure, router } from "./trpc";
@@ -20,14 +17,14 @@ export const userRouter = router({
 
 export const projectRouter = router({
     searchProjects: publicProcedure
-        .input(SearchQuery)
-        .output(z.array(SearchResult))
+        .input(project.search.Query)
+        .output(z.array(project.search.Result))
         .query(async (ctx) => {
             return searchProjects(ctx.input);
         }),
     fetch: publicProcedure
-        .input(FetchQuery)
-        .output(FetchResult)
+        .input(project.fetch.Query)
+        .output(project.fetch.Result)
         .query(async (ctx) => {
             return fetchProject(ctx.input);
         }),

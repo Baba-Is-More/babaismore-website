@@ -5,18 +5,15 @@ import type { SearchResult } from "@common/SearchResult";
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { trpc } from "..";
-import {
-    parseUrlToQuery,
-    queryIntoURLSuffix,
-} from "@common/Search/SearchUtils";
+import * as project from "@common/project";
 
 const router = useRouter();
 const route = useRoute();
 
 const url = new URLSearchParams(route.query as Record<string, string>);
-const query = parseUrlToQuery(url);
+const query = project.search.utils.parseUrlToQuery(url);
 
-router.replace(queryIntoURLSuffix(query));
+router.replace(project.search.utils.queryIntoURLSuffix(query));
 
 watch(
     () => route.query,

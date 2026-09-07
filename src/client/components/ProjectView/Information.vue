@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { FetchResult } from "@common/fetch/FetchResult";
+import type * as project from "@common/project";
 
 const props = defineProps<{
-    data: FetchResult;
+    data: project.fetch.Result;
 }>();
 </script>
 

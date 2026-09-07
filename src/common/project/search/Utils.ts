@@ -1,5 +1,5 @@
 import type { Url } from "url";
-import { SortType, TagQuery, type SearchQuery } from "./SearchQuery";
+import { SortType, TagQuery, type Query } from "./Query";
 
 export function sortToString(sort: SortType): string {
     switch (sort) {
@@ -36,7 +36,7 @@ export function stringToSortType(str: string | null): SortType | null {
     return null;
 }
 
-export function queryIntoURLSuffix(query: SearchQuery): string {
+export function queryIntoURLSuffix(query: Query): string {
     let ret = "/search?";
     if (query.keywords.length != 0) {
         ret = ret.concat("q=", query.keywords.join("+"));
@@ -68,7 +68,7 @@ function isTagFilter(str: string): boolean {
     return str.startsWith("tag:");
 }
 
-export function parseUrlToQuery(url: URLSearchParams): SearchQuery {
+export function parseUrlToQuery(url: URLSearchParams): Query {
     const raw_keywords = (url.get("q") ?? "") // gets the query param, or an empty string if there is none
         .split(" ") // every + turns into a space so we split it by spaces
         .filter((v) => Boolean(v)); // if the split resulted in an empty string, such as when there are two spaces, we can get rid of it

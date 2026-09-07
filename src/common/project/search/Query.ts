@@ -14,10 +14,10 @@ export const TagQuery = z.object({
 
 export type TagQuery = z.infer<typeof TagQuery>;
 
-export const SearchQuery = z.object({
+export const Query = z.object({
     keywords: z.array(z.string()),
     tags: z.array(TagQuery),
     sort: z.enum(SortType),
 });
 
-export type SearchQuery = z.infer<typeof SearchQuery>;
+export type Query = z.infer<typeof Query>;

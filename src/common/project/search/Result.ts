@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-export const SearchResult = z.object({
+export const Result = z.object({
     name: z.string(),
     author: z.string(),
     summary: z.string(),
@@ -9,4 +9,4 @@ export const SearchResult = z.object({
     tags: z.array(z.string()),
 });
 
-export type SearchResult = z.infer<typeof SearchResult>;
+export type Result = z.infer<typeof Result>;

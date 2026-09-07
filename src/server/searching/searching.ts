@@ -1,4 +1,4 @@
-import { type SearchQuery } from "@common/Search/SearchQuery";
+import type * as project from "@common/project";
 import type { SearchResult } from "@common/SearchResult";
 import type {
     IProject,
@@ -8,7 +8,7 @@ import type { QueryFilter } from "mongoose";
 import { tagsToObjectId } from "../indexing/tags";
 
 export async function buildProjectsFilter(
-    query: SearchQuery,
+    query: project.search.Query,
 ): Promise<QueryFilter<IProject>> {
     const and = [];
     if (query.keywords.length) {
@@ -44,13 +44,13 @@ export async function buildProjectsFilter(
     return { $and: and };
 }
 
-export function projectToSearchResult(project: PopulatedProject): SearchResult {
+export function projectToSearchResult(proj: PopulatedProject): SearchResult {
     return {
-        author: project.author.username,
-        summary: project.summary,
-        downloads: project.downloads,
-        name: project.projectName,
-        posted: new Date(project.posted),
-        tags: project.tags.map((t: any) => t.tagName),
+        author: proj.author.username,
+        summary: proj.summary,
+        downloads: proj.downloads,
+        name: proj.projectName,
+        posted: new Date(proj.posted),
+        tags: proj.tags.map((t: any) => t.tagName),
     };
 }
