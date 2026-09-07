@@ -26,7 +26,7 @@ import Footer from "@/components/Footer/Footer.vue";
     flex-direction: column;
 }
 
-.main :first-child {
+.main > :first-child {
     flex: 1;
 }
 </style>

@@ -1,7 +1,15 @@
 <script setup lang="ts">
-import type { SearchResult } from "@common/SearchResult";
-
-const props = defineProps<SearchResult>();
+// i would love to bring SearchResult here but
+// vue SFC doesnt resolve z.infer, so it cant see it!
+// blehhh annoying but its okay
+const props = defineProps<{
+    name: string;
+    author: string;
+    summary: string;
+    downloads: number;
+    posted: Date;
+    tags: string[];
+}>();
 
 function truncate(desc: string): string {
     const max_length: number = 128;
@@ -49,48 +57,39 @@ function dateToOffset(date: Date): string {
 }
 </script>
 
-<template>
-    <div class="base blue" id="box">
-        <div class="horizontal-align">
-            <div>
-                <img
-                    src="\images\image_levelpacks.png"
-                    alt="{{ name }}"
-                    id="icon"
-                />
-            </div>
-            <div>
+<template><a :href="`/project/${author}/${name}`">
+        <div class="base blue" id="box">
+            <div class="meta">
+                <img src="\images\image_levelpacks.png" :alt="name" id="icon" />
                 <p class="name">{{ name }}</p>
                 <p class="author">
-                    <img
-                        src="\images\image_baba.png"
-                        alt="{{ author }}"
-                        class="inline"
-                    />
+                    <img src="\images\image_baba.png" :alt="author" class="inline" />
                     {{ author }}
                 </p>
                 <p class="info">
-                    <img
-                        src="\images\image_downloads.png"
-                        alt="{{ downloads }} downloads"
-                        class="inline"
-                    />
+                    <img src="\images\image_downloads.png" :alt="`${downloads} downloads`" class="inline" />
                     {{ reduce(downloads) }}
-                    <img src="\images\image_clock.png" alt="" class="inline" />
+                </p>
+                <p class="info">
+                    <img src="\images\image_clock.png" alt="todo" class="inline" />
                     {{ dateToOffset(posted) }}
                 </p>
             </div>
+            <p class="desc">{{ truncate(summary) }}</p>
+            <div>
+                <p v-for="tag in tags" id="tag" class="base pink">
+                    {{ tag }}
+                </p>
+            </div>
         </div>
-        <p class="desc">{{ truncate(summary) }}</p>
-        <div>
-            <p v-for="tag in tags" id="tag" class="base pink">
-                {{ tag }}
-            </p>
-        </div>
-    </div>
-</template>
+    </a></template>
 
 <style scoped>
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 .base {
     background-color: #00000000;
     align-items: center;
@@ -117,7 +116,7 @@ function dateToOffset(date: Date): string {
     border-image-source: url("/images/buttons/button_pink.png");
 }
 
-.base > div {
+.base>div {
     height: fit-content;
 }
 
@@ -125,10 +124,27 @@ function dateToOffset(date: Date): string {
     color: #83c8e5;
 }
 
+.meta {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 4px 0;
+}
+
+.meta>p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
 .inline {
-    width: 24px;
-    height: 24px;
-    vertical-align: top;
+    flex: none;
+    width: 2em;
+    height: 2em;
+    vertical-align: middle;
 }
 
 .desc {
@@ -153,13 +169,15 @@ p {
 }
 
 .name {
-    margin: 4px;
     text-align: left;
+    word-break: break-word;
 }
 
 #icon {
     vertical-align: top;
     margin: 1px;
+    width: 100px;
+    height: 100px;
 }
 
 .horizontal-align {

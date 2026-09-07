@@ -40,15 +40,16 @@ const results = ref<SearchResult[]>(
 </script>
 
 <template>
-    <h3 class="head">Search Filters</h3>
-    <Filter />
-    <div class="grid">
-        <div
-            v-for="(
-                { name, author, summary, downloads, posted, tags }, idx
-            ) in results"
-        >
-            <SearchPack :name :author :summary :downloads :posted :tags />
+    <div style="margin: 10px">
+        <h3 class="head">Search Filters</h3>
+        <Filter />
+        <div class="grid">
+            <div v-for="(
+{ name, author, summary, downloads, posted, tags },
+    idx
+                ) in results">
+                <SearchPack :name :author :summary :downloads :posted :tags />
+            </div>
         </div>
     </div>
 </template>
@@ -68,6 +69,18 @@ p {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .head {
