@@ -6,17 +6,20 @@ const props = defineProps<{
 }>();
 </script>
 
-<template>
-    <div style="display: contents">
-        <div style="display: flex; flex-direction: column">
-            <p class="name">{{ displayName }}</p>
-            <p class="id">{{ username }}</p>
-        </div>
-        <img class="profile" :src="profilePicture" alt="Profile" />
+<template><a :href="`/user/${username}`" style="display: contents">
+    <div style="display: flex; flex-direction: column">
+        <p class="name">{{ displayName }}</p>
+        <p class="id">{{ username }}</p>
     </div>
-</template>
+    <img class="profile" :src="profilePicture" alt="Profile" />
+</a></template>
 
 <style scoped>
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
 .name {
     color: white;
     font-size: 8px;

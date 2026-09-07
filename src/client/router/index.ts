@@ -8,6 +8,7 @@ import ProjectView from "@/views/project/View.vue";
 import Login from "@/views/auths/Login.vue";
 import Logout from "@/views/auths/Logout.vue";
 import Signup from "@/views/auths/Signup.vue";
+import Settings from "@/views/Settings.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -24,6 +25,7 @@ const router = createRouter({
         { path: "/login", component: Login },
         { path: "/logout", component: Logout },
         { path: "/signup", component: Signup },
+        { path: "/settings", component: Settings },
     ],
 });
 
