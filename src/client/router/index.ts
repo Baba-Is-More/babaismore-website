@@ -9,6 +9,7 @@ import Login from "@/views/auths/Login.vue";
 import Logout from "@/views/auths/Logout.vue";
 import Signup from "@/views/auths/Signup.vue";
 import Settings from "@/views/Settings.vue";
+import ProjectEdit from "@/views/project/Edit.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -21,6 +22,11 @@ const router = createRouter({
             path: "/project/:author/:project",
             name: "project",
             component: ProjectView,
+        },
+        {
+            path: "/edit/:author/:project",
+            name: "project edit",
+            component: ProjectEdit,
         },
         { path: "/login", component: Login },
         { path: "/logout", component: Logout },

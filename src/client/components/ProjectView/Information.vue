@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type * as project from "@common/project";
+import EditButton from "./EditButton.vue";
 
 const props = defineProps<{
     data: project.fetch.Result;
@@ -13,6 +14,11 @@ const props = defineProps<{
         <div class="tags">
             <p v-for="tag in data.tags">{{ tag }}</p>
         </div>
+        <EditButton
+            v-if="data.editable"
+            :author="data.author"
+            :slug="data.slug"
+        />
     </div>
 </template>
 

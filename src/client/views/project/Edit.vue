@@ -1,14 +1,9 @@
 <script setup lang="ts">
-import TopImages from "@/components/ProjectView/TopImages.vue";
-import Information from "@/components/ProjectView/Information.vue";
-import ContentColumn from "@/components/ContentColumn.vue";
 import { useRoute } from "vue-router";
-import { isTRPCError, trpc } from "@/index";
-import { ref, type Ref } from "vue";
 import type * as project from "@common/project";
-import { TRPCError } from "@trpc/server";
 import NotFound from "@/components/ProjectView/NotFound.vue";
-import { isTRPCClientError, TRPCClientError } from "@trpc/client";
+import { isTRPCError, trpc } from "@/index";
+import ContentColumn from "@/components/ContentColumn.vue";
 
 const route = useRoute();
 
@@ -30,21 +25,13 @@ try {
     if (error.data?.code != "NOT_FOUND") {
         throw error;
     }
-
-    // error is not found, we can chill (or handle it later i dunno)
-    // currently its handled by the v-else block so if i change it
-    // pleaseeeeee change this comment
 }
 </script>
 
 <template>
     <ContentColumn>
         <div v-if="fetchResult">
-            <TopImages
-                v-if="fetchResult.thumbnail"
-                :image="fetchResult.thumbnail"
-            />
-            <Information :data="fetchResult" />
+            <p>editing it ahsdghsdhg</p>
         </div>
         <div v-else>
             <NotFound />
