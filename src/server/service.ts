@@ -17,6 +17,7 @@ import { comparePassword } from "./auth/compare";
 import type mongoose from "mongoose";
 import type { MeResult } from "@common/users/MeResult";
 import type { QueryFilter } from "mongoose";
+import type { ITag } from "./database/models/tag";
 
 export async function fetchProject(
     query: project.fetch.Query,
@@ -34,17 +35,28 @@ export async function fetchProject(
         });
     }
 
-    // user will come in handy soon
+    const isOwner: boolean =
+        user != null && found.author._id.toString() === user.id;
+
+    if (found.unlisted) {
+        if (!isOwner) {
+            // we throw 404 instead of 403 for
+            // security via indistinguishability
+            throw new TRPCError({
+                code: "NOT_FOUND",
+                message: "project not found",
+            });
+        }
+    }
 
     return {
         author: found.author.username,
         title: found.projectName,
         slug: found.projectSlug,
         description: found.projectDesc,
-        thumbnail: found.galleryImages[0]!!.imageName,
-        tags: found.tags.map((v) => {
-            return v.tagName;
-        }),
+        thumbnail: found.galleryImages[0]?.imageName,
+        tags: found.tags.map((v: ITag): string => v.tagName),
+        editable: isOwner,
     };
 }
 

@@ -17,6 +17,7 @@ export const ProjectZod = z.object({
     summary: z.string(),
     posted: z.coerce.date(),
     tags: z.array(TagZod),
+    unlisted: z.boolean(),
 });
 
 export type PopulatedProjectPaths = {
@@ -38,6 +39,7 @@ export interface IProject {
     downloads: number;
     summary: string;
     posted: string;
+    unlisted: boolean;
     tags: ITag[];
     galleryImages: IGalleryImage[];
 }
@@ -84,6 +86,10 @@ export const ProjectSchema = new Schema<IProject>({
     ],
     galleryImages: {
         type: [GalleryImageSchema],
+    },
+    unlisted: {
+        type: Boolean,
+        default: false,
     },
     // distribution: {
     //     type: String,

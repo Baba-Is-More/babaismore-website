@@ -6,8 +6,9 @@ export const Result = z.object({
     title: z.string(),
     slug: SlugZod,
     description: z.string(),
-    thumbnail: z.string(),
+    thumbnail: z.string().optional(),
     tags: z.array(z.string()).default([]),
+    editable: z.boolean(),
 });
 
 export type Result = z.infer<typeof Result>;

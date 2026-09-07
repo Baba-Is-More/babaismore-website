@@ -17,7 +17,7 @@ const fetchResult = await trpc.project.fetch.query({
 
 <template>
     <div id="main">
-        <TopImages :image="fetchResult.thumbnail" />
+        <TopImages v-if="fetchResult.thumbnail" :image="fetchResult.thumbnail" />
         <Information :data="fetchResult" />
     </div>
 </template>

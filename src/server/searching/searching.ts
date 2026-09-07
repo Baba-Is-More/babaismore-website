@@ -40,7 +40,7 @@ export async function buildProjectsFilter(
         }
     }
 
-    return { $and: and };
+    return { unlisted: false, $and: and };
 }
 
 export function projectToSearchResult(
