@@ -19,8 +19,8 @@ export const userRouter = router({
         .input(UserFetchQuery)
         .output(UserFetchResult)
         .query(async (ctx) => {
-            return fetchUser(ctx.input, ctx.ctx.user)
-        })
+            return fetchUser(ctx.input, ctx.ctx.user);
+        }),
 });
 
 export const projectRouter = router({

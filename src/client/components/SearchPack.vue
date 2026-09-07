@@ -4,8 +4,8 @@
 // blehhh annoying but its okay
 const props = defineProps<{
     name: string;
-    author: string;
     slug: string;
+    author: string;
     summary: string;
     downloads: number;
     posted: Date;

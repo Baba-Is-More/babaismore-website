@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { LoginQuery } from "@common/login/loginQuery";
 import { ref } from "vue";
-import { trpc } from "@/index.ts";
+import { trpc } from "@/index";
 
 const email = ref("");
 const password = ref("");

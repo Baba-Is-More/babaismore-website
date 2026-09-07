@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { LoginQuery } from "@common/login/loginQuery";
 import { ref } from "vue";
-import { trpc } from "@/index.ts";
+import { trpc } from "@/index";
 import type { SignupQuery } from "@common/signup/SignupQuery";
 import router from "@/router";
 
@@ -27,7 +27,6 @@ async function start_signup() {
     } finally {
         // if we signed up successfully, we can go to login
         await router.replace("/login");
-        window.location.reload();
     }
 }
 </script>

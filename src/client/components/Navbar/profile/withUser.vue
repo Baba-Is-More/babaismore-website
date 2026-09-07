@@ -6,13 +6,15 @@ const props = defineProps<{
 }>();
 </script>
 
-<template><a :href="`/user/${username}`" style="display: contents">
-    <div style="display: flex; flex-direction: column">
-        <p class="name">{{ displayName }}</p>
-        <p class="id">{{ username }}</p>
-    </div>
-    <img class="profile" :src="profilePicture" alt="Profile" />
-</a></template>
+<template>
+    <a :href="`/user/${username}`" style="display: contents">
+        <div style="display: flex; flex-direction: column">
+            <p class="name">{{ displayName }}</p>
+            <p class="id">{{ username }}</p>
+        </div>
+        <img class="profile" :src="profilePicture" alt="Profile" />
+    </a>
+</template>
 
 <style scoped>
 a {

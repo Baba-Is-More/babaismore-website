@@ -8,11 +8,7 @@ defineProps<{
 
 <template>
     <div class="user">
-        <img
-            :src="profilePicture"
-            :alt="displayName"
-            class="inline"
-        />
+        <img :src="profilePicture" :alt="displayName" class="inline" />
         <div>
             <p>display name:</p>
             <h1>{{ displayName }}</h1>

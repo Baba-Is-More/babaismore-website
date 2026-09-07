@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import router from "@/router";
-import { trpc } from "@/index.ts";
+import { trpc } from "@/index";
 
 await trpc.auth.logout.mutate();
 

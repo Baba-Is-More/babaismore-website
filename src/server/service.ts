@@ -90,7 +90,7 @@ export async function fetchUser(
         username: user.username,
         displayName: user.displayName,
         profilePicture: user.profilePicture,
-        userIsYou: (caller && caller.id == user._id.toString()) ?? false
+        userIsYou: (caller && caller.id == user._id.toString()) ?? false,
     };
 }
 
