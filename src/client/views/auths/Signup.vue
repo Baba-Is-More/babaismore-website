@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { LoginQuery } from "@common/login/loginQuery";
 import { ref } from "vue";
-import { trpc } from "..";
+import { trpc } from "@/index.ts";
 import type { SignupQuery } from "@common/signup/SignupQuery";
 import router from "@/router";
 

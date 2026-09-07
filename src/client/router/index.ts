@@ -4,10 +4,10 @@ import Home from "@/views/Home.vue";
 import Search from "@/views/Search.vue";
 import User from "@/views/User.vue";
 import Test from "@/views/Test.vue";
-import ProjectView from "@/views/ProjectView.vue";
-import Login from "@/views/Login.vue";
-import Logout from "@/views/Logout.vue";
-import Signup from "@/views/Signup.vue";
+import ProjectView from "@/views/project/View.vue";
+import Login from "@/views/auths/Login.vue";
+import Logout from "@/views/auths/Logout.vue";
+import Signup from "@/views/auths/Signup.vue";
 
 const router = createRouter({
     history: createWebHistory(),

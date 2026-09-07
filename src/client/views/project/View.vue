@@ -2,7 +2,7 @@
 import TopImages from "@/components/ProjectView/TopImages.vue";
 import Information from "@/components/ProjectView/Information.vue";
 import { useRoute } from "vue-router";
-import { trpc } from "..";
+import { trpc } from "@/index.ts";
 
 const route = useRoute();
 
