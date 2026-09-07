@@ -1,4 +1,7 @@
-import { ProfilePictureZod, type ProfilePicture } from "@common/users/ProfilePicture";
+import {
+    ProfilePictureZod,
+    type ProfilePicture,
+} from "@common/users/ProfilePicture";
 import { octetInputParser } from "@trpc/server/unstable-core-do-not-import";
 import mongoose, { Schema } from "mongoose";
 import * as z from "zod";

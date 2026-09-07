@@ -36,7 +36,6 @@ export async function signup(query: SignupQuery) {
     // if not, we can make a new account
 
     const hashedPassword = await hashPassword(query.password);
-    // TODO: make this not ugly
     const randomProfilePicture = getRandomProfile();
 
     const newUser: HydratedDocument<IUser> = new db.users({
