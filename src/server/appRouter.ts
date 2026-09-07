@@ -26,7 +26,7 @@ export const projectRouter = router({
         .input(project.fetch.Query)
         .output(project.fetch.Result)
         .query(async (ctx) => {
-            return fetchProject(ctx.input);
+            return fetchProject(ctx.input, ctx.ctx.user);
         }),
 });
 

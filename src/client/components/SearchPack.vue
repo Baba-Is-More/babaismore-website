@@ -5,6 +5,7 @@
 const props = defineProps<{
     name: string;
     author: string;
+    slug: string;
     summary: string;
     downloads: number;
     posted: Date;
@@ -58,7 +59,7 @@ function dateToOffset(date: Date): string {
 </script>
 
 <template>
-    <a :href="`/project/${author}/${name}`">
+    <a :href="`/project/${author}/${slug}`">
         <div class="base blue" id="box">
             <div class="meta">
                 <img src="\images\image_levelpacks.png" :alt="name" id="icon" />

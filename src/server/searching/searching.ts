@@ -1,5 +1,4 @@
 import type * as project from "@common/project";
-import type { SearchResult } from "@common/SearchResult";
 import type {
     IProject,
     PopulatedProject,
@@ -44,8 +43,11 @@ export async function buildProjectsFilter(
     return { $and: and };
 }
 
-export function projectToSearchResult(proj: PopulatedProject): SearchResult {
+export function projectToSearchResult(
+    proj: PopulatedProject,
+): project.search.Result {
     return {
+        slug: proj.projectSlug,
         author: proj.author.username,
         summary: proj.summary,
         downloads: proj.downloads,

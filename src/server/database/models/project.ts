@@ -6,10 +6,12 @@ import { TagZod, type ITag } from "./tag";
 import { GalleryImageSchema, type IGalleryImage } from "./galleryImage";
 import type { IUser } from "./user";
 import { UserZod } from "./user";
+import SlugZod, { SLUG_MAX_LENGTH, SLUG_REGEX } from "@common/slug";
 
 export const ProjectZod = z.object({
     author: UserZod,
     projectName: z.string(),
+    projectSlug: SlugZod,
     projectDesc: z.string(),
     downloads: z.number(),
     summary: z.string(),
@@ -17,16 +19,21 @@ export const ProjectZod = z.object({
     tags: z.array(TagZod),
 });
 
-export type PopulatedProject = HydratedDocument<
-    Omit<IProject, "tags" | "author"> & {
-        tags: ITag[];
-        author: IUser;
-    }
->;
+export type PopulatedProjectPaths = {
+    tags: HydratedDocument<ITag>[];
+    author: HydratedDocument<IUser>;
+};
+
+export type PopulatedProject = Omit<
+    HydratedDocument<IProject>,
+    keyof PopulatedProjectPaths
+> &
+    PopulatedProjectPaths;
 
 export interface IProject {
     author: IUser;
     projectName: string;
+    projectSlug: string;
     projectDesc: string;
     downloads: number;
     summary: string;
@@ -43,6 +50,14 @@ export const ProjectSchema = new Schema<IProject>({
     projectName: {
         type: String,
         required: true,
+    },
+    projectSlug: {
+        type: String,
+        required: true,
+        lowercase: true,
+        trim: true,
+        maxlength: SLUG_MAX_LENGTH,
+        match: SLUG_REGEX,
     },
     projectDesc: {
         type: String,

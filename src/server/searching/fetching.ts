@@ -7,5 +7,5 @@ export async function buildFetchFilter(
     query: project.fetch.Query,
 ): Promise<QueryFilter<IProject>> {
     const user = await userToObjectId(query.author);
-    return { author: user, projectName: query.project };
+    return { author: user, projectSlug: query.slug };
 }

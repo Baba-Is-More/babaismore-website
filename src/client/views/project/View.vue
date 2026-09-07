@@ -11,7 +11,7 @@ const project = route.params.project as string;
 
 const fetchResult = await trpc.project.fetch.query({
     author: author,
-    project: project,
+    slug: project,
 });
 </script>
 

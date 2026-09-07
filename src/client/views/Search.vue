@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import SearchPack from "@/components/SearchPack.vue";
 import Filter from "@/components/Filter.vue";
-import type { SearchResult } from "@common/SearchResult";
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { trpc } from "..";
@@ -25,11 +24,12 @@ watch(
     },
 );
 
-const results = ref<SearchResult[]>(
+const results = ref<project.search.Result[]>(
     (await trpc.project.searchProjects.query(query)).map((v) => {
         return {
             author: v.author,
             summary: v.summary,
+            slug: v.slug,
             downloads: v.downloads,
             name: v.name,
             posted: new Date(v.posted),
@@ -46,10 +46,19 @@ const results = ref<SearchResult[]>(
         <div class="grid">
             <div
                 v-for="(
-                    { name, author, summary, downloads, posted, tags }, idx
+                    { name, author, summary, downloads, posted, tags, slug },
+                    idx
                 ) in results"
             >
-                <SearchPack :name :author :summary :downloads :posted :tags />
+                <SearchPack
+                    :name
+                    :author
+                    :summary
+                    :downloads
+                    :posted
+                    :tags
+                    :slug
+                />
             </div>
         </div>
     </div>
