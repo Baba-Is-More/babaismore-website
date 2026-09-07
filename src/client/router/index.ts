@@ -14,7 +14,7 @@ const router = createRouter({
     routes: [
         { path: "/", component: Home },
         { path: "/search", component: Search },
-        { path: "/user", component: User },
+        { path: "/user/:username", name: "user", component: User },
         { path: "/newthing", component: Test },
         {
             path: "/project/:author/:project",
