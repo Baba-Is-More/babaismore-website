@@ -5,6 +5,7 @@ import Loading from "./profile/Loading.vue";
 import WithUser from "./profile/withUser.vue";
 import type { MeResult } from "@common/users/MeResult";
 import LoggedOut from "./profile/LoggedOut.vue";
+import type { ProfilePicture } from "@common/users/ProfilePicture";
 
 const user_data: Ref<MeResult | null> = ref(null);
 const loading: Ref<boolean> = ref(true);
@@ -15,14 +16,22 @@ onMounted(async () => {
     loading.value = false;
 });
 
+function profilePictureUrl(picture: ProfilePicture): string {
+    const idx = picture.indexOf(":");
+    const kind = picture.slice(0, idx);
+    const value = picture.slice(idx + 1);
+    return kind === "custom"
+        ? `/uploads/avatars/${value}.png`
+        : `/avatars/${value}.png`;
+}
+
 const data = computed(() => {
     if (!user_data.value || !user_data.value.is_logged_in) return null;
 
     return {
         username: user_data.value.data.username,
         displayName: user_data.value.data.displayName,
-        profilePicture:
-            "/uploads/avatars/" + user_data.value.data.profilePicture + ".png",
+        profilePicture: profilePictureUrl(user_data.value.data.profilePicture),
     };
 });
 

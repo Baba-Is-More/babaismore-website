@@ -1,3 +1,4 @@
+import { ProfilePictureZod, type ProfilePicture } from "@common/users/ProfilePicture";
 import { octetInputParser } from "@trpc/server/unstable-core-do-not-import";
 import mongoose, { Schema } from "mongoose";
 import * as z from "zod";
@@ -5,7 +6,7 @@ import * as z from "zod";
 export const UserZod = z.object({
     username: z.string(),
     displayName: z.string(),
-    profilePicture: z.string(),
+    profilePicture: ProfilePictureZod,
     password: z.string(),
     email: z.email(),
 });
@@ -13,7 +14,7 @@ export const UserZod = z.object({
 export interface IUser {
     username: string;
     displayName: string;
-    profilePicture: string;
+    profilePicture: ProfilePicture;
     password: string;
     email: string;
 }
@@ -33,6 +34,12 @@ export const UserSchema = new mongoose.Schema<IUser>({
     profilePicture: {
         type: String,
         required: true,
+        validate: {
+            validator: (value: string) =>
+                ProfilePictureZod.safeParse(value).success,
+            message: (props) =>
+                `${props.value} is not a valid profile picture (expected "default:<name>" or "custom:<uuid>")`,
+        },
     },
     password: {
         type: String,

@@ -7,6 +7,12 @@ import type { HydratedDocument } from "mongoose";
 import { comparePassword } from "./compare";
 import type { SignupQuery } from "@common/signup/SignupQuery";
 import { hashPassword } from "./hash";
+import { DEFAULT_PROFILE_PICTURES } from "@common/users/ProfilePicture";
+
+function getRandomProfile() {
+    const i = Math.floor(Math.random() * DEFAULT_PROFILE_PICTURES.length);
+    return `default:${DEFAULT_PROFILE_PICTURES[i]!}` as const;
+}
 
 export async function signup(query: SignupQuery) {
     // make sure neither the email or username is already taken
@@ -31,7 +37,7 @@ export async function signup(query: SignupQuery) {
 
     const hashedPassword = await hashPassword(query.password);
     // TODO: make this not ugly
-    const randomProfilePicture = "4c546671-0573-4895-926d-88800077b67d";
+    const randomProfilePicture = getRandomProfile();
 
     const newUser: HydratedDocument<IUser> = new db.users({
         displayName: query.displayName,

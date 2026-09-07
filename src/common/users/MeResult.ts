@@ -1,11 +1,12 @@
 import * as z from "zod";
+import { ProfilePictureZod } from "./ProfilePicture";
 
 // if we are logged in, is_logged_in field MUST be true and data MUST exist
 const LoggedIn = z.object({
     is_logged_in: z.literal(true),
     data: z.object({
         username: z.string(),
-        profilePicture: z.string(),
+        profilePicture: ProfilePictureZod,
         displayName: z.string(),
     }),
 });
