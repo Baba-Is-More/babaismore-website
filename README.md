@@ -4,7 +4,7 @@ The official repository and source code for the Baba Is More website. Currently 
 
 ## Forking this repository
 
-If you wish to work on this yourself, you will first need to download [Vue.js](https://vuejs.org/guide/quick-start.html).
+If you wish to work on this yourself, you will first need to download [NodeJS](https://nodejs.org/en/download).
 
 From there, run the following in the root folder of the branch:
 
