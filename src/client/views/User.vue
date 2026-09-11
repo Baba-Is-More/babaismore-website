@@ -7,6 +7,7 @@ import { ref, type Ref } from "vue";
 import type { UserFetchResult } from "@common/fetch/UserFetchResult";
 import QuickButtons from "@/components/User/QuickButtons.vue";
 import type { ProfilePicture } from "@common/users/ProfilePicture";
+import ProjectsView from "@/components/User/ProjectsView.vue";
 
 const route = useRoute();
 
@@ -42,6 +43,7 @@ try {
             <QuickButtons v-if="user.userIsYou" :username="user.username" />
             <h1>my projects:</h1>
             <p>&lt:3</p>
+            <ProjectsView />
         </div>
         <div v-else>
             <h1>user not found!</h1>

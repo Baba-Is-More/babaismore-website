@@ -25,13 +25,13 @@ watch(
 );
 
 const results = ref<project.search.Result[]>(
-    (await trpc.project.searchProjects.query(query)).map((v) => {
+    (await trpc.project.search.query(query)).map((v) => {
         return {
             author: v.author,
             summary: v.summary,
-            slug: v.slug,
             downloads: v.downloads,
             name: v.name,
+            slug: v.slug,
             posted: new Date(v.posted),
             tags: v.tags,
         };
@@ -52,12 +52,12 @@ const results = ref<project.search.Result[]>(
             >
                 <SearchPack
                     :name
+                    :slug
                     :author
                     :summary
                     :downloads
                     :posted
                     :tags
-                    :slug
                 />
             </div>
         </div>

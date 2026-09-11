@@ -6,6 +6,7 @@ export const Result = z.object({
     title: z.string(),
     slug: SlugZod,
     description: z.string(),
+    summary: z.string(),
     thumbnail: z.string().optional(),
     tags: z.array(z.string()).default([]),
     editable: z.boolean(),

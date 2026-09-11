@@ -67,7 +67,7 @@ function dateToOffset(date: Date): string {
                 <p class="author">
                     <img
                         src="\images\image_baba.png"
-                        :alt="author"
+                        alt="{{ author }}"
                         class="inline"
                     />
                     {{ author }}
@@ -75,17 +75,13 @@ function dateToOffset(date: Date): string {
                 <p class="info">
                     <img
                         src="\images\image_downloads.png"
-                        :alt="`${downloads} downloads`"
+                        alt="{{ downloads }} downloads"
                         class="inline"
                     />
                     {{ reduce(downloads) }}
                 </p>
                 <p class="info">
-                    <img
-                        src="\images\image_clock.png"
-                        alt="todo"
-                        class="inline"
-                    />
+                    <img src="\images\image_clock.png" alt="" class="inline" />
                     {{ dateToOffset(posted) }}
                 </p>
             </div>

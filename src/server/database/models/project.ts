@@ -1,6 +1,6 @@
 import mongoose, { Schema, Types, type HydratedDocument } from "mongoose";
 import { ReviewSchema } from "./review";
-import { ProjectFileSchema } from "./projectFile";
+import { ProjectFileSchema, type IProjectFile } from "./projectFile";
 import * as z from "zod";
 import { TagZod, type ITag } from "./tag";
 import { GalleryImageSchema, type IGalleryImage } from "./galleryImage";
@@ -13,11 +13,11 @@ export const ProjectZod = z.object({
     projectName: z.string(),
     projectSlug: SlugZod,
     projectDesc: z.string(),
+    unlisted: z.boolean(),
     downloads: z.number(),
     summary: z.string(),
     posted: z.coerce.date(),
     tags: z.array(TagZod),
-    unlisted: z.boolean(),
 });
 
 export type PopulatedProjectPaths = {
@@ -42,6 +42,7 @@ export interface IProject {
     unlisted: boolean;
     tags: ITag[];
     galleryImages: IGalleryImage[];
+    files: IProjectFile[];
 }
 
 export const ProjectSchema = new Schema<IProject>({
@@ -86,6 +87,10 @@ export const ProjectSchema = new Schema<IProject>({
     ],
     galleryImages: {
         type: [GalleryImageSchema],
+    },
+    files: {
+        type: [ProjectFileSchema],
+        default: [],
     },
     unlisted: {
         type: Boolean,

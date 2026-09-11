@@ -1,19 +1,27 @@
 import * as project from "@common/project";
 import * as z from "zod";
-import { fetchProject, fetchUser, searchProjects, userMe } from "./service";
+import {
+    createProject,
+    fetchProject,
+    fetchUser,
+    login,
+    logout,
+    searchProjects,
+    signup,
+    updateProject,
+    uploadProject,
+    userMe,
+} from "./service";
 import { publicProcedure, router } from "./trpc";
 import { LoginQuery } from "@common/login/loginQuery";
 import { MeResult } from "@common/users/MeResult";
-import { login } from "./auth/login";
-import { logout } from "./auth/logout";
-import { SignupQuery } from "@common/signup/SignupQuery";
-import { signup } from "./auth/signup";
 import { UserFetchQuery } from "@common/fetch/UserFetchQuery";
 import { UserFetchResult } from "@common/fetch/UserFetchResult";
+import { SignupQuery } from "@common/signup/SignupQuery";
 
 export const userRouter = router({
     me: publicProcedure.output(MeResult).query(async (ctx) => {
-        return userMe(ctx.ctx as any);
+        return userMe(ctx.ctx.user);
     }),
     fetch: publicProcedure
         .input(UserFetchQuery)
@@ -24,7 +32,7 @@ export const userRouter = router({
 });
 
 export const projectRouter = router({
-    searchProjects: publicProcedure
+    search: publicProcedure
         .input(project.search.Query)
         .output(z.array(project.search.Result))
         .query(async (ctx) => {
@@ -35,6 +43,21 @@ export const projectRouter = router({
         .output(project.fetch.Result)
         .query(async (ctx) => {
             return fetchProject(ctx.input, ctx.ctx.user);
+        }),
+    create: publicProcedure
+        .input(project.create.Query)
+        .mutation(async (ctx) => {
+            return createProject(ctx.input, ctx.ctx.user);
+        }),
+    update: publicProcedure
+        .input(project.update.Query)
+        .mutation(async (ctx) => {
+            return updateProject(ctx.input, ctx.ctx.user);
+        }),
+    upload: publicProcedure
+        .input(project.upload.Query)
+        .mutation(async (ctx) => {
+            return await uploadProject(ctx.input, ctx.ctx.user);
         }),
 });
 

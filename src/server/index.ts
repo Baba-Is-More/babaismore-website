@@ -13,6 +13,8 @@ import passport from "passport";
 import "./auth/passport";
 import MongoStore from "connect-mongo";
 
+import { octetInputParser } from "@trpc/server/http";
+
 if (process.env.DB_URL) {
     await mongoose.connect(process.env.DB_URL);
 } else {

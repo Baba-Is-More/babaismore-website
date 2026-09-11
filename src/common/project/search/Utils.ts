@@ -1,5 +1,4 @@
-import type { Url } from "url";
-import { SortType, TagQuery, type Query } from "./Query";
+import { SortType, type TagQuery, type Query } from "./Query";
 
 export function sortToString(sort: SortType): string {
     switch (sort) {

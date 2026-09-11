@@ -68,7 +68,9 @@ async function start_signup() {
         <div class="info">
             <h3>sign up to baba is more!</h3>
             <img src="/images/image_baba.png" />
-            <a href="/login"> <p>meant to login?</p></a>
+            <a href="/login">
+                <p>meant to login?</p>
+            </a>
         </div>
     </div>
 </template>

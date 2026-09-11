@@ -1,10 +1,7 @@
 import type * as project from "@common/project";
-import type {
-    IProject,
-    PopulatedProject,
-} from "@server/database/models/project";
 import type { QueryFilter } from "mongoose";
-import { tagsToObjectId } from "../indexing/tags";
+import type { IProject } from "../database/models/project";
+import { tagsToObjectId } from "../database/queries";
 
 export async function buildProjectsFilter(
     query: project.search.Query,
@@ -41,18 +38,4 @@ export async function buildProjectsFilter(
     }
 
     return { unlisted: false, $and: and };
-}
-
-export function projectToSearchResult(
-    proj: PopulatedProject,
-): project.search.Result {
-    return {
-        slug: proj.projectSlug,
-        author: proj.author.username,
-        summary: proj.summary,
-        downloads: proj.downloads,
-        name: proj.projectName,
-        posted: new Date(proj.posted),
-        tags: proj.tags.map((t: any) => t.tagName),
-    };
 }

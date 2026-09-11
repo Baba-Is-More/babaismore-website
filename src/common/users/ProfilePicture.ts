@@ -13,3 +13,8 @@ export const ProfilePictureZod = z.union([
 ]);
 
 export type ProfilePicture = z.infer<typeof ProfilePictureZod>;
+
+export function getRandomProfile(): `default:${DefaultProfilePicture}` {
+    const i = Math.floor(Math.random() * DEFAULT_PROFILE_PICTURES.length);
+    return `default:${DEFAULT_PROFILE_PICTURES[i]!}` as const;
+}

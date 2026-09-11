@@ -1,9 +1,10 @@
 import {
+    DEFAULT_PROFILE_PICTURES,
     ProfilePictureZod,
     type ProfilePicture,
 } from "@common/users/ProfilePicture";
 import { octetInputParser } from "@trpc/server/unstable-core-do-not-import";
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, type HydratedDocument } from "mongoose";
 import * as z from "zod";
 
 export const UserZod = z.object({
@@ -21,6 +22,8 @@ export interface IUser {
     password: string;
     email: string;
 }
+
+export type PopulatedUser = HydratedDocument<IUser>;
 
 export const UserSchema = new mongoose.Schema<IUser>({
     username: {

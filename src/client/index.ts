@@ -1,20 +1,29 @@
 import {
     createTRPCClient,
     httpBatchLink,
+    httpLink,
+    isNonJsonSerializable,
     isTRPCClientError,
+    splitLink,
 } from "@trpc/client";
 import type { AppRouter } from "../server/appRouter";
 
+function fetchWithCredentials(url: string | URL, options?: RequestInit) {
+    return fetch(url, { ...options, credentials: "include" });
+}
+
 export const trpc = createTRPCClient<AppRouter>({
     links: [
-        httpBatchLink({
-            url: "/trpc",
-            fetch(url, options) {
-                return fetch(url, {
-                    ...options,
-                    credentials: "include",
-                });
-            },
+        splitLink({
+            condition: (op) => isNonJsonSerializable(op.input),
+            true: httpLink({
+                url: "/trpc",
+                fetch: fetchWithCredentials,
+            }),
+            false: httpBatchLink({
+                url: "/trpc",
+                fetch: fetchWithCredentials,
+            }),
         }),
     ],
 });
