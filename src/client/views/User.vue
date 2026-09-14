@@ -4,16 +4,16 @@ import { trpc } from "..";
 import ContentColumn from "@/components/ContentColumn.vue";
 import UserProfile from "@/components/User/Profile.vue";
 import { ref, type Ref } from "vue";
-import type { UserFetchResult } from "@common/fetch/UserFetchResult";
+import type * as user from "@common/users";
 import QuickButtons from "@/components/User/QuickButtons.vue";
-import type { ProfilePicture } from "@common/users/ProfilePicture";
+import type { ProfilePicture } from "@common/profilePicture";
 import ProjectsView from "@/components/User/ProjectsView.vue";
 
 const route = useRoute();
 
 const username = route.params.username as string;
 
-const user: Ref<UserFetchResult | null> = ref(null);
+const userData: Ref<user.fetch.Result | null> = ref(null);
 
 function profilePictureUrl(picture: ProfilePicture): string {
     const idx = picture.indexOf(":");
@@ -26,7 +26,7 @@ function profilePictureUrl(picture: ProfilePicture): string {
 
 try {
     const user_fetch = await trpc.user.fetch.query({ username });
-    user.value = user_fetch;
+    userData.value = user_fetch;
 } catch (e) {
     // todo: error handle
 }
@@ -34,13 +34,13 @@ try {
 
 <template>
     <ContentColumn>
-        <div v-if="user">
+        <div v-if="userData">
             <UserProfile
-                :display-name="user.displayName"
-                :username="user.username"
-                :profile-picture="profilePictureUrl(user.profilePicture)"
+                :display-name="userData.displayName"
+                :username="userData.username"
+                :profile-picture="profilePictureUrl(userData.profilePicture)"
             />
-            <QuickButtons v-if="user.userIsYou" :username="user.username" />
+            <QuickButtons v-if="userData.userIsYou" :username="userData.username" />
             <h1>my projects:</h1>
             <p>&lt:3</p>
             <ProjectsView />

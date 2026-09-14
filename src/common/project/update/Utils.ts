@@ -10,6 +10,7 @@ export function fromFetchResult(
     const query: Query = {
         author: original.author,
         slug: original.slug,
+        action: "editFields",
     };
 
     if (edited.title != original.title) {

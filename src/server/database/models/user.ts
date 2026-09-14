@@ -2,7 +2,7 @@ import {
     DEFAULT_PROFILE_PICTURES,
     ProfilePictureZod,
     type ProfilePicture,
-} from "@common/users/ProfilePicture";
+} from "@common/profilePicture";
 import { octetInputParser } from "@trpc/server/unstable-core-do-not-import";
 import mongoose, { Schema, type HydratedDocument } from "mongoose";
 import * as z from "zod";

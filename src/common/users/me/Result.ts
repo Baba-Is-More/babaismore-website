@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { ProfilePictureZod } from "./ProfilePicture";
+import { ProfilePictureZod } from "@common/profilePicture";
 
 // if we are logged in, is_logged_in field MUST be true and data MUST exist
 const LoggedIn = z.object({
@@ -18,9 +18,9 @@ const LoggedOut = z.object({
 
 // zod magic here: it turns the two result fields into one union
 // said union is based on the value of "is_logged_in"
-export const MeResult = z.discriminatedUnion("is_logged_in", [
+export const Result = z.discriminatedUnion("is_logged_in", [
     LoggedIn,
     LoggedOut,
 ]);
 
-export type MeResult = z.infer<typeof MeResult>;
+export type Result = z.infer<typeof Result>;

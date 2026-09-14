@@ -1,10 +1,10 @@
+import type * as user from "@common/users";
 import type { PopulatedUser } from "../database/models/user";
-import type { UserFetchResult } from "@common/fetch/UserFetchResult";
 
 export function userToFetchResult(
     user: PopulatedUser,
     isYou: boolean,
-): UserFetchResult {
+): user.fetch.Result {
     return {
         username: user.username,
         displayName: user.displayName,

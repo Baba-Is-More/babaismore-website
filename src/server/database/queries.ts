@@ -53,3 +53,7 @@ export async function userToObjectId(
         username: user,
     });
 }
+
+export async function userFromId(id: string): Promise<PopulatedUser | null> {
+    return await db.users.findById(id);
+}

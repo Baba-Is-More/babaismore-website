@@ -12,3 +12,7 @@ export function userOwnsProject(
 export function userIdMatches(user: PopulatedUser, id: string): boolean {
     return user._id.toString() == id;
 }
+
+export function isLoggedIn(user: Express.User | null): user is Express.User {
+    return user != null;
+}

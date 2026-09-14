@@ -10,6 +10,7 @@ export const Result = z.object({
     thumbnail: z.string().optional(),
     tags: z.array(z.string()).default([]),
     editable: z.boolean(),
+    unlisted: z.boolean(),
 });
 
 export type Result = z.infer<typeof Result>;

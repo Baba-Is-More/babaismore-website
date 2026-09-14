@@ -15,5 +15,6 @@ export function projectToFetchResult(
         thumbnail: project.galleryImages[0]?.imageName,
         tags: project.tags.map((v: ITag): string => v.tagName),
         editable: allowEdit,
+        unlisted: project.unlisted,
     };
 }

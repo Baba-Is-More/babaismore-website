@@ -3,11 +3,11 @@ import { trpc } from "@/index";
 import { computed, onMounted, ref, type Ref } from "vue";
 import Loading from "./profile/Loading.vue";
 import WithUser from "./profile/withUser.vue";
-import type { MeResult } from "@common/users/MeResult";
+import type * as user from "@common/users";
 import LoggedOut from "./profile/LoggedOut.vue";
-import type { ProfilePicture } from "@common/users/ProfilePicture";
+import type { ProfilePicture } from "@common/profilePicture";
 
-const user_data: Ref<MeResult | null> = ref(null);
+const user_data: Ref<user.me.Result | null> = ref(null);
 const loading: Ref<boolean> = ref(true);
 
 onMounted(async () => {
@@ -38,10 +38,10 @@ const data = computed(() => {
 const currentComponent = computed(() => {
     if (loading.value == true) return Loading;
 
-    const user: MeResult | null = user_data.value;
-    if (user == null) throw "expected a user after loading finished";
+    const currentUser: user.me.Result | null = user_data.value;
+    if (currentUser == null) throw "expected a user after loading finished";
 
-    if (!user.is_logged_in) {
+    if (!currentUser.is_logged_in) {
         return LoggedOut;
     } else {
         return WithUser;

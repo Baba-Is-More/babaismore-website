@@ -1,5 +1,6 @@
 import type * as project from "@common/project";
 import type { upload } from "@common/project";
+import type * as user from "@common/users";
 import type { IProject, PopulatedProject } from "./database/models/project";
 import type { PopulatedUser } from "./database/models/user";
 import { TRPCError } from "@trpc/server";
@@ -9,6 +10,7 @@ import {
     getManyProjects,
     upsertTag,
     userToObjectId,
+    userFromId,
 } from "./database/queries";
 import {
     projectNotFound,
@@ -22,18 +24,15 @@ import { projectToSearchResult } from "./mappers/searchProjects";
 import { userToFetchResult } from "./mappers/fetchUser";
 import { buildFetchFilter } from "./filters/fetchFilter";
 import { buildProjectsFilter } from "./filters/searchFilter";
-import { userOwnsProject, userIdMatches } from "./helpers/user";
+import { userOwnsProject, userIdMatches, isLoggedIn } from "./helpers/user";
 import type { LoginQuery } from "@common/login/loginQuery";
 import type { SignupQuery } from "@common/signup/SignupQuery";
-import { getRandomProfile } from "@common/users/ProfilePicture";
+import { getRandomProfile } from "@common/profilePicture";
 import { comparePassword } from "./auth/compare";
 import { hashPassword } from "./auth/hash";
 import { checkEmail, checkUsername } from "./auth/checks";
 import type { QueryFilter, Types } from "mongoose";
 import type { Context } from "./context";
-import type { MeResult } from "@common/users/MeResult";
-import type { UserFetchQuery } from "@common/fetch/UserFetchQuery";
-import type { UserFetchResult } from "@common/fetch/UserFetchResult";
 import { createWriteStream } from "node:fs";
 import path from "node:path";
 import { Writable } from "node:stream";
@@ -71,23 +70,25 @@ export async function searchProjects(
 }
 
 export async function fetchUser(
-    query: UserFetchQuery,
+    query: user.fetch.Query,
     viwerUser: Express.User | null,
-): Promise<UserFetchResult> {
+): Promise<user.fetch.Result> {
     const fetchedUser: PopulatedUser =
         (await userToObjectId(query.username)) ?? userNotFound();
 
     const isYou: boolean =
-        viwerUser != null && userIdMatches(fetchedUser, viwerUser.id);
+        isLoggedIn(viwerUser) && userIdMatches(fetchedUser, viwerUser.id);
 
     return userToFetchResult(fetchedUser, isYou);
 }
 
-export async function userMe(user: Express.User | null): Promise<MeResult> {
+export async function userMe(
+    user: Express.User | null,
+): Promise<user.me.Result> {
     if (user == null) return { is_logged_in: false };
 
     const id: string = user.id;
-    const found: PopulatedUser | null = await db.users.findById(id);
+    const found: PopulatedUser | null = await userFromId(id);
 
     if (!found) return { is_logged_in: false };
 
@@ -146,10 +147,19 @@ export async function updateProject(
     // so i just return this and get it over with.
     if (!isEditable) projectNotFound();
 
-    if (query.projectName != undefined) found.projectName = query.projectName;
-    if (query.projectSlug != undefined) found.projectSlug = query.projectSlug;
-    if (query.projectDesc != undefined) found.projectDesc = query.projectDesc;
-    if (query.summary != undefined) found.summary = query.summary;
+    if (query.action == "editFields") {
+        if (query.projectName != undefined)
+            found.projectName = query.projectName;
+        if (query.projectSlug != undefined)
+            found.projectSlug = query.projectSlug;
+        if (query.projectDesc != undefined)
+            found.projectDesc = query.projectDesc;
+        if (query.summary != undefined) found.summary = query.summary;
+    }
+
+    if (query.action == "setUnlisted") {
+        found.unlisted = query.unlistedTo;
+    }
 
     await found.save();
 }
