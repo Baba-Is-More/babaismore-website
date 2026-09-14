@@ -14,6 +14,13 @@ export function userNotFound(): never {
     });
 }
 
+export function fileNotFound(): never {
+    throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "file not found",
+    });
+}
+
 export function userUnauthorizedToUploadProject(): never {
     throw new TRPCError({
         code: "UNAUTHORIZED",

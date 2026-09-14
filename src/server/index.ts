@@ -14,6 +14,8 @@ import "./auth/passport";
 import MongoStore from "connect-mongo";
 
 import { octetInputParser } from "@trpc/server/http";
+import * as project from "@common/project";
+import { HandleDownload } from "./downloading";
 
 if (process.env.DB_URL) {
     await mongoose.connect(process.env.DB_URL);
@@ -61,6 +63,16 @@ app.use(
     "/uploads",
     express.static(path.join(import.meta.dirname, "../../", "app/", "uploads")),
 );
+
+app.get("/download/:author/:slug/:fileName", async (req, res) => {
+    const parsed = project.files.download.Query.safeParse(req.params);
+    if (!parsed.success) {
+        res.status(400).json({ error: parsed.error.flatten() });
+        return;
+    }
+
+    await HandleDownload(parsed.data, (req.user as Express.User) ?? null, res);
+});
 
 console.log("listening on http://localhost:3000...");
 app.listen(3000);
