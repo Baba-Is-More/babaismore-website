@@ -48,3 +48,10 @@ export function userUnauthorizedToUpdateProjectFile(): never {
         message: "you are not authorized to update this project file",
     });
 }
+
+export function userUnauthorizedToViewUnlistedProjects(): never {
+    throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "you are not authorized to view this user's unlisted projects",
+    });
+}

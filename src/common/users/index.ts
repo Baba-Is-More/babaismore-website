@@ -3,3 +3,4 @@
 
 export * as fetch from "./fetch";
 export * as me from "./me";
+export * as projects from "./projects";

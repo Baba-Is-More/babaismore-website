@@ -16,3 +16,14 @@ export function userIdMatches(user: PopulatedUser, id: string): boolean {
 export function isLoggedIn(user: Express.User | null): user is Express.User {
     return user != null;
 }
+
+export function userCanViewUnlisted(
+    caller: PopulatedUser,
+    owner: PopulatedUser,
+): boolean {
+    if (caller.equals(owner)) {
+        return true;
+    } else {
+        return false;
+    }
+}

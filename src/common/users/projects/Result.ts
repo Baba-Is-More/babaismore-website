@@ -2,6 +2,7 @@ import SlugZod from "@common/slug";
 import * as z from "zod";
 
 const ResultItem = z.object({
+    author: z.string(),
     name: z.string(),
     slug: SlugZod,
     summary: z.string(),

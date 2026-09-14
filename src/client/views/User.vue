@@ -43,7 +43,7 @@ try {
             <QuickButtons v-if="userData.userIsYou" :username="userData.username" />
             <h1>my projects:</h1>
             <p>&lt:3</p>
-            <ProjectsView />
+            <ProjectsView :username="userData.username" />
         </div>
         <div v-else>
             <h1>user not found!</h1>

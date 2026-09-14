@@ -24,6 +24,21 @@ export async function getManyProjects(
         .populate<PopulatedProjectPaths>("tags author");
 }
 
+const NEWEST_FIRST = -1;
+
+export async function getPagedProjects(
+    filter: QueryFilter<IProject>,
+    page: number,
+    pageSize: number,
+): Promise<PopulatedProject[]> {
+    return await db.projects
+        .find(filter)
+        .sort({ posted: NEWEST_FIRST })
+        .skip(page * pageSize)
+        .limit(pageSize)
+        .populate<PopulatedProjectPaths>("tags author");
+}
+
 export async function upsertTag(tagName: string): Promise<Types.ObjectId> {
     const tag = await db.tags.findOneAndUpdate(
         { tagName },

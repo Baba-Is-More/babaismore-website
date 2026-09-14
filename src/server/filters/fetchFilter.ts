@@ -1,6 +1,7 @@
 import type { QueryFilter } from "mongoose";
 import type { IProject } from "../database/models/project";
 import { userToObjectId } from "../database/queries";
+import type { PopulatedUser } from "@server/database/models/user";
 
 export async function buildFetchFilter(
     author: string,
@@ -10,8 +11,9 @@ export async function buildFetchFilter(
     return { author: user, projectSlug: slug };
 }
 
-export async function buildUserProjectFetchFilter(): Promise<
-    QueryFilter<IProject>
-> {
-    return {};
+export async function buildUserProjectFetchFilter(
+    user: PopulatedUser,
+    visibility: "public" | "unlisted",
+): Promise<QueryFilter<IProject>> {
+    return { author: user, unlisted: visibility == "public" ? false : true };
 }

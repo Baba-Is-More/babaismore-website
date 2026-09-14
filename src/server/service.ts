@@ -11,6 +11,7 @@ import {
     upsertTag,
     userToObjectId,
     userFromId,
+    getPagedProjects,
 } from "./database/queries";
 import {
     fileNotFound,
@@ -20,13 +21,23 @@ import {
     userUnauthorizedToUpdateProjectFile,
     userUnauthorizedToUploadProject,
     userUnauthorizedToUploadProjectFile,
+    userUnauthorizedToViewUnlistedProjects,
 } from "./errors";
 import { projectToFetchResult } from "./mappers/fetchProject";
 import { projectToSearchResult } from "./mappers/searchProjects";
+import { projectToUserProjectsResultItem } from "./mappers/fetchUserProjects";
 import { userToFetchResult } from "./mappers/fetchUser";
-import { buildFetchFilter } from "./filters/fetchFilter";
+import {
+    buildFetchFilter,
+    buildUserProjectFetchFilter,
+} from "./filters/fetchFilter";
 import { buildProjectsFilter } from "./filters/searchFilter";
-import { userOwnsProject, userIdMatches, isLoggedIn } from "./helpers/user";
+import {
+    userOwnsProject,
+    userIdMatches,
+    isLoggedIn,
+    userCanViewUnlisted,
+} from "./helpers/user";
 import type { LoginQuery } from "@common/login/loginQuery";
 import type { SignupQuery } from "@common/signup/SignupQuery";
 import { getRandomProfile } from "@common/profilePicture";
@@ -84,6 +95,45 @@ export async function fetchUser(
         isLoggedIn(viwerUser) && userIdMatches(fetchedUser, viwerUser.id);
 
     return userToFetchResult(fetchedUser, isYou);
+}
+
+export async function fetchUserProjects(
+    query: user.projects.Query,
+    expressUser: Express.User | null,
+): Promise<user.projects.Result> {
+    const fetchedUser: PopulatedUser =
+        (await userToObjectId(query.username)) ?? userNotFound();
+
+    let allowUnlisted: boolean;
+
+    if (!isLoggedIn(expressUser)) {
+        allowUnlisted = false;
+    } else {
+        // its weird to return 404 from here not 500, as we assume the Express.User.id
+        // is a source of truth, but it wont matter all that much
+        const callerUser = (await userFromId(expressUser.id)) ?? userNotFound();
+        allowUnlisted = userCanViewUnlisted(callerUser, fetchedUser);
+    }
+
+    if (query.visibility == "unlisted" && !allowUnlisted)
+        userUnauthorizedToViewUnlistedProjects();
+
+    const PAGE_SIZE = 20;
+
+    const filter = await buildUserProjectFetchFilter(
+        fetchedUser,
+        query.visibility,
+    );
+    const projects = await getPagedProjects(filter, query.page, PAGE_SIZE + 1);
+    const hasMore = projects.length > PAGE_SIZE;
+    const mappedProjects = projects
+        .slice(0, PAGE_SIZE)
+        .map(projectToUserProjectsResultItem);
+
+    return {
+        projects: mappedProjects,
+        hasMore,
+    };
 }
 
 export async function fetchAllProjectFiles(

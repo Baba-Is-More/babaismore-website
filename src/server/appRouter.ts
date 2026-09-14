@@ -8,6 +8,7 @@ import {
     fetchOneProjectFile,
     fetchProject,
     fetchUser,
+    fetchUserProjects,
     login,
     logout,
     searchProjects,
@@ -30,6 +31,12 @@ export const userRouter = router({
         .output(user.fetch.Result)
         .query(async (ctx) => {
             return fetchUser(ctx.input, ctx.ctx.user);
+        }),
+    projects: publicProcedure
+        .input(user.projects.Query)
+        .output(user.projects.Result)
+        .query(async (ctx) => {
+            return fetchUserProjects(ctx.input, ctx.ctx.user);
         }),
 });
 
