@@ -14,7 +14,9 @@ defineProps<{
             <Bapi>Settings</Bapi>
         </RouterLink>
         <div style="flex: 1" />
-        <Babu>Upload</Babu>
+        <RouterLink to="/new" class="link">
+            <Babu>Create</Babu>
+        </RouterLink>
     </div>
 </template>
 
