@@ -9,6 +9,8 @@ import Login from "@/views/auths/Login.vue";
 import Logout from "@/views/auths/Logout.vue";
 import Signup from "@/views/auths/Signup.vue";
 import ProjectEdit from "@/views/project/Edit.vue";
+import ProjectLatest from "@/views/project/Latest.vue";
+import ProjectFiles from "@/views/project/Files.vue";
 import Settings from "@/views/Settings.vue";
 
 const router = createRouter({
@@ -27,6 +29,16 @@ const router = createRouter({
             path: "/edit/:author/:project",
             name: "project edit",
             component: ProjectEdit,
+        },
+        {
+            path: "/project/:author/:project/latest",
+            name: "project latest",
+            component: ProjectLatest,
+        },
+        {
+            path: "/project/:author/:project/files",
+            name: "project files",
+            component: ProjectFiles,
         },
         { path: "/login", component: Login },
         { path: "/logout", component: Logout },
