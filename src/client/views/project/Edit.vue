@@ -4,6 +4,7 @@ import * as project from "@common/project";
 import NotFound from "@/components/ProjectView/NotFound.vue";
 import { isTRPCError, trpc } from "@/index";
 import ContentColumn from "@/components/ContentColumn.vue";
+import Bapi from "@/components/Bapi.vue";
 import router from "@/router";
 import { ref, type Ref } from "vue";
 
@@ -42,6 +43,7 @@ let projectName: Ref<string> = ref(fetchResult.title);
 let slug: Ref<string> = ref(fetchResult.slug);
 let description: Ref<string> = ref(fetchResult.description);
 let summary: Ref<string> = ref(fetchResult.summary);
+let unlisted: Ref<boolean> = ref(fetchResult.unlisted);
 
 function is_upload_blocked(): boolean {
     const name_is_new = projectName.value != fetchResult.title;
@@ -68,6 +70,45 @@ async function upload() {
     await trpc.project.update.mutate(query);
 
     await router.push(`/edit/${author}/${slug.value}`);
+}
+
+async function setUnlisted(unlistedTo: boolean) {
+    await trpc.project.update.mutate({
+        action: "setUnlisted",
+        author: fetchResult.author,
+        slug: fetchResult.slug,
+        unlistedTo,
+    });
+
+    unlisted.value = unlistedTo;
+}
+
+const file = ref<File | null>(null);
+const fileStatus = ref("");
+const fileBusy = ref(false);
+
+function onFileChange(event: Event) {
+    file.value = (event.target as HTMLInputElement).files?.[0] ?? null;
+}
+
+async function uploadFile() {
+    if (!file.value || fileBusy.value) return;
+    fileBusy.value = true;
+    fileStatus.value = "uploading...";
+
+    const fd = new FormData();
+    fd.append("author", fetchResult.author);
+    fd.append("projectSlug", fetchResult.slug);
+    fd.append("file", file.value);
+
+    try {
+        await trpc.project.upload.mutate(fd);
+        fileStatus.value = "uploaded";
+    } catch (err) {
+        fileStatus.value = `error: ${(err as Error).message}`;
+    } finally {
+        fileBusy.value = false;
+    }
 }
 </script>
 
@@ -114,12 +155,32 @@ async function upload() {
                 save changes
             </button>
         </div>
+
+        <div class="boxed" style="display: flex; gap: 8px">
+            <h1>Big Important Section</h1>
+            <Bapi v-if="unlisted" @click="setUnlisted(false)"
+                >list project</Bapi
+            >
+            <Bapi v-else @click="setUnlisted(true)">unlist project</Bapi>
+        </div>
+
+        <div class="boxed">
+            <h1>Uploading</h1>
+
+            <div style="display: flex">
+                <p>file:</p>
+                <input type="file" @change="onFileChange" />
+            </div>
+
+            <Bapi @click="uploadFile">upload file</Bapi>
+
+            <p class="status">{{ fileStatus }}</p>
+        </div>
     </ContentColumn>
 </template>
 
 <style scoped>
 input {
-    color: black;
     width: 100%;
 }
 
@@ -129,5 +190,9 @@ input {
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
+}
+
+.status {
+    white-space: pre-wrap;
 }
 </style>

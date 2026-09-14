@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import type { LoginQuery } from "@common/login/loginQuery";
 import { ref } from "vue";
-import { trpc } from "@/index";
+import { trpc, isTRPCError } from "@/index";
 
 const email = ref("");
 const password = ref("");
+const error = ref("");
+const unauthorized = ref(false);
 
 async function start_login() {
     const query: LoginQuery = {
@@ -12,7 +14,18 @@ async function start_login() {
         plainPassword: password.value,
     };
 
-    await trpc.auth.login.mutate(query);
+    error.value = "";
+    unauthorized.value = false;
+
+    try {
+        await trpc.auth.login.mutate(query);
+    } catch (err) {
+        if (isTRPCError(err) && err.data?.code === "UNAUTHORIZED") {
+            unauthorized.value = true;
+        } else {
+            error.value = isTRPCError(err) ? err.message : "an unknown error occured";
+        }
+    }
 }
 </script>
 
@@ -25,6 +38,7 @@ async function start_login() {
         </div>
         <div class="separator"></div>
         <div class="login">
+            <p v-if="unauthorized">incorrect email or password!</p>
             <input
                 name="email"
                 type="email"
@@ -39,6 +53,7 @@ async function start_login() {
                 required
                 v-model="password"
             />
+            <p v-if="error">{{ error }}</p>
             <div style="flex: 1"></div>
             <button @click="start_login">Login</button>
         </div>
