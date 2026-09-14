@@ -23,7 +23,9 @@ async function start_login() {
         if (isTRPCError(err) && err.data?.code === "UNAUTHORIZED") {
             unauthorized.value = true;
         } else {
-            error.value = isTRPCError(err) ? err.message : "an unknown error occured";
+            error.value = isTRPCError(err)
+                ? err.message
+                : "an unknown error occured";
         }
     }
 }

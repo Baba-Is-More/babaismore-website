@@ -51,24 +51,24 @@ if (fetchResult) {
 </script>
 
 <template>
-<ContentColumn>
-    <div v-if="fetchResult">
-        <h1 class="center">Versions for {{ fetchResult.title }}</h1>
-        <div>
-            <FileDownloadRow
-                v-for="file in filesResult?.files"
-                :key="file.version"
-                :author="fetchResult.author"
-                :slug="fetchResult.slug"
-                :file="file"
-                :editable="fetchResult.editable"
-            />
+    <ContentColumn>
+        <div v-if="fetchResult">
+            <h1 class="center">Versions for {{ fetchResult.title }}</h1>
+            <div>
+                <FileDownloadRow
+                    v-for="file in filesResult?.files"
+                    :key="file.version"
+                    :author="fetchResult.author"
+                    :slug="fetchResult.slug"
+                    :file="file"
+                    :editable="fetchResult.editable"
+                />
+            </div>
         </div>
-    </div>
-    <div v-else>
-        <NotFound />
-    </div>
-</ContentColumn>
+        <div v-else>
+            <NotFound />
+        </div>
+    </ContentColumn>
 </template>
 
 <style scoped>

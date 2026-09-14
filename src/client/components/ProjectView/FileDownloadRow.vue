@@ -49,39 +49,39 @@ async function updateFile() {
 </script>
 
 <template>
-<div class="row">
-    <div class="flex">
-        <a :href="`/download/${author}/${slug}/${file.fileName}`">
-            <Bage>
-                <p>Download</p>
-            </Bage>
-        </a>
-
-        <Babu v-if="editable" @click="toggleExpanded">
-            <p>Edit</p>
-        </Babu>
-
-        <p>{{ file.version }}</p>
-        <p>{{ file.fileDesc }}</p>
-    </div>
-
-    <div v-if="expanded" class="edit-menu">
+    <div class="row">
         <div class="flex">
-            <p> Version name: </p>
-            <input v-model="version" />
-        </div>
-        <div class="flex">
-            <p> Version Description: </p>
-            <input v-model="fileDesc" />
+            <a :href="`/download/${author}/${slug}/${file.fileName}`">
+                <Bage>
+                    <p>Download</p>
+                </Bage>
+            </a>
+
+            <Babu v-if="editable" @click="toggleExpanded">
+                <p>Edit</p>
+            </Babu>
+
+            <p>{{ file.version }}</p>
+            <p>{{ file.fileDesc }}</p>
         </div>
 
-        <Bapi @click="updateFile">
-            <p>Update</p>
-        </Bapi>
+        <div v-if="expanded" class="edit-menu">
+            <div class="flex">
+                <p>Version name:</p>
+                <input v-model="version" />
+            </div>
+            <div class="flex">
+                <p>Version Description:</p>
+                <input v-model="fileDesc" />
+            </div>
 
-        <p>{{ error }}</p>
+            <Bapi @click="updateFile">
+                <p>Update</p>
+            </Bapi>
+
+            <p>{{ error }}</p>
+        </div>
     </div>
-</div>
 </template>
 
 <style scoped>
@@ -98,7 +98,7 @@ a {
 }
 
 input {
-    color: black
+    color: black;
 }
 
 .edit-menu .baba-button {

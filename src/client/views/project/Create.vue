@@ -32,28 +32,30 @@ async function upload() {
 
         await router.push(`/project/${username}/${projectSlug.value}`);
     } catch (err) {
-        error.value = isTRPCError(err) ? err.message : "an unknown error occured";
+        error.value = isTRPCError(err)
+            ? err.message
+            : "an unknown error occured";
     }
 }
 </script>
 
 <template>
-<ContentColumn>
-    <h1 class="center"> lets make a new project!</h1>
-    <div class="flex" style="gap: 10px;">
-        <input v-model="projectName" placeholder="project name" />
-        <input v-model="projectSlug" placeholder="project slug" />
-        <input v-model="projectDesc" placeholder="project description" />
-        <input v-model="summary" placeholder="summary" />
-    </div>
-    <Bapi @click="upload">upload</Bapi>
-    <p> {{ error }} </p>
-</ContentColumn>
+    <ContentColumn>
+        <h1 class="center">lets make a new project!</h1>
+        <div class="flex" style="gap: 10px">
+            <input v-model="projectName" placeholder="project name" />
+            <input v-model="projectSlug" placeholder="project slug" />
+            <input v-model="projectDesc" placeholder="project description" />
+            <input v-model="summary" placeholder="summary" />
+        </div>
+        <Bapi @click="upload">upload</Bapi>
+        <p>{{ error }}</p>
+    </ContentColumn>
 </template>
 
 <style scoped>
 input {
-    color: black
+    color: black;
 }
 
 .center {

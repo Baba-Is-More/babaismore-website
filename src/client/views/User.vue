@@ -40,7 +40,10 @@ try {
                 :username="userData.username"
                 :profile-picture="profilePictureUrl(userData.profilePicture)"
             />
-            <QuickButtons v-if="userData.userIsYou" :username="userData.username" />
+            <QuickButtons
+                v-if="userData.userIsYou"
+                :username="userData.username"
+            />
             <h1>my projects:</h1>
             <p>&lt:3</p>
             <ProjectsView :username="userData.username" />
