@@ -13,9 +13,11 @@ import {
     userFromId,
 } from "./database/queries";
 import {
+    fileNotFound,
     projectNotFound,
     userNotFound,
     userUnauthorizedToUpdateProject,
+    userUnauthorizedToUpdateProjectFile,
     userUnauthorizedToUploadProject,
     userUnauthorizedToUploadProjectFile,
 } from "./errors";
@@ -37,6 +39,8 @@ import { createWriteStream } from "node:fs";
 import path from "node:path";
 import { Writable } from "node:stream";
 import { v4 as uuidv4 } from "uuid";
+import type { IProjectFile } from "./database/models/projectFile";
+import { projectFileToFile } from "./mappers/fetchProjectFiles";
 
 export async function fetchProject(
     query: project.fetch.Query,
@@ -80,6 +84,111 @@ export async function fetchUser(
         isLoggedIn(viwerUser) && userIdMatches(fetchedUser, viwerUser.id);
 
     return userToFetchResult(fetchedUser, isYou);
+}
+
+export async function fetchAllProjectFiles(
+    query: project.files.getAll.Query,
+    // currently useless as files are always visible
+    // but might come in handy in the future
+    user: Express.User | null,
+): Promise<project.files.getAll.Result> {
+    const filter: QueryFilter<IProject> = await buildFetchFilter(
+        query.author,
+        query.slug,
+    );
+    const found: PopulatedProject =
+        (await getOneProject(filter)) ?? projectNotFound();
+
+    // TODO: MAKE SURE THE USER CAN SEE THE PROJECT IN THE FIRST PLACE!
+
+    const files: IProjectFile[] = found.files;
+
+    const PAGE_SIZE = 30;
+    const paged_files = files.slice(
+        query.page * PAGE_SIZE,
+        query.page * PAGE_SIZE + PAGE_SIZE,
+    );
+    const paged_results = paged_files.map(projectFileToFile);
+
+    const hasMore = (query.page + 1) * PAGE_SIZE < files.length;
+
+    return {
+        files: paged_results,
+        hasMore,
+    };
+}
+
+export async function fetchOneProjectFile(
+    query: project.files.getOne.Query,
+    // currently useless as files are always visible
+    // but might come in handy in the future
+    user: Express.User | null,
+): Promise<project.files.getOne.Result> {
+    const filter: QueryFilter<IProject> = await buildFetchFilter(
+        query.author,
+        query.slug,
+    );
+    const found: PopulatedProject =
+        (await getOneProject(filter)) ?? projectNotFound();
+
+    // TODO: MAKE SURE THE USER CAN SEE THE PROJECT IN THE FIRST PLACE!
+
+    const file: IProjectFile =
+        found.files.find((file) => file.fileName == query.fileName) ??
+        fileNotFound();
+
+    const result = projectFileToFile(file);
+
+    return result;
+}
+
+export async function fetchLatestProjectFile(
+    query: project.files.getLatest.Query,
+    // currently useless as files are always visible
+    // but might come in handy in the future
+    user: Express.User | null,
+): Promise<project.files.getLatest.Result> {
+    const filter: QueryFilter<IProject> = await buildFetchFilter(
+        query.author,
+        query.slug,
+    );
+    const found: PopulatedProject =
+        (await getOneProject(filter)) ?? projectNotFound();
+
+    // TODO: MAKE SURE THE USER CAN SEE THE PROJECT IN THE FIRST PLACE!
+
+    const file: IProjectFile = found.files[0] ?? fileNotFound();
+
+    const result = projectFileToFile(file);
+
+    return result;
+}
+
+export async function updateProjectFile(
+    query: project.files.update.Query,
+    user: Express.User | null,
+): Promise<void> {
+    const filter: QueryFilter<IProject> = await buildFetchFilter(
+        query.author,
+        query.slug,
+    );
+    const found: PopulatedProject =
+        (await getOneProject(filter)) ?? projectNotFound();
+
+    const isOwner: boolean = userOwnsProject(user, found);
+
+    if (found.unlisted && !isOwner) projectNotFound();
+
+    if (!isOwner) userUnauthorizedToUpdateProjectFile();
+
+    const fileToUpdate: IProjectFile =
+        found.files.find((file) => file.fileName == query.fileName) ??
+        fileNotFound();
+
+    fileToUpdate.version = query.version;
+    fileToUpdate.fileDesc = query.fileDesc;
+
+    await found.save();
 }
 
 export async function userMe(

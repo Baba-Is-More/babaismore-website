@@ -3,6 +3,9 @@ import * as user from "@common/users";
 import * as z from "zod";
 import {
     createProject,
+    fetchAllProjectFiles,
+    fetchLatestProjectFile,
+    fetchOneProjectFile,
     fetchProject,
     fetchUser,
     login,
@@ -10,6 +13,7 @@ import {
     searchProjects,
     signup,
     updateProject,
+    updateProjectFile,
     uploadProject,
     userMe,
 } from "./service";
@@ -26,6 +30,32 @@ export const userRouter = router({
         .output(user.fetch.Result)
         .query(async (ctx) => {
             return fetchUser(ctx.input, ctx.ctx.user);
+        }),
+});
+
+export const projectFilesRouter = router({
+    getAll: publicProcedure
+        .input(project.files.getAll.Query)
+        .output(project.files.getAll.Result)
+        .query(async (ctx) => {
+            return fetchAllProjectFiles(ctx.input, ctx.ctx.user);
+        }),
+    getOne: publicProcedure
+        .input(project.files.getOne.Query)
+        .output(project.files.getOne.Result)
+        .query(async (ctx) => {
+            return fetchOneProjectFile(ctx.input, ctx.ctx.user);
+        }),
+    getLatest: publicProcedure
+        .input(project.files.getLatest.Query)
+        .output(project.files.getLatest.Result)
+        .query(async (ctx) => {
+            return fetchLatestProjectFile(ctx.input, ctx.ctx.user);
+        }),
+    update: publicProcedure
+        .input(project.files.update.Query)
+        .mutation(async (ctx) => {
+            return updateProjectFile(ctx.input, ctx.ctx.user);
         }),
 });
 
@@ -57,6 +87,7 @@ export const projectRouter = router({
         .mutation(async (ctx) => {
             return await uploadProject(ctx.input, ctx.ctx.user);
         }),
+    files: projectFilesRouter,
 });
 
 export const authRouter = router({

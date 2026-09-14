@@ -41,3 +41,10 @@ export function userUnauthorizedToUploadProjectFile(): never {
         message: "you must be logged in to upload a project file",
     });
 }
+
+export function userUnauthorizedToUpdateProjectFile(): never {
+    throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "you are not authorized to update this project file",
+    });
+}
